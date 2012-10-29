@@ -19,6 +19,7 @@
 		5009CE50163EE7B60082C5A7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE4F163EE7B60082C5A7 /* OpenGLES.framework */; };
 		5009CE52163EE7BD0082C5A7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE51163EE7BD0082C5A7 /* QuartzCore.framework */; };
 		5009CE54163EE7C40082C5A7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE53163EE7C40082C5A7 /* GLKit.framework */; };
+		5009CE73163EF6FA0082C5A7 /* AGLKContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE72163EF6FA0082C5A7 /* AGLKContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		5009CE4F163EE7B60082C5A7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		5009CE51163EE7BD0082C5A7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5009CE53163EE7C40082C5A7 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		5009CE71163EF6FA0082C5A7 /* AGLKContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLKContext.h; sourceTree = "<group>"; };
+		5009CE72163EF6FA0082C5A7 /* AGLKContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLKContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,12 +94,10 @@
 		5009CE35163EE7500082C5A7 /* BallEscape */ = {
 			isa = PBXGroup;
 			children = (
-				5009CE3E163EE7500082C5A7 /* OpenGLAppDelegate.h */,
-				5009CE3F163EE7500082C5A7 /* OpenGLAppDelegate.m */,
+				5009CE75163F01C50082C5A7 /* Controller */,
+				5009CE74163F01A30082C5A7 /* AGLKit */,
 				5009CE41163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard */,
 				5009CE44163EE7500082C5A7 /* MainStoryboard_iPad.storyboard */,
-				5009CE47163EE7500082C5A7 /* OpenGLViewController.h */,
-				5009CE48163EE7500082C5A7 /* OpenGLViewController.m */,
 				5009CE36163EE7500082C5A7 /* Supporting Files */,
 			);
 			path = BallEscape;
@@ -111,6 +112,26 @@
 				5009CE3D163EE7500082C5A7 /* BallEscape-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5009CE74163F01A30082C5A7 /* AGLKit */ = {
+			isa = PBXGroup;
+			children = (
+				5009CE71163EF6FA0082C5A7 /* AGLKContext.h */,
+				5009CE72163EF6FA0082C5A7 /* AGLKContext.m */,
+			);
+			name = AGLKit;
+			sourceTree = "<group>";
+		};
+		5009CE75163F01C50082C5A7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5009CE3E163EE7500082C5A7 /* OpenGLAppDelegate.h */,
+				5009CE3F163EE7500082C5A7 /* OpenGLAppDelegate.m */,
+				5009CE47163EE7500082C5A7 /* OpenGLViewController.h */,
+				5009CE48163EE7500082C5A7 /* OpenGLViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +200,7 @@
 				5009CE3C163EE7500082C5A7 /* main.m in Sources */,
 				5009CE40163EE7500082C5A7 /* OpenGLAppDelegate.m in Sources */,
 				5009CE49163EE7500082C5A7 /* OpenGLViewController.m in Sources */,
+				5009CE73163EF6FA0082C5A7 /* AGLKContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
