@@ -250,17 +250,17 @@
 {
     //  Searches for the path and stores it.
     NSString *modelsPath = [[NSBundle bundleForClass:[self class]]
-                            pathForResource:@"board" ofType:@"modelplist"];
+                            pathForResource:@"board7" ofType:@"modelplist"];
     self.modelManager = [[UtilityModelManager alloc] initWithModelPath:modelsPath];
     
     //  Finds a specified mesh into the model and stores it.
-    self.boardModelFloor = [self.modelManager modelNamed:@"floor"];
+    self.boardModelFloor = [self.modelManager modelNamed:@"floor7"];
     
     //  Throws an exception if the model does not exist.
-    NSAssert(self.boardModelFloor != nil, @"Failed to load Board model");
+    NSAssert(self.boardModelFloor != nil, @"Failed to load floor model");
     
-    self.boardModelBorders = [self.modelManager modelNamed:@"borders"];
-    NSAssert(self.boardModelBorders != nil, @"Failed to load Borders model");
+    self.boardModelBorders = [self.modelManager modelNamed:@"borders7"];
+    NSAssert(self.boardModelBorders != nil, @"Failed to load borders model");
     
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
