@@ -29,8 +29,8 @@
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
 		5009CE9A163F1BE90082C5A7 /* UtilityModelEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE99163F1BE90082C5A7 /* UtilityModelEffect.m */; };
 		5009CE9D163F1C070082C5A7 /* UtilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE9C163F1C070082C5A7 /* UtilityEffect.m */; };
-		5009CEAD163FD16B0082C5A7 /* labyrinth.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEAC163FD16B0082C5A7 /* labyrinth.modelplist */; };
-		5009CEAF163FD8870082C5A7 /* bumper.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEAE163FD8870082C5A7 /* bumper.modelplist */; };
+		5009CEB1164145550082C5A7 /* board.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEB0164145550082C5A7 /* board.modelplist */; };
+		5009CEB316414AFD0082C5A7 /* texture0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEB216414AFD0082C5A7 /* texture0.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,8 +72,8 @@
 		5009CE99163F1BE90082C5A7 /* UtilityModelEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityModelEffect.m; sourceTree = "<group>"; };
 		5009CE9B163F1C070082C5A7 /* UtilityEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityEffect.h; sourceTree = "<group>"; };
 		5009CE9C163F1C070082C5A7 /* UtilityEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityEffect.m; sourceTree = "<group>"; };
-		5009CEAC163FD16B0082C5A7 /* labyrinth.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = labyrinth.modelplist; sourceTree = "<group>"; };
-		5009CEAE163FD8870082C5A7 /* bumper.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = bumper.modelplist; sourceTree = "<group>"; };
+		5009CEB0164145550082C5A7 /* board.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board.modelplist; sourceTree = "<group>"; };
+		5009CEB216414AFD0082C5A7 /* texture0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture0.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,8 +205,8 @@
 		5009CE9E163F1FD80082C5A7 /* Modelplist */ = {
 			isa = PBXGroup;
 			children = (
-				5009CEAE163FD8870082C5A7 /* bumper.modelplist */,
-				5009CEAC163FD16B0082C5A7 /* labyrinth.modelplist */,
+				5009CEB0164145550082C5A7 /* board.modelplist */,
+				5009CEB216414AFD0082C5A7 /* texture0.jpg */,
 			);
 			name = Modelplist;
 			sourceTree = "<group>";
@@ -264,8 +264,8 @@
 				5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */,
 				5009CE43163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5009CE46163EE7500082C5A7 /* MainStoryboard_iPad.storyboard in Resources */,
-				5009CEAD163FD16B0082C5A7 /* labyrinth.modelplist in Resources */,
-				5009CEAF163FD8870082C5A7 /* bumper.modelplist in Resources */,
+				5009CEB1164145550082C5A7 /* board.modelplist in Resources */,
+				5009CEB316414AFD0082C5A7 /* texture0.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

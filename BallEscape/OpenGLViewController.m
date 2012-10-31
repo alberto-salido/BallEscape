@@ -32,7 +32,8 @@
 
 //  The UtilityModel class stores a simple model. In this case, the 
 //  boardgame model.
-@property(nonatomic, strong) UtilityModel *boardModel;
+@property (nonatomic, strong) UtilityModel *boardModelFloor;
+@property (nonatomic, strong) UtilityModel *boardModelBorders;
 
 //  Set of vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
@@ -58,11 +59,12 @@
 
 @implementation OpenGLViewController
 
-//  Creates every "getter" and "setter" methods.
+//  Creates all "getter" and "setter" methods.
 @synthesize glView = _glView;
 @synthesize baseEffect = _baseEffect;
 @synthesize modelManager = _modelManager;
-@synthesize boardModel = _boardModel;
+@synthesize boardModelFloor = _boardModelFloor;
+@synthesize boardModelBorders = _boardModelBorders;
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
 @synthesize upVector = _upVector;
@@ -95,7 +97,7 @@
     [self configurePointOfView];
     
     //  Load the modelplist file and stores the meshes into
-    //  its variables.
+    //  its variables. Also load the texture map for the models.
     [self loadModels];
     
     
@@ -162,7 +164,10 @@
     //  Prepares the view for drawing and draws the models.
     [self.modelManager prepareToDraw];
     [self.baseEffect prepareToDraw];
-    [self.boardModel draw];
+    
+    //  Draw the boardgame.
+    [self.boardModelFloor draw];
+    [self.boardModelBorders draw];
 }
 
 
@@ -228,7 +233,7 @@
 //  Configures the point of view of the model. 
 - (void)configurePointOfView
 {
-    self.eyePosition = GLKVector3Make(0.1, 15.0, 0.0);
+    self.eyePosition = GLKVector3Make(0.1, 18.0, 0.0);
     self.lookAtPosition = GLKVector3Make(0.0, 0.0, 0.0);
     self.upVector = GLKVector3Make(0.0, 10.0, 0.0);
     
@@ -245,14 +250,21 @@
 {
     //  Searches for the path and stores it.
     NSString *modelsPath = [[NSBundle bundleForClass:[self class]]
-                            pathForResource:@"labyrinth" ofType:@"modelplist"];
+                            pathForResource:@"board" ofType:@"modelplist"];
     self.modelManager = [[UtilityModelManager alloc] initWithModelPath:modelsPath];
     
     //  Finds a specified mesh into the model and stores it.
-    self.boardModel = [self.modelManager modelNamed:@"board"];
+    self.boardModelFloor = [self.modelManager modelNamed:@"floor"];
     
     //  Throws an exception if the model does not exist.
-    NSAssert(self.boardModel != nil, @"Failed to load Board model");
+    NSAssert(self.boardModelFloor != nil, @"Failed to load Board model");
+    
+    self.boardModelBorders = [self.modelManager modelNamed:@"borders"];
+    NSAssert(self.boardModelBorders != nil, @"Failed to load Borders model");
+    
+    //  Load the textures.
+    self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
+    self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
 }
 
 
