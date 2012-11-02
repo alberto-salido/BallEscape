@@ -27,8 +27,6 @@
 		5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */; };
 		5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */; };
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
-		5009CE9A163F1BE90082C5A7 /* UtilityModelEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE99163F1BE90082C5A7 /* UtilityModelEffect.m */; };
-		5009CE9D163F1C070082C5A7 /* UtilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE9C163F1C070082C5A7 /* UtilityEffect.m */; };
 		5009CEBC164179A70082C5A7 /* board3.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEB8164179A20082C5A7 /* board3.modelplist */; };
 		5009CEBD164179A70082C5A7 /* board7.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEB9164179A40082C5A7 /* board7.modelplist */; };
 		5009CEBE164179A70082C5A7 /* texture3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEBA164179A50082C5A7 /* texture3.jpg */; };
@@ -70,10 +68,6 @@
 		5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UtilityTextureInfo+viewAdditions.m"; sourceTree = "<group>"; };
 		5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTextureInfo.h; sourceTree = "<group>"; };
 		5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTextureInfo.m; sourceTree = "<group>"; };
-		5009CE98163F1BE90082C5A7 /* UtilityModelEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityModelEffect.h; sourceTree = "<group>"; };
-		5009CE99163F1BE90082C5A7 /* UtilityModelEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityModelEffect.m; sourceTree = "<group>"; };
-		5009CE9B163F1C070082C5A7 /* UtilityEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityEffect.h; sourceTree = "<group>"; };
-		5009CE9C163F1C070082C5A7 /* UtilityEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityEffect.m; sourceTree = "<group>"; };
 		5009CEB8164179A20082C5A7 /* board3.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board3.modelplist; sourceTree = "<group>"; };
 		5009CEB9164179A40082C5A7 /* board7.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board7.modelplist; sourceTree = "<group>"; };
 		5009CEBA164179A50082C5A7 /* texture3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture3.jpg; sourceTree = "<group>"; };
@@ -194,14 +188,10 @@
 			children = (
 				5009CE44163EE7500082C5A7 /* MainStoryboard_iPad.storyboard */,
 				5009CE41163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard */,
-				5009CE9B163F1C070082C5A7 /* UtilityEffect.h */,
-				5009CE9C163F1C070082C5A7 /* UtilityEffect.m */,
 				5009CE8F163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.h */,
 				5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */,
 				5009CE8C163F1B580082C5A7 /* UtilityModel+viewAdditions.h */,
 				5009CE8D163F1B580082C5A7 /* UtilityModel+viewAdditions.m */,
-				5009CE98163F1BE90082C5A7 /* UtilityModelEffect.h */,
-				5009CE99163F1BE90082C5A7 /* UtilityModelEffect.m */,
 				5009CE89163F1B210082C5A7 /* UtilityModelManager.h */,
 				5009CE8A163F1B210082C5A7 /* UtilityModelManager.m */,
 				5009CE92163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.h */,
@@ -295,8 +285,6 @@
 				5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */,
 				5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */,
 				5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */,
-				5009CE9A163F1BE90082C5A7 /* UtilityModelEffect.m in Sources */,
-				5009CE9D163F1C070082C5A7 /* UtilityEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +406,7 @@
 				5009CE4E163EE7500082C5A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

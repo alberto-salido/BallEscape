@@ -1,6 +1,10 @@
 //
 //  UtilityModel.h
-// 
+//  BallEscape
+//
+//  Created by Alberto Salido López on 29/10/12.
+//  References Learning OpenGL ES for iOS, Erik M. Buck.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import <GLKit/GLKit.h>
@@ -8,7 +12,14 @@
 
 @class UtilityMesh;
 
-
+//  Each instance of UtilityModel stores a mesh property defining 
+//  the geometry for one or more 3D models. UtilityModel also stores
+//  a name property to identify the specific subset of the mesh
+//  needed by the 3D model. The computed axisAlignedBoundingBox property
+//  provides a bounding box containing all the mesh vertices included in
+//  a model. The doesRequireLighting property indicates whether to render
+//  the 3D model with or without using OpenGL ES lighting calculations 
+//  on a case-by-case basis.
 @interface UtilityModel : NSObject
 {
    NSUInteger indexOfFirstCommand_;

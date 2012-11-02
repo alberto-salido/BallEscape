@@ -1,6 +1,10 @@
 //
 //  UtilityMesh.h
-//  
+//  BallEscape
+//
+//  Created by Alberto Salido López on 29/10/12.
+//  References Learning OpenGL ES for iOS, Erik M. Buck.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,7 +21,9 @@ typedef struct
 }
 UtilityMeshVertex;
 
-
+//  The UtilityMesh class extract the relevant information
+//  from modelplist files and grabs it out of the “mesh” dictionary
+//  A mesh is a grid of triangles that share edges and define 3D shapes.
 @interface UtilityMesh : NSObject
 {
    GLuint indexBufferID_;

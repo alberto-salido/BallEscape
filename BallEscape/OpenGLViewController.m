@@ -31,16 +31,15 @@
 @property (nonatomic, strong) UtilityModelManager *modelManager;
 
 //  The UtilityModel class stores a simple model. In this case, the 
-//  boardgame model.
+//  boardgame model, floor and borders.
 @property (nonatomic, strong) UtilityModel *boardModelFloor;
 @property (nonatomic, strong) UtilityModel *boardModelBorders;
 
 //  Set of vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
 //  The second one, makes a target for the view.
-/*
- * The last one, sets a ...
- */
+//  The last one, sets a vector that produces the same effect as tilting
+//  onserver's head (not usefull in this proyect).
 @property GLKVector3 eyePosition;
 @property GLKVector3 lookAtPosition;
 @property GLKVector3 upVector;
@@ -181,7 +180,7 @@
 - (void)configureGLView
 {
     //  Verify the View's type, created by the interface builder 
-    //  (storyboard), is GLKView.
+    //  (storyboard), is GLKView, otherwise rise an exception.
     self.glView = (GLKView *)self.view;
     NSAssert([self.glView isKindOfClass:[GLKView class]],
              @"View controller's view is not a GLKView");
@@ -198,17 +197,18 @@
                       initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [AGLKContext setCurrentContext:self.glView.context];
     
-    /*
-     *  Documentar esta líena!
-     */
+    //  The GL_DEPTH_TEST constant makes only renderizable the faces
+    //  the model that are shown. Not rendering the faces in depth.
+    //  The GL_CULL_FACE constant render both face of each 
+    //  triangle. It's an optimization when render. 
     [((AGLKContext *)self.glView.context) enable:GL_DEPTH_TEST];
-    [((AGLKContext *)self.glView.context) enable:GL_CULL_FACE];
+    //[((AGLKContext *)self.glView.context) enable:GL_CULL_FACE];
 
 }
 
 
 //  Configures the enviroment for the scene.
-//  - Sets the lights, color and direction;
+//  - Sets the lights; color and direction;
 //  - Sets the background.
 - (void)configureEnviroment
 {
@@ -230,13 +230,17 @@
 }
 
 
-//  Configures the point of view of the model. 
+//  Configures the point of view of the model.
+//  - Sets the vectors of the Eye and the LookAt in the 
+//    scene.
+//  - Creates the model view matrix with the previous vectors.
 - (void)configurePointOfView
 {
     self.eyePosition = GLKVector3Make(0.1, 18.0, 0.0);
     self.lookAtPosition = GLKVector3Make(0.0, 0.0, 0.0);
-    self.upVector = GLKVector3Make(0.0, 10.0, 0.0);
+    self.upVector = GLKVector3Make(0.0, 1.0, 0.0);
     
+    //  Returns a 4x4 matrix that transforms world coordinates to eye coordinates.
     self.baseEffect.transform.modelviewMatrix = 
     GLKMatrix4MakeLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,
                          self.lookAtPosition.x, self.lookAtPosition.y, self.lookAtPosition.z, 
@@ -245,21 +249,23 @@
 
 
 //  Load the Modelplist file, which stores the complete model and
-//  divide it saving each mesh into a variable.
+//  divide it, saving each mesh into a variable.
+//  - Finds the modelplist file and loads it.
+//  - Finde a specified mesh and stored it.
+//  - Throws exception in case of error.
 - (void)loadModels
 {
     //  Searches for the path and stores it.
     NSString *modelsPath = [[NSBundle bundleForClass:[self class]]
-                            pathForResource:@"board7" ofType:@"modelplist"];
+                            pathForResource:@"board3" ofType:@"modelplist"];
     self.modelManager = [[UtilityModelManager alloc] initWithModelPath:modelsPath];
     
-    //  Finds a specified mesh into the model and stores it.
-    self.boardModelFloor = [self.modelManager modelNamed:@"floor7"];
-    
-    //  Throws an exception if the model does not exist.
+    //  Loads the floor.
+    self.boardModelFloor = [self.modelManager modelNamed:@"floor3"];
     NSAssert(self.boardModelFloor != nil, @"Failed to load floor model");
     
-    self.boardModelBorders = [self.modelManager modelNamed:@"borders7"];
+    // Loads the borders.
+    self.boardModelBorders = [self.modelManager modelNamed:@"borders3"];
     NSAssert(self.boardModelBorders != nil, @"Failed to load borders model");
     
     //  Load the textures.

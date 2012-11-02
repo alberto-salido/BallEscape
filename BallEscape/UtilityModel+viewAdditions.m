@@ -1,6 +1,10 @@
 //
-//  UtilityModel+viewAdditions.m
-// 
+//  UtilityModel+viewAdditions.h
+//  BallEscape
+//
+//  Created by Alberto Salido López on 29/10/12.
+//  References Learning OpenGL ES for iOS, Erik M. Buck.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import "UtilityModel+viewAdditions.h"
