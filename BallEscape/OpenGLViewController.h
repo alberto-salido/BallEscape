@@ -18,4 +18,10 @@
 //  animation in the view.
 @interface OpenGLViewController : GLKViewController
 
+/*
+ *  Sliders para simular el sensor de movimento.
+ */
+- (IBAction)tiltXAxis:(UISlider *)sender;
+- (IBAction)tiltYAxis:(UISlider *)sender;
+
 @end

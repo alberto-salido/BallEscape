@@ -27,10 +27,8 @@
 		5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */; };
 		5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */; };
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
-		5009CEBC164179A70082C5A7 /* board3.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEB8164179A20082C5A7 /* board3.modelplist */; };
-		5009CEBD164179A70082C5A7 /* board7.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEB9164179A40082C5A7 /* board7.modelplist */; };
 		5009CEBE164179A70082C5A7 /* texture3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEBA164179A50082C5A7 /* texture3.jpg */; };
-		5009CEBF164179A70082C5A7 /* texture7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEBB164179A60082C5A7 /* texture7.jpg */; };
+		50896C7816466CD80017F22D /* board.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 50896C7716466CD80017F22D /* board.modelplist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,10 +66,8 @@
 		5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UtilityTextureInfo+viewAdditions.m"; sourceTree = "<group>"; };
 		5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTextureInfo.h; sourceTree = "<group>"; };
 		5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTextureInfo.m; sourceTree = "<group>"; };
-		5009CEB8164179A20082C5A7 /* board3.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board3.modelplist; sourceTree = "<group>"; };
-		5009CEB9164179A40082C5A7 /* board7.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board7.modelplist; sourceTree = "<group>"; };
 		5009CEBA164179A50082C5A7 /* texture3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture3.jpg; sourceTree = "<group>"; };
-		5009CEBB164179A60082C5A7 /* texture7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture7.jpg; sourceTree = "<group>"; };
+		50896C7716466CD80017F22D /* board.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board.modelplist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,10 +120,8 @@
 		5009CE35163EE7500082C5A7 /* BallEscape */ = {
 			isa = PBXGroup;
 			children = (
-				5009CEB8164179A20082C5A7 /* board3.modelplist */,
-				5009CEB9164179A40082C5A7 /* board7.modelplist */,
+				50896C7716466CD80017F22D /* board.modelplist */,
 				5009CEBA164179A50082C5A7 /* texture3.jpg */,
-				5009CEBB164179A60082C5A7 /* texture7.jpg */,
 				5009CE9E163F1FD80082C5A7 /* Modelplist */,
 				5009CE88163F1AA50082C5A7 /* View */,
 				5009CE76163F14540082C5A7 /* Model */,
@@ -260,10 +254,8 @@
 				5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */,
 				5009CE43163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5009CE46163EE7500082C5A7 /* MainStoryboard_iPad.storyboard in Resources */,
-				5009CEBC164179A70082C5A7 /* board3.modelplist in Resources */,
-				5009CEBD164179A70082C5A7 /* board7.modelplist in Resources */,
 				5009CEBE164179A70082C5A7 /* texture3.jpg in Resources */,
-				5009CEBF164179A70082C5A7 /* texture7.jpg in Resources */,
+				50896C7816466CD80017F22D /* board.modelplist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
