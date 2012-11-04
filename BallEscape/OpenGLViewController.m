@@ -31,9 +31,10 @@
 @property (nonatomic, strong) UtilityModelManager *modelManager;
 
 //  The UtilityModel class stores a simple model. In this case, the 
-//  boardgame model, floor and borders.
-@property (nonatomic, strong) UtilityModel *boardModelFloor;
-@property (nonatomic, strong) UtilityModel *boardModelBorders;
+//  boardgame model; floor, hedges and borders.
+@property (nonatomic, strong) UtilityModel *gameModelFloor;
+@property (nonatomic, strong) UtilityModel *gameModelBorders;
+@property (nonatomic, strong) UtilityModel *gameModelHedge;
 
 //  Set of vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
@@ -44,12 +45,16 @@
 @property GLKVector3 lookAtPosition;
 @property GLKVector3 upVector;
 
+//  Vector (array) with the walls to draw into the labyrinth.
+@property (nonatomic, strong) NSMutableArray *walls;
+
 
 //  Prototypes of auxiliary functions.
 - (void)configureGLView;
 - (void)configureEnviroment;
 - (void)configurePointOfView;
 - (void)loadModels;
+- (void)storeWalls;
 
 @end
 
@@ -62,11 +67,13 @@
 @synthesize glView = _glView;
 @synthesize baseEffect = _baseEffect;
 @synthesize modelManager = _modelManager;
-@synthesize boardModelFloor = _boardModelFloor;
-@synthesize boardModelBorders = _boardModelBorders;
+@synthesize gameModelFloor = _gameModelFloor;
+@synthesize gameModelBorders = _gameModelBorders;
+@synthesize gameModelHedge = _gameModelHedge;
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
 @synthesize upVector = _upVector;
+@synthesize walls = _walls;
 
 
 //  Sent to the view controller when the app receives a memory warning.
@@ -98,6 +105,9 @@
     //  Load the modelplist file and stores the meshes into
     //  its variables. Also load the texture map for the models.
     [self loadModels];
+    
+    //  Stores the location of the walls into an array.
+    [self storeWalls];
     
     
     
@@ -165,8 +175,12 @@
     [self.baseEffect prepareToDraw];
     
     //  Draw the boardgame.
-    [self.boardModelFloor draw];
-    [self.boardModelBorders draw];
+    [self.gameModelFloor draw];
+    [self.gameModelBorders draw];
+    
+    // Draw hedges.
+    [self.walls makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
+                                 withObject:self.baseEffect];
 }
 
 
@@ -258,21 +272,57 @@
 {
     //  Searches for the path and stores it.
     NSString *modelsPath = [[NSBundle bundleForClass:[self class]]
-                            pathForResource:@"board" ofType:@"modelplist"];
+                            pathForResource:@"ballEscape" ofType:@"modelplist"];
     self.modelManager = [[UtilityModelManager alloc] initWithModelPath:modelsPath];
     
     //  Loads the floor.
-    self.boardModelFloor = [self.modelManager modelNamed:@"floor"];
-    NSAssert(self.boardModelFloor != nil, @"Failed to load floor model");
+    self.gameModelFloor = [self.modelManager modelNamed:@"floor"];
+    NSAssert(self.gameModelFloor != nil, @"Failed to load floor model");
     
-    // Loads the borders.
-    self.boardModelBorders = [self.modelManager modelNamed:@"borders"];
-    NSAssert(self.boardModelBorders != nil, @"Failed to load borders model");
+    //  Loads the borders.
+    self.gameModelBorders = [self.modelManager modelNamed:@"borders"];
+    NSAssert(self.gameModelBorders != nil, @"Failed to load borders model");
+    
+    //  Loads the walls.
+    self.gameModelHedge = [self.modelManager modelNamed:@"walls"];
+    NSAssert(self.gameModelHedge != nil, @"Failed to load walls");
     
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
     self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
 }
+
+//  Stores the position of every walls in the labyrinth into the vector.
+//  - Creates the Wall.
+//  - Stores it.
+- (void)storeWalls
+{
+    //  Initializes the array.
+    self.walls = [[NSMutableArray alloc] init];
+    
+    //  Adds objects.
+    [self.walls addObject:[[Wall alloc] 
+                            initWithModel:self.gameModelHedge 
+                            position:GLKVector3Make(-2.5, 0.0, -6.0) 
+                            shouldRotate:YES]];
+    [self.walls addObject:[[Wall alloc] 
+                            initWithModel:self.gameModelHedge 
+                            position:GLKVector3Make(-1.5, 0.0, -2.5) 
+                            shouldRotate:YES]];
+    [self.walls addObject:[[Wall alloc] 
+                            initWithModel:self.gameModelHedge 
+                            position:GLKVector3Make(-1.5, 0.0, -1.5) 
+                            shouldRotate:YES]];
+    [self.walls addObject:[[Wall alloc] 
+                            initWithModel:self.gameModelHedge 
+                            position:GLKVector3Make(-0.7, 0.0, -3.1) 
+                            shouldRotate:NO]];
+    [self.walls addObject:[[Wall alloc] 
+                            initWithModel:self.gameModelHedge 
+                            position:GLKVector3Make(0.3, 0.0, -3.1) 
+                            shouldRotate:NO]];
+}
+
 
 
 #pragma mark - Animation
@@ -294,11 +344,11 @@
  *  Simuladores del sensor de movimiento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender {
-    self.lookAtPosition = GLKVector3Make(sender.value, self.lookAtPosition.y, self.lookAtPosition.z);
+    self.eyePosition = GLKVector3Make(sender.value, self.eyePosition.y, self.eyePosition.z);
 }
 
 - (IBAction)tiltYAxis:(UISlider *)sender {
-    self.lookAtPosition = GLKVector3Make(self.lookAtPosition.x, self.lookAtPosition.y, sender.value);
+    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, sender.value);
 
 }
 @end

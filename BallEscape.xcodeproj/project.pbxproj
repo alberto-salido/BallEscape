@@ -27,8 +27,10 @@
 		5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */; };
 		5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */; };
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
-		5009CEBE164179A70082C5A7 /* texture3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5009CEBA164179A50082C5A7 /* texture3.jpg */; };
-		50896C7816466CD80017F22D /* board.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 50896C7716466CD80017F22D /* board.modelplist */; };
+		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
+		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
+		509DC38F16472B4E00251009 /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 509DC38D16472B4E00251009 /* ballEscape.modelplist */; };
+		509DC39016472B4E00251009 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 509DC38E16472B4E00251009 /* texture.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,8 +68,12 @@
 		5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UtilityTextureInfo+viewAdditions.m"; sourceTree = "<group>"; };
 		5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTextureInfo.h; sourceTree = "<group>"; };
 		5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTextureInfo.m; sourceTree = "<group>"; };
-		5009CEBA164179A50082C5A7 /* texture3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture3.jpg; sourceTree = "<group>"; };
-		50896C7716466CD80017F22D /* board.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = board.modelplist; sourceTree = "<group>"; };
+		509DC3781646CF1D00251009 /* 3DObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DObject.h; sourceTree = "<group>"; };
+		509DC3791646CF1D00251009 /* 3DObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DObject.m; sourceTree = "<group>"; };
+		509DC37C1646D19B00251009 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Wall.h; sourceTree = "<group>"; };
+		509DC37D1646D19B00251009 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		509DC38D16472B4E00251009 /* ballEscape.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ballEscape.modelplist; sourceTree = "<group>"; };
+		509DC38E16472B4E00251009 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,9 +126,7 @@
 		5009CE35163EE7500082C5A7 /* BallEscape */ = {
 			isa = PBXGroup;
 			children = (
-				50896C7716466CD80017F22D /* board.modelplist */,
-				5009CEBA164179A50082C5A7 /* texture3.jpg */,
-				5009CE9E163F1FD80082C5A7 /* Modelplist */,
+				5009CE9E163F1FD80082C5A7 /* Objects */,
 				5009CE88163F1AA50082C5A7 /* View */,
 				5009CE76163F14540082C5A7 /* Model */,
 				5009CE75163F01C50082C5A7 /* Controller */,
@@ -173,6 +177,10 @@
 				5009CE85163F18210082C5A7 /* UtilityModel.m */,
 				5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */,
 				5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */,
+				509DC3781646CF1D00251009 /* 3DObject.h */,
+				509DC3791646CF1D00251009 /* 3DObject.m */,
+				509DC37C1646D19B00251009 /* Wall.h */,
+				509DC37D1646D19B00251009 /* Wall.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -194,11 +202,13 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		5009CE9E163F1FD80082C5A7 /* Modelplist */ = {
+		5009CE9E163F1FD80082C5A7 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				509DC38D16472B4E00251009 /* ballEscape.modelplist */,
+				509DC38E16472B4E00251009 /* texture.jpg */,
 			);
-			name = Modelplist;
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,8 +264,8 @@
 				5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */,
 				5009CE43163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5009CE46163EE7500082C5A7 /* MainStoryboard_iPad.storyboard in Resources */,
-				5009CEBE164179A70082C5A7 /* texture3.jpg in Resources */,
-				50896C7816466CD80017F22D /* board.modelplist in Resources */,
+				509DC38F16472B4E00251009 /* ballEscape.modelplist in Resources */,
+				509DC39016472B4E00251009 /* texture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +287,8 @@
 				5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */,
 				5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */,
 				5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */,
+				509DC37A1646CF1D00251009 /* 3DObject.m in Sources */,
+				509DC37E1646D19B00251009 /* Wall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

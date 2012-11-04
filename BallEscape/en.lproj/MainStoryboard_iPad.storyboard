@@ -13,14 +13,14 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-0.40000000000000002" maxValue="0.40000000000000002" id="Aad-ZK-IUQ">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="Aad-ZK-IUQ">
                                 <rect key="frame" x="437" y="962" width="261" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="tiltYAxis:" destination="2" eventType="valueChanged" id="GRT-gb-4kY"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-0.40000000000000002" maxValue="0.40000000000000002" id="0ie-Ng-ips">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="0ie-Ng-ips">
                                 <rect key="frame" x="72" y="962" width="261" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
@@ -49,15 +49,6 @@
             <point key="canvasLocation" x="-232" y="-53"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="OpenGLViewController" superclassName="GLKViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OpenGLViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="tiltXAxis:" candidateClass="UISlider"/>
-                <relationship kind="action" name="tiltYAxis:" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
