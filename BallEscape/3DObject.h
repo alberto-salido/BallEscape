@@ -12,15 +12,17 @@
 @interface threeDObject : NSObject
 
 //  Object's model.
-@property (nonatomic, strong) UtilityModel *model;
+@property (nonatomic, readonly, strong) UtilityModel *model;
 
 //  Obejct's position.
-@property GLKVector3 position;
+@property (readonly) GLKVector3 position;
 
 - (id)initWithModel:(UtilityModel *)model position:(GLKVector3)position;
 
 @end
 
+
+//  Protocol for drawing the scene using a base effect.
 @protocol abstractDraw <NSObject>
 
 - (void)drawWithBaseEffect:(GLKBaseEffect *)baseEffect;

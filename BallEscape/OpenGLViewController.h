@@ -10,7 +10,6 @@
 #import "AGLKContext.h"
 #import "UtilityModelManager.h"
 #import "UtilityModel+viewAdditions.h"
-#import "Wall.h"
 
 //  The GLKViewController class provides all of the standard view
 //  controller functionality, but additionally implements an

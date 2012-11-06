@@ -8,6 +8,13 @@
 
 #import "3DObject.h"
 
+@interface threeDObject ()
+
+@property (nonatomic, strong) UtilityModel *model;
+@property GLKVector3 position;
+
+@end
+
 @implementation threeDObject
 
 @synthesize model = _model;

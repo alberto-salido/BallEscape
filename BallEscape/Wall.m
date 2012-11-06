@@ -7,7 +7,6 @@
 //
 
 #import "Wall.h"
-#import "UtilityModel+viewAdditions.h"
 
 @implementation Wall
 

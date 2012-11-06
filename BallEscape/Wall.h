@@ -7,6 +7,7 @@
 //
 
 #import "3DObject.h"
+#import "UtilityModel+viewAdditions.h"
 
 @interface Wall : threeDObject <abstractDraw>
 

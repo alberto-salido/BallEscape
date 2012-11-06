@@ -7,6 +7,7 @@
 //
 
 #import "OpenGLViewController.h"
+#import "LevelManager.h"
 
 #pragma mark - Private API
 
@@ -20,22 +21,6 @@
 //  when the contents need to be updated.
 @property (nonatomic, strong) GLKView *glView;
 
-//  The GLKBaseEffect class provides shaders that mimic many of the
-//  behaviors provided by the OpenGL ES 1.1 lighting and shading model,
-//  including materials, lighting and texturing. The base effect 
-//  allows up to three lights and two textures to be applied to a scene.
-@property (nonatomic, strong) GLKBaseEffect *baseEffect;
-
-//  The UtilityModelManager simplifies the load of models. This class
-//  loads a unique Modelplist file with the entire model.
-@property (nonatomic, strong) UtilityModelManager *modelManager;
-
-//  The UtilityModel class stores a simple model. In this case, the 
-//  boardgame model; floor, hedges and borders.
-@property (nonatomic, strong) UtilityModel *gameModelFloor;
-@property (nonatomic, strong) UtilityModel *gameModelBorders;
-@property (nonatomic, strong) UtilityModel *gameModelHedge;
-
 //  Set of vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
 //  The second one, makes a target for the view.
@@ -45,8 +30,12 @@
 @property GLKVector3 lookAtPosition;
 @property GLKVector3 upVector;
 
-//  Vector (array) with the walls to draw into the labyrinth.
-@property (nonatomic, strong) NSMutableArray *walls;
+//  Variables for checking if the model view matrix 
+//  has been altered since the last time.
+@property float previousXPosition;
+@property float previousZPosition;
+
+@property (nonatomic, strong) LevelManager *levelManager;
 
 
 //  Prototypes of auxiliary functions.
@@ -54,7 +43,6 @@
 - (void)configureEnviroment;
 - (void)configurePointOfView;
 - (void)loadModels;
-- (void)storeWalls;
 
 @end
 
@@ -65,15 +53,12 @@
 
 //  Creates all "getter" and "setter" methods.
 @synthesize glView = _glView;
-@synthesize baseEffect = _baseEffect;
-@synthesize modelManager = _modelManager;
-@synthesize gameModelFloor = _gameModelFloor;
-@synthesize gameModelBorders = _gameModelBorders;
-@synthesize gameModelHedge = _gameModelHedge;
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
 @synthesize upVector = _upVector;
-@synthesize walls = _walls;
+@synthesize previousXPosition = _previousXPosition;
+@synthesize previousZPosition = _previousZPosition;
+@synthesize levelManager = _levelManager;
 
 
 //  Sent to the view controller when the app receives a memory warning.
@@ -106,8 +91,7 @@
     //  its variables. Also load the texture map for the models.
     [self loadModels];
     
-    //  Stores the location of the walls into an array.
-    [self storeWalls];
+    [self.levelManager prepareLevelStructure];
     
     
     
@@ -123,7 +107,6 @@
     self.glView = nil;
     [EAGLContext setCurrentContext:nil];
     
-    self.baseEffect = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -167,20 +150,11 @@
     //  Calculates the aspect ratio.
     const GLfloat aspectRatio = (GLfloat)view.drawableWidth / (GLfloat)view.drawableHeight;
     
-    self.baseEffect.transform.projectionMatrix = 
+    self.levelManager.baseEffect.transform.projectionMatrix = 
     GLKMatrix4MakePerspective(GLKMathDegreesToRadians(35.0), aspectRatio, 4.0, 20.0);
     
-    //  Prepares the view for drawing and draws the models.
-    [self.modelManager prepareToDraw];
-    [self.baseEffect prepareToDraw];
-    
-    //  Draw the boardgame.
-    [self.gameModelFloor draw];
-    [self.gameModelBorders draw];
-    
-    // Draw hedges.
-    [self.walls makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
-                                 withObject:self.baseEffect];
+    [self.levelManager prepareViewAndDrawScene];
+
 }
 
 
@@ -226,18 +200,15 @@
 //  - Sets the background.
 - (void)configureEnviroment
 {
-    //  Creates a BaseEffect.
-    self.baseEffect = [[GLKBaseEffect alloc] init];
-    
     //  Enables the light.
-    self.baseEffect.light0.enabled = GL_TRUE;
+    self.levelManager.baseEffect.light0.enabled = GL_TRUE;
     
     //  Sets the light color (RGBA)
-    self.baseEffect.light0.ambientColor = GLKVector4Make(0.8, 0.8, 0.8, 1.0);
-    self.baseEffect.light0.diffuseColor = GLKVector4Make(1.0, 1.0, 1.0, 1.0);
+    self.levelManager.baseEffect.light0.ambientColor = GLKVector4Make(0.8, 0.8, 0.8, 1.0);
+    self.levelManager.baseEffect.light0.diffuseColor = GLKVector4Make(1.0, 1.0, 1.0, 1.0);
     
     //  Sets the main position.
-    self.baseEffect.light0.position = GLKVector4Make(1.0, 0.8, 0.4, 0.0);
+    self.levelManager.baseEffect.light0.position = GLKVector4Make(1.0, 0.8, 0.4, 0.0);
     
     //  Sets the background color (RGBA).
     ((AGLKContext *)self.glView.context).clearColor = GLKVector4Make(0.0, 0.0, 0.0, 1.0);
@@ -256,7 +227,7 @@
     self.upVector = GLKVector3Make(1.0, 0.0, 0.0);
     
     //  Returns a 4x4 matrix that transforms world coordinates to eye coordinates.
-    self.baseEffect.transform.modelviewMatrix = 
+    self.levelManager.baseEffect.transform.modelviewMatrix = 
     GLKMatrix4MakeLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,
                          self.lookAtPosition.x, self.lookAtPosition.y, self.lookAtPosition.z, 
                          self.upVector.x, self.upVector.y, self.upVector.z);
@@ -265,62 +236,32 @@
 
 //  Load the Modelplist file, which stores the complete model and
 //  divide it, saving each mesh into a variable.
-//  - Finds the modelplist file and loads it.
-//  - Finde a specified mesh and stored it.
 //  - Throws exception in case of error.
 - (void)loadModels
 {
-    //  Searches for the path and stores it.
-    NSString *modelsPath = [[NSBundle bundleForClass:[self class]]
-                            pathForResource:@"ballEscape" ofType:@"modelplist"];
-    self.modelManager = [[UtilityModelManager alloc] initWithModelPath:modelsPath];
-    
-    //  Loads the floor.
-    self.gameModelFloor = [self.modelManager modelNamed:@"floor"];
-    NSAssert(self.gameModelFloor != nil, @"Failed to load floor model");
-    
-    //  Loads the borders.
-    self.gameModelBorders = [self.modelManager modelNamed:@"borders"];
-    NSAssert(self.gameModelBorders != nil, @"Failed to load borders model");
-    
-    //  Loads the walls.
-    self.gameModelHedge = [self.modelManager modelNamed:@"walls"];
-    NSAssert(self.gameModelHedge != nil, @"Failed to load walls");
-    
-    //  Load the textures.
-    self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
-    self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
+    [self.levelManager loadModelsFromPath:@"ballEscape"];
 }
 
-//  Stores the position of every walls in the labyrinth into the vector.
+//  Stores the position of every element in the labyrinth into the vector.
 //  - Creates the Wall.
-//  - Stores it.
-- (void)storeWalls
+//  - Creates the Ball.
+//  - Creates the Monster.
+//  - Stores it all.
+- (void)storeElementsInArray
 {
-    //  Initializes the array.
-    self.walls = [[NSMutableArray alloc] init];
+ 
     
-    //  Adds objects.
-    [self.walls addObject:[[Wall alloc] 
-                            initWithModel:self.gameModelHedge 
-                            position:GLKVector3Make(-2.5, 0.0, -6.0) 
-                            shouldRotate:YES]];
-    [self.walls addObject:[[Wall alloc] 
-                            initWithModel:self.gameModelHedge 
-                            position:GLKVector3Make(-1.5, 0.0, -2.5) 
-                            shouldRotate:YES]];
-    [self.walls addObject:[[Wall alloc] 
-                            initWithModel:self.gameModelHedge 
-                            position:GLKVector3Make(-1.5, 0.0, -1.5) 
-                            shouldRotate:YES]];
-    [self.walls addObject:[[Wall alloc] 
-                            initWithModel:self.gameModelHedge 
-                            position:GLKVector3Make(-0.7, 0.0, -3.1) 
-                            shouldRotate:NO]];
-    [self.walls addObject:[[Wall alloc] 
-                            initWithModel:self.gameModelHedge 
-                            position:GLKVector3Make(0.3, 0.0, -3.1) 
-                            shouldRotate:NO]];
+    
+
+
+
+
+
+
+
+
+
+    
 }
 
 
@@ -332,10 +273,27 @@
 //  the controller’s view redraws. 
 - (void)update
 {
-    self.baseEffect.transform.modelviewMatrix = 
-    GLKMatrix4MakeLookAt(self.eyePosition.x, self.eyePosition.y, self.eyePosition.z,
-                         self.lookAtPosition.x, self.lookAtPosition.y, self.lookAtPosition.z, 
-                         self.upVector.x, self.upVector.y, self.upVector.z);
+    //  If the position of the matrix has not been altered, the calulation of the new
+    //  model view matrix wont be done, saving CPU cycles.
+    if ((self.previousXPosition != self.eyePosition.x) ||
+        (self.previousZPosition != self.eyePosition.z)) {
+       
+        //  Update de matrix
+        self.levelManager.baseEffect.transform.modelviewMatrix = 
+        GLKMatrix4MakeLookAt(self.eyePosition.x,
+                             self.eyePosition.y,
+                             self.eyePosition.z,
+                             self.lookAtPosition.x,
+                             self.lookAtPosition.y,
+                             self.lookAtPosition.z, 
+                             self.upVector.x,
+                             self.upVector.y, 
+                             self.upVector.z);
+        
+        //  Update the variables.
+        self.previousXPosition = self.eyePosition.x;
+        self.previousZPosition = self.eyePosition.z;
+    }
 
 }
 
