@@ -53,6 +53,8 @@
 //  Vector (array) with the elements to draw into the labyrinth.
 @property (nonatomic, strong) NSMutableArray *elements;
 
+@property (nonatomic, strong) LevelManager *levelManager;
+
 //  Prototypes of auxiliary functions.
 - (void)configureGLView;
 - (void)configureEnviroment;
@@ -80,6 +82,7 @@
 @synthesize previousXPosition = _previousXPosition;
 @synthesize previousZPosition = _previousZPosition;
 @synthesize elements = _elements;
+@synthesize levelManager = _levelManager;
 
 
 //  Sent to the view controller when the app receives a memory warning.
@@ -251,7 +254,7 @@
 //  - Creates the model view matrix with the previous vectors.
 - (void)configurePointOfView
 {
-    //  Default view {0, 19, 0}.
+    //  Default view {0, 18, 0}.
     self.eyePosition = GLKVector3Make(0.0, 18.0, 0.0);
     self.lookAtPosition = GLKVector3Make(0.0, 0.0, 0.0);
     self.upVector = GLKVector3Make(1.0, 0.0, 0.0);
@@ -297,174 +300,22 @@
 //  - Stores it all.
 - (void)storeElementsInArray
 {
-    //  Initializes the array.
+    self.levelManager = [[LevelManager alloc] initWithNumberOfLevels:1];
+    
+    //  Initializes the arrays.
+    NSArray *positions = 
+    [[NSArray alloc] initWithArray:[self.levelManager getNextLevelStructure]];
+    
     self.elements = [[NSMutableArray alloc] init];
-    
-    //  Adds objects.
-    //  A)
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-3.5, 0.0, -6.0) 
-                                    shouldRotate:YES]];
-    //  B)
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, -4.5) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, -3.5) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, -2.5) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, -1.5) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.25, 0.0, -0.8) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-3.25, 0.0, -0.8) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-4.25, 0.0, -0.8) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, -0.1) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, 0.9) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, 1.9) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, 2.9) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-2.0, 0.0, 3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-3.0, 0.0, 3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-1.0, 0.0, 3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(0.0, 0.0, 3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-1.3, 0.0, -3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(-0.3, 0.0, -3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(0.7, 0.0, -3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(1.7, 0.0, -3.5) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(2.4, 0.0, -3.25) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(2.4, 0.0, -2.25) 
-                                    shouldRotate:YES]];
-    
-    
-    //  C)
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(4.5, 0.0, -5.0) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(3.5, 0.0, -5.0) 
-                                    shouldRotate:NO]];
-    
-    //  D)
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(3.0, 0.0, 0.0) 
-                                    shouldRotate:NO]];
-    
-    //  E)
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(4.5, 0.0, 2.0) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(3.5, 0.0, 2.0) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(2.5, 0.0, 2.0) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(1.5, 0.0, 2.0) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(0.5, 0.0, 2.0) 
-                                    shouldRotate:NO]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(0.25, 0.0, 1.3) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(0.25, 0.0, 0.3) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(0.25, 0.0, -0.7) 
-                                    shouldRotate:YES]];
-    
-    //  F)
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(3.0, 0.0, 4.0) 
-                                    shouldRotate:YES]];
-    [self.elements addObject:[[Wall alloc] 
-                                    initWithModel:self.gameModelWalls 
-                                    position:GLKVector3Make(3.0, 0.0, 5.0) 
-                                    shouldRotate:YES]];
- 
-    
-    
-
-
-
-
-
-
-
-
-
-    
+        
+    for (int i = 0; i < positions.count; i = i+3) {
+        [self.elements addObject:[[Wall alloc] 
+                                  initWithModel:self.gameModelWalls 
+                                  position:GLKVector3Make([[positions objectAtIndex:i] floatValue],
+                                                          0.0,
+                                                          [[positions objectAtIndex:i+1] floatValue])
+                                  shouldRotate:[[positions objectAtIndex:i+2] boolValue]]];
+    }
 }
 
 
