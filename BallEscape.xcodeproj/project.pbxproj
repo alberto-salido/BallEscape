@@ -32,6 +32,7 @@
 		509DC38F16472B4E00251009 /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 509DC38D16472B4E00251009 /* ballEscape.modelplist */; };
 		509DC39016472B4E00251009 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 509DC38E16472B4E00251009 /* texture.jpg */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
+		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		509DC38E16472B4E00251009 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
+		50FCF5D5164AF7D5008CD89E /* level0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				509DC38D16472B4E00251009 /* ballEscape.modelplist */,
+				50FCF5D5164AF7D5008CD89E /* level0.txt */,
 				509DC38E16472B4E00251009 /* texture.jpg */,
 			);
 			name = Objects;
@@ -271,6 +274,7 @@
 				5009CE46163EE7500082C5A7 /* MainStoryboard_iPad.storyboard in Resources */,
 				509DC38F16472B4E00251009 /* ballEscape.modelplist in Resources */,
 				509DC39016472B4E00251009 /* texture.jpg in Resources */,
+				50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "LevelManager.h"
 
+
 @class LevelManager;
 
 @interface LevelManager ()
@@ -15,13 +16,12 @@
 @property int numberOfLevels;
 @property int currentLevel;
 
-//  Loads the level 0. Get an array with the position of every object. 
-//  The array has the following format:
-//  - [x, z, BOOL, ...]
-//  Where, x and z are the coordinates of the object, the y
-//  axis is not necessary because the objects are all over the floor.
-//  The |BOOL| element represent if the object has to be rotated or not.
-- (NSArray *)loadLevel0;
+//  Loads the game level corresponding to the number
+//  pased by parameter, number.
+//  Reads the file with the coordinates of the level's
+//  obejcts, and returns an array with all the coordinates
+//  inside.
+- (NSArray *)loadLevelWithNumber:(int)number;
 
 @end
 
@@ -54,30 +54,27 @@
     NSArray *elementsPositions = [[NSArray alloc] init];
     
     if (self.currentLevel < self.numberOfLevels) {
-        switch (self.currentLevel) {
-            case LEVEL_ZERO:
-                elementsPositions = [self loadLevel0];
-                break;
-                
-            default:
-                break;
-        }
-        return elementsPositions;
+        elementsPositions = [self loadLevelWithNumber:self.currentLevel];
+        self.currentLevel ++;
     } else {
         return nil;
     }
+    return elementsPositions;
 }
 
-//  The locations of the level are stored into a string separated by
-//  commas. This function divides the string into an array with all
-//  the coordinates of every element. The Y-Coordinate is not stored
-//  because all the objects are over the floor. It also saves a |BOOL|
-//  component which indicates to rotate the object 90º.
-- (NSArray *)loadLevel0
-{
-    NSString *locations = 
-    @"-3.5,-6.0,YES,-2.0,-4.5,YES,-2.0,-3.5,YES,-2.0,-2.5,YES,-2.0,-1.5,YES,-2.25,-0.8,NO,-3.25,-0.8,NO,-4.25,-0.8,NO,-2.0,-0.1,YES,-2.0,0.9,YES,-2.0,1.9,YES,-2.0,2.9,YES,-2.0,3.5,NO,-3.0,3.5,NO,-1.0,3.5,NO,0.0,3.5,NO,-1.3,-3.5,NO,-0.3,-3.5,NO,0.7,-3.5,NO,1.7,-3.5,NO,2.4,-3.25,YES,2.4,-2.25,YES,4.5,-5.0,NO,3.5,-5.0,NO,3.0,0.0,NO,4.5,2.0,NO,3.5,2.0,NO,2.5,2.0,NO,1.5,2.0,NO,0.5,2.0,NO,0.25,1.3,YES,0.25,0.3,YES,0.25,-0.7,YES,3.0,4.0,YES,3.0,5.0,YES";
-   return [locations componentsSeparatedByString:@","];
+- (NSArray *)loadLevelWithNumber:(int)number
+{    
+    //  The level coordinates file is a CSV (Comma Separated File) file.
+    //  Each file has the coordinates of a level. The name starts with "level"
+    //  followed by the number of the level.
+    NSError *error;
+    NSString *stringWithLevelPath = [[NSBundle mainBundle] 
+                                     pathForResource:[NSString stringWithFormat:@"level%d", self.currentLevel] 
+                                     ofType:@"txt"]; 
+    NSString *stringWithCoordinatesOfLevel = [NSString stringWithContentsOfFile:stringWithLevelPath
+                                                                       encoding:NSUTF8StringEncoding
+                                                                          error:&error];
+    return [stringWithCoordinatesOfLevel componentsSeparatedByString:@","];
 }
 
 @end
