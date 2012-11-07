@@ -18,6 +18,9 @@
 //  OpenGL ES rendering loop. A GLKViewController object works in
 //  conjunction with a GLKView object to display frames of 
 //  animation in the view.
+//  This interface manages all the view events, using the model
+//  for that propose.
+//
 @interface OpenGLViewController : GLKViewController
 
 /*

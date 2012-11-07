@@ -8,35 +8,40 @@
 
 #import "OpenGLViewController.h"
 
-#pragma mark - Private API
-
+//  The OpenGLViewController () interface extends the previous one
+//  (public) with some addtional mehtods and variables hidden.
+//  The interface manages the |GLKView|, the models and the position
+//  of the camera. Also has information about the level that is
+// currently played and elements will be displayed in it.
+//
 @interface OpenGLViewController ()
 
-//  The GLKView class simplifies the effort required to create 
+//  The |GLKView| class simplifies the effort required to create 
 //  an OpenGL ES application by providing a default implementation
-//  of an OpenGL ES-aware view. A GLKView directly manages a 
+//  of an OpenGL ES-aware view. A |GLKView| directly manages a 
 //  framebuffer object on your application’s behalf; 
 //  your application simply needs to draw into the framebuffer 
 //  when the contents need to be updated.
 @property (nonatomic, strong) GLKView *glView;
 
-//  The GLKBaseEffect class provides shaders that mimic many of the
+//  The |GLKBaseEffect| class provides shaders that mimic many of the
 //  behaviors provided by the OpenGL ES 1.1 lighting and shading model,
 //  including materials, lighting and texturing. The base effect 
 //  allows up to three lights and two textures to be applied to a scene.
 @property (nonatomic, strong) GLKBaseEffect *baseEffect;
 
-//  The UtilityModelManager simplifies the load of models. This class
-//  loads a unique Modelplist file with the entire model.
+//  The |UtilityModelManager| simplifies the load of models. This class
+//  loads a unique Modelplist file with the entire model. This object has
+//  the information about all the elements in the scene.
 @property (nonatomic, strong) UtilityModelManager *modelManager;
 
-//  The UtilityModel class stores a simple model. In this case, the 
-//  boardgame model; floor, walls and borders.
+//  The |UtilityModel| class stores a simple model. Each object in
+//  the game are a instance of |UtilityModel|.
 @property (nonatomic, strong) UtilityModel *gameModelFloor;
 @property (nonatomic, strong) UtilityModel *gameModelBorders;
 @property (nonatomic, strong) UtilityModel *gameModelWalls;
 
-//  Set of vectors with the information of the current point of view.
+//  Vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
 //  The second one, makes a target for the view.
 //  The last one, sets a vector that produces the same effect as tilting
@@ -46,26 +51,54 @@
 @property GLKVector3 upVector;
 
 //  Variables for checking if the model view matrix 
-//  has been altered since the last time.
+//  has been altered since the last time. It usefull for not to waste CPU
+//  cycles if the model hasn't been moved since the last time.
 @property float previousXPosition;
 @property float previousZPosition;
 
-//  Vector (array) with the elements to draw into the labyrinth.
+//  Vector with the elements to draw into the labyrinth. This proporty
+//  stores |UtilityModel|, each one with one different element to be
+//  draw into the game.
 @property (nonatomic, strong) NSMutableArray *elements;
 
+//  Manages the information about each level. Returns importat
+//  data about the levels; number of levels in the game, current level
+//  played and the position of every element into the game.
 @property (nonatomic, strong) LevelManager *levelManager;
 
-//  Prototypes of auxiliary functions.
+
+//  Configures the current GLKView.
+//  - Initializes a new one;
+//  - Checks the type of the view;
+//  - Sets the Z-Buffer;
+//  - Sets the context.
 - (void)configureGLView;
+
+//  Configures the enviroment for the scene.
+//  - Sets the lights; color and direction;
+//  - Sets the background.
 - (void)configureEnviroment;
+
+//  Configures the point of view of the model.
+//  - Sets the vectors of the Eye and the LookAt into the 
+//    scene.
+//  - Creates the model view matrix with the previous vectors.
 - (void)configurePointOfView;
+
+//  Load the Modelplist file, which stores the complete model and
+//  divide it, saving each mesh into a variable.
+//  - Throws exception in case of error.
 - (void)loadModels;
+
+//  Stores the position of every element of the labyrinth into the vector.
+//  - Creates the Walls.
+//  - Creates the Ball.
+//  - Creates the Monster.
+//  - Stores it all.
 - (void)storeElementsInArray;
 
 @end
 
-
-#pragma mark - Implementation
 
 @implementation OpenGLViewController
 
@@ -160,7 +193,8 @@
     }
 }
 
-#pragma mark - GLKViewDelegate Protocol
+
+#pragma mark - GLKViewDelegate protocol
 
 //  Draws the view’s contents.
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -171,6 +205,7 @@
     //  Calculates the aspect ratio.
     const GLfloat aspectRatio = (GLfloat)view.drawableWidth / (GLfloat)view.drawableHeight;
     
+    //  Makes a first view of the scene.
     self.baseEffect.transform.projectionMatrix = 
     GLKMatrix4MakePerspective(GLKMathDegreesToRadians(35.0), aspectRatio, 4.0, 20.0);
     
@@ -182,19 +217,14 @@
     [self.gameModelFloor draw];
     [self.gameModelBorders draw];
     
-    // Draw walls.
+    // Draw every element.
     [self.elements makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
                                 withObject:self.baseEffect];
 }
 
 
-#pragma mark - Auxiliary functions
+#pragma mark - Private methods
 
-//  Configures the current GLKView.
-//  - Initializes a new one;
-//  - Checks the type of the view;
-//  - Sets the Z-Buffer;
-//  - Sets the context.
 - (void)configureGLView
 {
     //  Verify the View's type, created by the interface builder 
@@ -221,13 +251,8 @@
     //  triangle. It's an optimization when render. 
     [((AGLKContext *)self.glView.context) enable:GL_DEPTH_TEST];
     //[((AGLKContext *)self.glView.context) enable:GL_CULL_FACE];
-
 }
 
-
-//  Configures the enviroment for the scene.
-//  - Sets the lights; color and direction;
-//  - Sets the background.
 - (void)configureEnviroment
 {
     //  Creates a BaseEffect.
@@ -247,11 +272,6 @@
     ((AGLKContext *)self.glView.context).clearColor = GLKVector4Make(0.0, 0.0, 0.0, 1.0);
 }
 
-
-//  Configures the point of view of the model.
-//  - Sets the vectors of the Eye and the LookAt in the 
-//    scene.
-//  - Creates the model view matrix with the previous vectors.
 - (void)configurePointOfView
 {
     //  Default view {0, 18, 0}.
@@ -266,10 +286,6 @@
                          self.upVector.x, self.upVector.y, self.upVector.z);
 }
 
-
-//  Load the Modelplist file, which stores the complete model and
-//  divide it, saving each mesh into a variable.
-//  - Throws exception in case of error.
 - (void)loadModels
 {
     //  Searches for the path and stores it.
@@ -291,13 +307,9 @@
     
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
-    self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;}
+    self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
+}
 
-//  Stores the position of every element in the labyrinth into the vector.
-//  - Creates the Wall.
-//  - Creates the Ball.
-//  - Creates the Monster.
-//  - Stores it all.
 - (void)storeElementsInArray
 {
     self.levelManager = [[LevelManager alloc] initWithNumberOfLevels:1];
@@ -317,7 +329,6 @@
                                   shouldRotate:[[positions objectAtIndex:i+2] boolValue]]];
     }
 }
-
 
 
 #pragma mark - Animation
@@ -348,7 +359,6 @@
         self.previousXPosition = self.eyePosition.x;
         self.previousZPosition = self.eyePosition.z;
     }
-
 }
 
 

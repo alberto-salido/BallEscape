@@ -12,16 +12,15 @@
 
 @synthesize shouldRotate = _shouldRotate;
 
+
 - (id)initWithModel:(UtilityModel *)model position:(GLKVector3)position shouldRotate:(BOOL)rotate
 {
     if ((self = [super initWithModel:model position:position]) != nil) {
         self.shouldRotate = rotate;
     }
-    
     return self;
 }
 
-//  Draw the object using the protocol defined in the super class.
 - (void) drawWithBaseEffect:(GLKBaseEffect *)baseEffect
 {
     // Save effect attributes that will be changed

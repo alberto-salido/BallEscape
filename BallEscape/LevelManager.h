@@ -8,17 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-//  Constants for the level's name.
+//  Constants with the level's name.
 #define LEVEL_ZERO 0
 
+//  Manages all the levels of the game. When the game starts,
+//  the |LevelManager| has to be initialized with the number
+//  of levels and he returns every game turn, using the
+//  |getNextLevelStructure| call, the position of the object in
+//  the game.
+//
 @interface LevelManager : NSObject
-
-//  Structure for storing the position in the screen of 
-//  every object that will be displayed.
-typedef struct {
-    float x, y, z;
-    BOOL rotate;
-}Location;
 
 //  Number of levels in the game
 @property (readonly) int numberOfLevels;
@@ -26,8 +25,16 @@ typedef struct {
 //  Level played now.
 @property (readonly) int currentLevel;
 
-
+//  Initializes with the number of levels.
 - (id)initWithNumberOfLevels:(int)number;
+
+//  Gets the array with the position of every object in the current level.
+//  Returns |nil| if there are not more levels.
+//  The array has the following format:
+//  - [x, z, BOOL, ...]
+//  Where, x and z are the coordinates of the object, the y
+//  axis is not necessary because the objects are all over the floor.
+//  The |BOOL| element represent if the object has to be rotated or not.
 - (NSArray *)getNextLevelStructure;
 
 @end
