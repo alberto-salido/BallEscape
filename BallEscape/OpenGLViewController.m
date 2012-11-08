@@ -40,6 +40,7 @@
 @property (nonatomic, strong) UtilityModel *gameModelFloor;
 @property (nonatomic, strong) UtilityModel *gameModelBorders;
 @property (nonatomic, strong) UtilityModel *gameModelWalls;
+@property (nonatomic, strong) UtilityModel *gameModelBall;
 
 //  Vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
@@ -56,15 +57,21 @@
 @property float previousXPosition;
 @property float previousZPosition;
 
-//  Vector with the elements to draw into the labyrinth. This proporty
-//  stores |UtilityModel|, each one with one different element to be
-//  draw into the game.
-@property (nonatomic, strong) NSMutableArray *elements;
+//  Vectors with the static and dynamic elements to draw into the labyrinth.
+//  This proporty stores |UtilityModel|, each one with one different element
+//  to be draw into the game.
+@property (nonatomic, strong) NSMutableArray *staticElements;
+@property (nonatomic, strong) NSMutableArray *dynamicElements;
 
 //  Manages the information about each level. Returns importat
 //  data about the levels; number of levels in the game, current level
 //  played and the position of every element into the game.
 @property (nonatomic, strong) LevelManager *levelManager;
+
+//  Properties with the velocity of the ball in a point of time.
+//  Both variables are updated with the motion controller.
+@property float xVelocity;
+@property float yVelocity;
 
 
 //  Configures the current GLKView.
@@ -109,13 +116,17 @@
 @synthesize gameModelFloor = _gameModelFloor;
 @synthesize gameModelBorders = _gameModelBorders;
 @synthesize gameModelWalls = _gameModelWalls;
+@synthesize gameModelBall = _gameModelBall;
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
 @synthesize upVector = _upVector;
 @synthesize previousXPosition = _previousXPosition;
 @synthesize previousZPosition = _previousZPosition;
-@synthesize elements = _elements;
+@synthesize staticElements = _staticElements;
+@synthesize dynamicElements = _dynamicElements;
 @synthesize levelManager = _levelManager;
+@synthesize xVelocity = _xVelocity;
+@synthesize yVelocity = _yVelocity;
 
 
 //  Sent to the view controller when the app receives a memory warning.
@@ -217,9 +228,11 @@
     [self.gameModelFloor draw];
     [self.gameModelBorders draw];
     
-    // Draw every element.
-    [self.elements makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
+    // Draw all the elements.
+    [self.staticElements makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
                                 withObject:self.baseEffect];
+    [self.dynamicElements makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
+                                          withObject:self.baseEffect];
 }
 
 
@@ -305,6 +318,10 @@
     self.gameModelWalls = [self.modelManager modelNamed:@"walls"];
     NSAssert(self.gameModelWalls != nil, @"Failed to load walls");
     
+    //  Load the ball.
+    self.gameModelBall = [self.modelManager modelNamed:@"ball"];
+    NSAssert(self.gameModelBall != nil, @"Failed to load ball");
+    
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
     self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
@@ -318,16 +335,23 @@
     NSArray *positions = 
     [[NSArray alloc] initWithArray:[self.levelManager getNextLevelStructure]];
     
-    self.elements = [[NSMutableArray alloc] init];
+    self.staticElements = [[NSMutableArray alloc] init];
+    self.dynamicElements = [[NSMutableArray alloc] init];
         
+    //  Stores all the walls of the level.
     for (int i = 0; i < positions.count; i = i+3) {
-        [self.elements addObject:[[Wall alloc] 
+        [self.staticElements addObject:[[Wall alloc] 
                                   initWithModel:self.gameModelWalls 
                                   position:GLKVector3Make([[positions objectAtIndex:i] floatValue],
                                                           0.0,
                                                           [[positions objectAtIndex:i+1] floatValue])
                                   shouldRotate:[[positions objectAtIndex:i+2] boolValue]]];
     }
+    
+    [self.dynamicElements addObject:[[Ball alloc] 
+                              initWithModel:self.gameModelBall 
+                              position:GLKVector3Make(-4.5, 0.0, -6.0) 
+                              velocity:GLKVector3Make(0.0, 0.0, 0.0)]];
 }
 
 
@@ -359,18 +383,56 @@
         self.previousXPosition = self.eyePosition.x;
         self.previousZPosition = self.eyePosition.z;
     }
+    
+    [self.dynamicElements 
+     makeObjectsPerformSelector:@selector(updateWithController:) withObject:self];
 }
 
+
+#pragma mark - Protocol ObjectController
+
+- (AGLKAxisAllignedBoundingBox)borders
+{
+    return self.gameModelBorders.axisAlignedBoundingBox;
+}
+
+- (NSArray *)walls
+{
+    return self.staticElements;
+}
+
+- (NSArray *)monsters
+{
+    NSMutableArray *monstersArray = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i < self.dynamicElements.count; i++) {
+        [monstersArray addObject:[self.dynamicElements objectAtIndex:i]];
+    }
+    
+    return (NSArray *)monstersArray;
+}
+
+- (float)getXVelocity
+{
+    return -self.xVelocity;
+}
+
+- (float)getYVelocity
+{
+    return -self.yVelocity;
+}
 
 /*
  *  Simuladores del sensor de movimiento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender {
-    self.eyePosition = GLKVector3Make(sender.value, self.eyePosition.y, self.eyePosition.z);
+    self.xVelocity = sender.value;
+    self.eyePosition = GLKVector3Make(self.xVelocity, self.eyePosition.y, self.eyePosition.z);
 }
 
 - (IBAction)tiltYAxis:(UISlider *)sender {
-    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, sender.value);
+    self.yVelocity = sender.value;
+    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, self.yVelocity);
 
 }
 @end

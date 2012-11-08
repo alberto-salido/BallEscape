@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "UtilityModel.h"
+#import "AGLKAxisAllignedBoundingBox.h"
+#import "UtilityModel+viewAdditions.h"
 
 //  A simple 3DObject. It has two properties, the |UtilityModel|
 //  with the mesh and the information about him; and the position
@@ -29,7 +31,7 @@
 
 
 //  Protocol for drawing the scene using a base effect.
-@protocol abstractDraw <NSObject>
+@protocol AbstractDraw <NSObject>
 
 //  Draw the object model in the position set, using a 
 //  base effect property.

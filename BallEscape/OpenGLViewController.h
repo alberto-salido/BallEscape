@@ -12,6 +12,7 @@
 #import "UtilityModel+viewAdditions.h"
 #import "Wall.h"
 #import "LevelManager.h"
+#import "Ball.h"
 
 //  The GLKViewController class provides all of the standard view
 //  controller functionality, but additionally implements an
@@ -21,7 +22,7 @@
 //  This interface manages all the view events, using the model
 //  for that propose.
 //
-@interface OpenGLViewController : GLKViewController
+@interface OpenGLViewController : GLKViewController <ObjectController>
 
 /*
  *  Sliders para simular el sensor de movimento.
