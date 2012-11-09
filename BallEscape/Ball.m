@@ -27,6 +27,11 @@
 //  and the labyrinth walls.
 - (void)bounceOffWalls:(NSArray *)walls;
 
+//  Checks if a position, represented as a |GLKvector3| is inside
+//  of another object, represented by its Bounding Box.
+- (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 
+                         boundingBox:(AGLKAxisAllignedBoundingBox)borders;
+
 @end
 
 
@@ -138,8 +143,66 @@
 }
 
 - (void)bounceOffWalls:(NSArray *)walls
-{
+{    
+    for (Wall *currentWall in walls) {
+        
+        //  Variables.
+        GLKVector3 wallPosition = currentWall.position;
+        AGLKAxisAllignedBoundingBox wallBoundingBox = currentWall.model.axisAlignedBoundingBox;
+        float wallXWidth = wallBoundingBox.max.x - wallBoundingBox.min.x;
+        float wallZWidth = wallBoundingBox.max.z - wallBoundingBox.min.z;
+
+        //  If the ball and the wall are going to collision.
+        if ([self isInsideOfObjectWithPosition:wallPosition 
+                                   boundingBox:wallBoundingBox]) {
+            
+            //  [x, z, X, Z]
+            int location[] = {0, 0, 0, 0};
+            if (self.position.x < (wallPosition.x - (wallXWidth / 2))) {
+                location[0] = 1;
+            } 
+            if (self.position.z < (wallPosition.z - (wallZWidth / 2)))  {
+                location[1] = 1;
+            }
+            if (self.position.x > (wallPosition.x + (wallXWidth / 2))) {
+                location[2] = 1;
+            }
+            if (self.position.z > (wallPosition.z + (wallZWidth / 2))) {
+                location[3] = 1;
+            }
+            
+            for (int i = 0; i < 4; i++) {
+                NSLog(@"%d", location[i]);
+            }
+            
+        }
+        
+    }
     
+}
+
+- (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 
+                         boundingBox:(AGLKAxisAllignedBoundingBox)borders 
+{
+    float xWidth = borders.max.x - borders.min.x;
+    float zWidth = borders.max.z - borders.min.z;
+    
+    if (self.nextPosition.x < (position.x - (xWidth / 2))) {
+        return NO;
+    }
+       
+    if (self.nextPosition.x > (position.x + (xWidth / 2))) {
+        return NO;
+    }
+    
+    if (self.nextPosition.z < (position.z - (zWidth / 2))) {
+        return NO;
+    }
+    
+    if (self.nextPosition.z > (position.z + (zWidth / 2))) {
+        return NO;
+    }
+    return YES;
 }
 
 

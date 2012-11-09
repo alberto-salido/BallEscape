@@ -8,6 +8,7 @@
 
 #import "3DObject.h"
 #import "ObjectController.h"
+#import "Wall.h"
 
 //  Border's width.
 #define BORDER_WIDTH 1.0
