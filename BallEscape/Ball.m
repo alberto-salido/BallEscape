@@ -18,6 +18,15 @@
 //  Next position of the ball.
 @property (nonatomic) GLKVector3 nextPosition;
 
+//  This function checks if the ball has collisioned
+//  with the borders of the board-game. The collisions
+//  bounce of the ball from the borders.
+- (void)bounceOffBorders:(AGLKAxisAllignedBoundingBox)borders;
+
+//  This method detexts any collision between the ball
+//  and the labyrinth walls.
+- (void)bounceOffWalls:(NSArray *)walls;
+
 @end
 
 
@@ -28,7 +37,9 @@
 @synthesize radius = _radius;
 @synthesize nextPosition = _nextPosition;
 
-- (id)initWithModel:(UtilityModel *)model position:(GLKVector3)position velocity:(GLKVector3)velocity
+- (id)initWithModel:(UtilityModel *)model 
+           position:(GLKVector3)position 
+           velocity:(GLKVector3)velocity
 {
     if ((self = [super initWithModel:model position:position])
         != nil) {
@@ -49,18 +60,23 @@
 
 - (void)updateWithController:(id<ObjectController>)controller
 {
-    NSTimeInterval elapsedTimeSeconds = MIN(MAX([controller timeSinceLastUpdate], 0.1), 0.5);
-    
-    NSLog(@"x:%f y:%f", [controller getXVelocity], [controller getYVelocity]);
-
+    NSTimeInterval elapsedTimeSeconds = 
+    MIN(MAX([controller timeSinceLastUpdate], 0.1), 0.5);
+        
     //  Updates the velocity using the motion controller.
-    if ((self.velocity.x != [controller getXVelocity]) || (self.velocity.y != [controller getYVelocity])) {
-        self.velocity = GLKVector3Make([controller getXVelocity], 0.0, [controller getYVelocity]);
-    }
+    self.velocity = GLKVector3Add(self.velocity, 
+                                    GLKVector3Make([controller getXVelocity],
+                                                    0.0, 
+                                                    [controller getYVelocity]));
     
-    GLKVector3 traveledDistance = GLKVector3MultiplyScalar(self.velocity, elapsedTimeSeconds);
+    GLKVector3 traveledDistance = GLKVector3MultiplyScalar(self.velocity,
+                                                           elapsedTimeSeconds);
     
     self.nextPosition = GLKVector3Add(self.position, traveledDistance);
+    
+    //  Detectes collisions.
+    [self bounceOffBorders:[controller borders]];
+    [self bounceOffWalls:[controller walls]];
     
     self.position = self.nextPosition;
 }
@@ -89,6 +105,41 @@
     baseEffect.transform.modelviewMatrix = savedModelviewMatrix;
     baseEffect.material.diffuseColor = savedDiffuseColor;
     baseEffect.material.ambientColor = savedAmbientColor;
+}
+
+- (void)bounceOffBorders:(AGLKAxisAllignedBoundingBox)borders
+{
+    // Detects collisions with the four borders.
+    //  Updates the velocity, as the ball was hitten, and sets up the nextPosition.
+    if ((borders.min.x + BORDER_WIDTH + self.radius) > self.nextPosition.x) {
+        self.nextPosition = GLKVector3Make(borders.min.x + BORDER_WIDTH + self.radius,
+                                           self.nextPosition.y, self.nextPosition.z);
+        self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
+                                       self.velocity.y, self.velocity.z);
+    } 
+    if ((borders.max.x - BORDER_WIDTH - self.radius) < self.nextPosition.x) {
+        self.nextPosition = GLKVector3Make(borders.max.x - BORDER_WIDTH - self.radius,
+                                           self.nextPosition.y, self.nextPosition.z);
+        self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
+                                       self.velocity.y, self.velocity.z);
+    } 
+    if ((borders.min.z + BORDER_WIDTH + self.radius) > self.nextPosition.z) {
+        self.nextPosition = GLKVector3Make(self.nextPosition.x, self.nextPosition.y, 
+                                           borders.min.z + BORDER_WIDTH + self.radius);
+        self.velocity = GLKVector3Make(self.velocity.x, self.velocity.y,
+                                       -self.velocity.z * BOUNDING_COEFFICIENT);
+    }
+    if ((borders.max.z - BORDER_WIDTH - self.radius) < self.nextPosition.z) {
+        self.nextPosition = GLKVector3Make(self.nextPosition.x, self.nextPosition.y,
+                                           borders.max.z - BORDER_WIDTH - self.radius);
+        self.velocity = GLKVector3Make(self.velocity.x, self.velocity.y,
+                                       -self.velocity.z * BOUNDING_COEFFICIENT);
+    }
+}
+
+- (void)bounceOffWalls:(NSArray *)walls
+{
+    
 }
 
 
