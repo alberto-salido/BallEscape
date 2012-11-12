@@ -14,6 +14,8 @@
 //  A simple 3DObject. It has two properties, the |UtilityModel|
 //  with the mesh and the information about him; and the position
 //  into the space.
+//  This kind of objects are not drawable, to create a drawable one,
+//  must extends this class adding a category for drawing.
 //
 @interface threeDObject : NSObject
 
@@ -23,18 +25,8 @@
 //  Obejct's position.
 @property (readonly) GLKVector3 position;
 
-
 //  Initializes the object with a model and a position.
-- (id)initWithModel:(UtilityModel *)model position:(GLKVector3)position;
-
-@end
-
-
-//  Protocol for drawing the scene using a base effect.
-@protocol AbstractDraw <NSObject>
-
-//  Draw the object model in the position set, using a 
-//  base effect property.
-- (void)drawWithBaseEffect:(GLKBaseEffect *)baseEffect;
+- (id)initWithModel:(UtilityModel *)model 
+           position:(GLKVector3)position;
 
 @end

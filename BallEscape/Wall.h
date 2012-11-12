@@ -8,12 +8,11 @@
 
 #import "3DObject.h"
 
-//  A Wall in the labyrinth. It extends from |threeDObject| and
-//  implements the |abstractDraw| protocol for drawing.
+//  A Wall in the labyrinth. It extends from |threeDObject|.
 //  Every wall has a property |shouldRotate| that indicates if the
 //  object has to be rotated 90º.
 //
-@interface Wall : threeDObject <AbstractDraw>
+@interface Wall : threeDObject
 
 //  The model must be rotated over the Y Axis.
 @property BOOL shouldRotate;

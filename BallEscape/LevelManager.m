@@ -8,7 +8,6 @@
 
 #import "LevelManager.h"
 
-
 @class LevelManager;
 
 @interface LevelManager ()
@@ -24,7 +23,6 @@
 - (NSArray *)loadLevelWithNumber:(int)number;
 
 @end
-
 
 @implementation LevelManager
 

@@ -19,12 +19,10 @@
 
 @end
 
-
 @implementation threeDObject
 
 @synthesize model = _model;
 @synthesize position = _position;
-
 
 //  Default initializer. Must be override from the super class.
 //  Returns an Assertion.
@@ -34,7 +32,8 @@
     return nil;
 }
 
-- (id)initWithModel:(UtilityModel *)model position:(GLKVector3)position
+- (id)initWithModel:(UtilityModel *)model 
+           position:(GLKVector3)position
 {
     if ((self = [super init]) != nil) {
         self.model = model;

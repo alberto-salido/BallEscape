@@ -8,7 +8,6 @@
 
 #import "Ball.h"
 
-
 @interface Ball ()
 
 @property (nonatomic) GLKVector3 position;
@@ -25,7 +24,7 @@
 
 //  This method detexts any collision between the ball
 //  and the labyrinth walls.
-- (void)bounceOffWalls:(NSArray *)walls;
+- (void)bounceOffWalls:(NSArray *)walls elapsedTime:(NSTimeInterval)elapsedTime;
 
 //  Checks if a position, represented as a |GLKvector3| is inside
 //  of another object, represented by its Bounding Box.
@@ -33,7 +32,6 @@
                          boundingBox:(AGLKAxisAllignedBoundingBox)borders;
 
 @end
-
 
 @implementation Ball
 
@@ -81,35 +79,9 @@
     
     //  Detectes collisions.
     [self bounceOffBorders:[controller borders]];
-    [self bounceOffWalls:[controller walls]];
+    [self bounceOffWalls:[controller walls] elapsedTime:elapsedTimeSeconds];
     
     self.position = self.nextPosition;
-}
-
-- (void)drawWithBaseEffect:(GLKBaseEffect *)baseEffect
-{
-    // Save effect attributes that will be changed
-    GLKMatrix4  savedModelviewMatrix = 
-    baseEffect.transform.modelviewMatrix;
-    GLKVector4  savedDiffuseColor = 
-    baseEffect.material.diffuseColor;
-    GLKVector4  savedAmbientColor = 
-    baseEffect.material.ambientColor;
-    
-    // Translate to the model's position
-    baseEffect.transform.modelviewMatrix = 
-    GLKMatrix4Translate(savedModelviewMatrix,
-                        self.position.x, self.position.y, self.position.z);
-    
-    [baseEffect prepareToDraw];
-    
-    // Draw the model
-    [self.model draw];
-    
-    // Restore saved attributes   
-    baseEffect.transform.modelviewMatrix = savedModelviewMatrix;
-    baseEffect.material.diffuseColor = savedDiffuseColor;
-    baseEffect.material.ambientColor = savedAmbientColor;
 }
 
 - (void)bounceOffBorders:(AGLKAxisAllignedBoundingBox)borders
@@ -142,43 +114,33 @@
     }
 }
 
-- (void)bounceOffWalls:(NSArray *)walls
+- (void)bounceOffWalls:(NSArray *)walls elapsedTime:(NSTimeInterval)elapsedTime
 {    
     for (Wall *currentWall in walls) {
         
-        //  Variables.
-        GLKVector3 wallPosition = currentWall.position;
-        AGLKAxisAllignedBoundingBox wallBoundingBox = currentWall.model.axisAlignedBoundingBox;
-        float wallXWidth = wallBoundingBox.max.x - wallBoundingBox.min.x;
-        float wallZWidth = wallBoundingBox.max.z - wallBoundingBox.min.z;
-
-        //  If the ball and the wall are going to collision.
-        if ([self isInsideOfObjectWithPosition:wallPosition 
-                                   boundingBox:wallBoundingBox]) {
+        if ([self isInsideOfObjectWithPosition:currentWall.position 
+                                   boundingBox:currentWall.model.axisAlignedBoundingBox]) {
             
-            //  [x, z, X, Z]
-            int location[] = {0, 0, 0, 0};
-            if (self.position.x < (wallPosition.x - (wallXWidth / 2))) {
-                location[0] = 1;
-            } 
-            if (self.position.z < (wallPosition.z - (wallZWidth / 2)))  {
-                location[1] = 1;
-            }
-            if (self.position.x > (wallPosition.x + (wallXWidth / 2))) {
-                location[2] = 1;
-            }
-            if (self.position.z > (wallPosition.z + (wallZWidth / 2))) {
-                location[3] = 1;
+            float wallXWidth = currentWall.model.axisAlignedBoundingBox.max.x - currentWall.model.axisAlignedBoundingBox.min.x;
+            float wallZWidth = currentWall.model.axisAlignedBoundingBox.max.z - currentWall.model.axisAlignedBoundingBox.min.z;
+            
+            NSLog(@"%f, %f inide of block %f, %f",
+                  self.position.x, self.position.z, currentWall.position.x, currentWall.position.z);
+            GLKVector3 direction = GLKVector3Normalize(GLKVector3Subtract(currentWall.position, self.position));
+            NSLog(@"Vector direction: [%f, %f]", direction.x, direction.z);
+            
+            if ((currentWall.position.x > 0) && (currentWall.position.z > 0)) {
+                
             }
             
-            for (int i = 0; i < 4; i++) {
-                NSLog(@"%d", location[i]);
-            }
+            self.nextPosition = GLKVector3Make(currentWall.position.x - (wallXWidth / 2) - self.radius,
+                                               self.nextPosition.y, self.nextPosition.z);
+            self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
+                                           self.velocity.y, self.velocity.z);
+            
             
         }
-        
     }
-    
 }
 
 - (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 
@@ -187,19 +149,19 @@
     float xWidth = borders.max.x - borders.min.x;
     float zWidth = borders.max.z - borders.min.z;
     
-    if (self.nextPosition.x < (position.x - (xWidth / 2))) {
+    if (self.nextPosition.x < (position.x - self.radius - (xWidth / 2))) {
         return NO;
     }
        
-    if (self.nextPosition.x > (position.x + (xWidth / 2))) {
+    if (self.nextPosition.x > (position.x + self.radius + (xWidth / 2))) {
         return NO;
     }
     
-    if (self.nextPosition.z < (position.z - (zWidth / 2))) {
+    if (self.nextPosition.z < (position.z - self.radius - (zWidth / 2))) {
         return NO;
     }
     
-    if (self.nextPosition.z > (position.z + (zWidth / 2))) {
+    if (self.nextPosition.z > (position.z + self.radius + (zWidth / 2))) {
         return NO;
     }
     return YES;

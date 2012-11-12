@@ -27,6 +27,10 @@
 		5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */; };
 		5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */; };
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
+		507D1CFA1651284F007FC594 /* BoardGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CF91651284F007FC594 /* BoardGame.m */; };
+		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
+		507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D0216512F25007FC594 /* Ball+viewAdditions.m */; };
+		507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D05165131B2007FC594 /* Wall+viewAdditions.m */; };
 		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
 		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
@@ -71,6 +75,14 @@
 		5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UtilityTextureInfo+viewAdditions.m"; sourceTree = "<group>"; };
 		5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTextureInfo.h; sourceTree = "<group>"; };
 		5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTextureInfo.m; sourceTree = "<group>"; };
+		507D1CF81651284F007FC594 /* BoardGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGame.h; sourceTree = "<group>"; };
+		507D1CF91651284F007FC594 /* BoardGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardGame.m; sourceTree = "<group>"; };
+		507D1CFE16512C14007FC594 /* BoardGame+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BoardGame+viewAdditions.h"; sourceTree = "<group>"; };
+		507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BoardGame+viewAdditions.m"; sourceTree = "<group>"; };
+		507D1D0116512F25007FC594 /* Ball+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ball+viewAdditions.h"; sourceTree = "<group>"; };
+		507D1D0216512F25007FC594 /* Ball+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ball+viewAdditions.m"; sourceTree = "<group>"; };
+		507D1D04165131B2007FC594 /* Wall+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Wall+viewAdditions.h"; sourceTree = "<group>"; };
+		507D1D05165131B2007FC594 /* Wall+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Wall+viewAdditions.m"; sourceTree = "<group>"; };
 		509DC3781646CF1D00251009 /* 3DObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DObject.h; sourceTree = "<group>"; };
 		509DC3791646CF1D00251009 /* 3DObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DObject.m; sourceTree = "<group>"; };
 		509DC37C1646D19B00251009 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
@@ -184,6 +196,8 @@
 				509DC3791646CF1D00251009 /* 3DObject.m */,
 				50FCF5DD164BA249008CD89E /* Ball.h */,
 				50FCF5DE164BA249008CD89E /* Ball.m */,
+				507D1CF81651284F007FC594 /* BoardGame.h */,
+				507D1CF91651284F007FC594 /* BoardGame.m */,
 				50FCF55616492830008CD89E /* LevelManager.h */,
 				50FCF55716492830008CD89E /* LevelManager.m */,
 				50FCF5E2164BC83F008CD89E /* ObjectController.h */,
@@ -207,11 +221,17 @@
 				5009CE8F163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.h */,
 				5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */,
 				5009CE8C163F1B580082C5A7 /* UtilityModel+viewAdditions.h */,
+				507D1D0116512F25007FC594 /* Ball+viewAdditions.h */,
+				507D1D0216512F25007FC594 /* Ball+viewAdditions.m */,
+				507D1CFE16512C14007FC594 /* BoardGame+viewAdditions.h */,
+				507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */,
 				5009CE8D163F1B580082C5A7 /* UtilityModel+viewAdditions.m */,
 				5009CE89163F1B210082C5A7 /* UtilityModelManager.h */,
 				5009CE8A163F1B210082C5A7 /* UtilityModelManager.m */,
 				5009CE92163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.h */,
 				5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */,
+				507D1D04165131B2007FC594 /* Wall+viewAdditions.h */,
+				507D1D05165131B2007FC594 /* Wall+viewAdditions.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -307,6 +327,10 @@
 				509DC37E1646D19B00251009 /* Wall.m in Sources */,
 				50FCF55816492830008CD89E /* LevelManager.m in Sources */,
 				50FCF5DF164BA249008CD89E /* Ball.m in Sources */,
+				507D1CFA1651284F007FC594 /* BoardGame.m in Sources */,
+				507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */,
+				507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */,
+				507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,7 +26,7 @@
 //  the enviroment. The second protocol is implemented using the method
 //  updateWithController.
 //
-@interface Ball : threeDObject <AbstractDraw>
+@interface Ball : threeDObject
 
 //  Ball's velocity.
 @property (nonatomic, readonly) GLKVector3 velocity;
