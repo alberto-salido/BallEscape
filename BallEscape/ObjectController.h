@@ -20,16 +20,16 @@
 //  Position of the borders. Used for collision.
 - (AGLKAxisAllignedBoundingBox)borders;
 
-//  Array with the position of the walls.
-- (NSArray *)walls;
+//  Set with the position of the labyrinth's walls.
+- (NSSet *)labyrinth;
 
 //  Array with the position of the monsters.
 //  At first, is only one monster, but in futures implementations
 //  should have more.
-- (NSArray *)monsters;
+//- (NSArray *)monsters;
 
 //  Gets the direction and speed of the movement.
 - (float)getXVelocity;
-- (float)getYVelocity;
+- (float)getZVelocity;
 
 @end

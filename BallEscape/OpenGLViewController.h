@@ -10,10 +10,11 @@
 #import "AGLKContext.h"
 #import "UtilityModelManager.h"
 #import "UtilityModel+viewAdditions.h"
+#import "BoardGame+viewAdditions.h"
 #import "Wall.h"
 #import "LevelManager.h"
-#import "Ball.h"
-
+#import "Ball+viewAdditions.h"
+ 
 //  The GLKViewController class provides all of the standard view
 //  controller functionality, but additionally implements an
 //  OpenGL ES rendering loop. A GLKViewController object works in
@@ -28,6 +29,6 @@
  *  Sliders para simular el sensor de movimento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender;
-- (IBAction)tiltYAxis:(UISlider *)sender;
+- (IBAction)tiltZAxis:(UISlider *)sender;
 
 @end

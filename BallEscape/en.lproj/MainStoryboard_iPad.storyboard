@@ -17,14 +17,14 @@
                                 <rect key="frame" x="437" y="962" width="261" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <action selector="tiltYAxis:" destination="2" eventType="valueChanged" id="GRT-gb-4kY"/>
+                                    <action selector="tiltZAxis:" destination="2" eventType="valueChanged" id="E8z-aS-CT0"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="0ie-Ng-ips">
                                 <rect key="frame" x="72" y="962" width="261" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <action selector="tiltXAxis:" destination="2" eventType="valueChanged" id="rV8-MT-jHZ"/>
+                                    <action selector="tiltXAxis:" destination="2" eventType="valueChanged" id="xh5-V0-s9N"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tilt X" lineBreakMode="tailTruncation" minimumFontSize="10" id="mFB-CG-ukd">
@@ -34,7 +34,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tilt Y" lineBreakMode="tailTruncation" minimumFontSize="10" id="rr1-rq-2iq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tilt Z" lineBreakMode="tailTruncation" minimumFontSize="10" id="rr1-rq-2iq">
                                 <rect key="frame" x="414" y="916" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -49,6 +49,15 @@
             <point key="canvasLocation" x="-232" y="-53"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="OpenGLViewController" superclassName="GLKViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OpenGLViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="tiltXAxis:" candidateClass="UISlider"/>
+                <relationship kind="action" name="tiltZAxis:" candidateClass="UISlider"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

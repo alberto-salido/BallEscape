@@ -10,14 +10,6 @@
 #import "ObjectController.h"
 #import "Wall.h"
 
-//  Border's width.
-#define BORDER_WIDTH 1.0
-
-//  Bounding coefficiente.
-//  Makes the ball's bounding more elastic
-//  or more rigid.
-#define BOUNDING_COEFFICIENT 0.5
-
 //  The main character in the game.
 //  Represents a Ball. This ball extends the interface |threeDObject| adding
 //  a couple of properties; one for the velocity and another for the raidus.

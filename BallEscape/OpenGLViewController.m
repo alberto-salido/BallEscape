@@ -8,6 +8,22 @@
 
 #import "OpenGLViewController.h"
 
+//  Constants with the information about the size of the boardgame.
+//  Size of the board game in the X-Axis.
+static float const BOARD_GAME_WIDTH = 10.0;
+static float const BOARD_GAME_HEIGHT = 13.68;
+
+//  Eye's hight.
+static float const EYE_HEIGHT = 18.0;
+
+//  Constants about the Modelpfile with the name of the models
+//  inside.
+static NSString *const MODELS_FILE = @"ballEscape";
+static NSString *const MODEL_FLOOR_NAME = @"floor";
+static NSString *const MODEL_BORDERS_NAME = @"borders";
+static NSString *const MODEL_WALL_NAME = @"walls";
+static NSString *const MODEL_BALL_NAME = @"ball";
+
 //  The OpenGLViewController () interface extends the previous one
 //  (public) with some addtional mehtods and variables hidden.
 //  The interface manages the |GLKView|, the models and the position
@@ -35,12 +51,10 @@
 //  the information about all the elements in the scene.
 @property (nonatomic, strong) UtilityModelManager *modelManager;
 
-//  The |UtilityModel| class stores a simple model. Each object in
-//  the game are a instance of |UtilityModel|.
-@property (nonatomic, strong) UtilityModel *gameModelFloor;
-@property (nonatomic, strong) UtilityModel *gameModelBorders;
-@property (nonatomic, strong) UtilityModel *gameModelWalls;
-@property (nonatomic, strong) UtilityModel *gameModelBall;
+//  Objects to be drawn into the game.
+@property (nonatomic, strong) BoardGame *boardGame;
+@property (nonatomic, strong) NSMutableSet *labyrinth;
+@property (nonatomic, strong) Ball *ball;
 
 //  Vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
@@ -57,12 +71,6 @@
 @property float previousXPosition;
 @property float previousZPosition;
 
-//  Vectors with the static and dynamic elements to draw into the labyrinth.
-//  This proporty stores |UtilityModel|, each one with one different element
-//  to be draw into the game.
-@property (nonatomic, strong) NSMutableArray *staticElements;
-@property (nonatomic, strong) NSMutableArray *dynamicElements;
-
 //  Manages the information about each level. Returns importat
 //  data about the levels; number of levels in the game, current level
 //  played and the position of every element into the game.
@@ -71,8 +79,7 @@
 //  Properties with the velocity of the ball in a point of time.
 //  Both variables are updated with the motion controller.
 @property float xVelocity;
-@property float yVelocity;
-
+@property float zVelocity;
 
 //  Configures the current GLKView.
 //  - Initializes a new one;
@@ -93,19 +100,11 @@
 - (void)configurePointOfView;
 
 //  Load the Modelplist file, which stores the complete model and
-//  divide it, saving each mesh into a variable.
+//  divide it, saving each mesh into an object.
 //  - Throws exception in case of error.
-- (void)loadModels;
-
-//  Stores the position of every element of the labyrinth into the vector.
-//  - Creates the Walls.
-//  - Creates the Ball.
-//  - Creates the Monster.
-//  - Stores it all.
-- (void)storeElementsInArray;
+- (void)loadObjects;
 
 @end
-
 
 @implementation OpenGLViewController
 
@@ -113,21 +112,21 @@
 @synthesize glView = _glView;
 @synthesize baseEffect = _baseEffect;
 @synthesize modelManager = _modelManager;
-@synthesize gameModelFloor = _gameModelFloor;
-@synthesize gameModelBorders = _gameModelBorders;
-@synthesize gameModelWalls = _gameModelWalls;
-@synthesize gameModelBall = _gameModelBall;
+
+@synthesize boardGame = _boardGame;
+@synthesize labyrinth = _labyrinth;
+@synthesize ball = _ball;
+
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
 @synthesize upVector = _upVector;
+
 @synthesize previousXPosition = _previousXPosition;
 @synthesize previousZPosition = _previousZPosition;
-@synthesize staticElements = _staticElements;
-@synthesize dynamicElements = _dynamicElements;
+
 @synthesize levelManager = _levelManager;
 @synthesize xVelocity = _xVelocity;
-@synthesize yVelocity = _yVelocity;
-
+@synthesize zVelocity = _zVelocity;
 
 //  Sent to the view controller when the app receives a memory warning.
 //  Release any cached data, images, etc that aren't in use.
@@ -135,7 +134,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
 
 #pragma mark - View lifecycle
 
@@ -156,12 +154,10 @@
     [self configurePointOfView];
     
     //  Load the modelplist file and stores the meshes into
-    //  its variables. Also load the texture map for the models.
-    [self loadModels];
+    //  the objects. Also load the texture map for the models.
+    [self loadObjects];
     
-    [self storeElementsInArray];
 }
-
 
 //  Called when the controller’s view is released from memory.
 - (void)viewDidUnload
@@ -222,17 +218,16 @@
     
     //  Prepares the view for drawing and draws the models.
     [self.modelManager prepareToDraw];
-    [self.baseEffect prepareToDraw];
-    
+
     //  Draw the boardgame.
-    [self.gameModelFloor draw];
-    [self.gameModelBorders draw];
+    [self.boardGame drawWithBaseEffect:self.baseEffect];
     
-    // Draw all the elements.
-    [self.staticElements makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
-                                withObject:self.baseEffect];
-    [self.dynamicElements makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
-                                          withObject:self.baseEffect];
+    //  Draw the labyrinth.
+    [self.labyrinth makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
+                                    withObject:self.baseEffect];
+    
+    //  Draw the ball.
+    [self.ball drawWithBaseEffect:self.baseEffect];
 }
 
 
@@ -287,9 +282,15 @@
 
 - (void)configurePointOfView
 {
-    //  Default view {0, 18, 0}.
-    self.eyePosition = GLKVector3Make(0.0, 18.0, 0.0);
-    self.lookAtPosition = GLKVector3Make(0.0, 0.0, 0.0);
+    //  Moves the eye position for viewing the entire boardgame.
+    //  The board game is set to fit its lower-left corner, in the
+    //  0.0 position.
+    self.eyePosition = GLKVector3Make((BOARD_GAME_WIDTH / 2),
+                                      EYE_HEIGHT,
+                                      (BOARD_GAME_HEIGHT / 2));  
+    self.lookAtPosition = GLKVector3Make((BOARD_GAME_WIDTH / 2),
+                                         0.0,
+                                         (BOARD_GAME_HEIGHT / 2));  
     self.upVector = GLKVector3Make(1.0, 0.0, 0.0);
     
     //  Returns a 4x4 matrix that transforms world coordinates to eye coordinates.
@@ -299,61 +300,241 @@
                          self.upVector.x, self.upVector.y, self.upVector.z);
 }
 
-- (void)loadModels
+- (void)loadObjects
 {
     //  Searches for the path and stores it.
     NSString *modelsPath = [[NSBundle bundleForClass:[self class]]
-                            pathForResource:@"ballEscape" ofType:@"modelplist"];
+                            pathForResource:MODELS_FILE ofType:@"modelplist"];
+    
     self.modelManager = [[UtilityModelManager alloc] initWithModelPath:modelsPath];
     
     //  Loads the floor.
-    self.gameModelFloor = [self.modelManager modelNamed:@"floor"];
-    NSAssert(self.gameModelFloor != nil, @"Failed to load floor model");
+    UtilityModel *gameModelFloor = [self.modelManager modelNamed:MODEL_FLOOR_NAME];
+    NSAssert(gameModelFloor != nil, @"Failed to load floor model");
     
     //  Loads the borders.
-    self.gameModelBorders = [self.modelManager modelNamed:@"borders"];
-    NSAssert(self.gameModelBorders != nil, @"Failed to load borders model");
+    UtilityModel *gameModelBorders = [self.modelManager modelNamed:MODEL_BORDERS_NAME];
+    NSAssert(gameModelBorders != nil, @"Failed to load borders model");
+    
+    //  Creates the board game.
+    self.boardGame = [[BoardGame alloc] 
+                      initBoardgameWithFloor:gameModelFloor 
+                      andBorders:gameModelBorders
+                      inPosition:GLKVector3Make((BOARD_GAME_WIDTH / 2),
+                                                0.0,
+                                                (BOARD_GAME_HEIGHT / 2))];    
     
     //  Loads the walls.
-    self.gameModelWalls = [self.modelManager modelNamed:@"walls"];
-    NSAssert(self.gameModelWalls != nil, @"Failed to load walls");
+    UtilityModel *gameModelWalls = [self.modelManager modelNamed:MODEL_WALL_NAME];
+    NSAssert(gameModelWalls != nil, @"Failed to load walls");
     
+    //  Creates a Level manager for handling the information of each level.
+    self.levelManager = [[LevelManager alloc] initWithNumberOfLevels:1];
+    
+    //  Creates the walls and stores them into a vector, making the entire labyrinth.
+    NSArray *coordinates = [[NSArray alloc] initWithArray:self.levelManager.getNextLevelStructure];
+    self.labyrinth = [[NSMutableSet alloc] init];
+    for (int i = 0; i < coordinates.count; i = i + 3) {
+       GLKVector3 position = GLKVector3Make([[coordinates objectAtIndex:i] floatValue],
+                                             0.0,
+                                             [[coordinates objectAtIndex:(i + 1)] floatValue]);
+        Wall *wallToAdd = [[Wall alloc]
+                           initWithModel:gameModelWalls
+                           position:position
+                           shouldRotate:[[coordinates objectAtIndex:(i + 2)] boolValue]];
+        [self.labyrinth addObject:wallToAdd];
+    }
+    /* Constructor de laberintos.
+     {
+    Wall *oneWall = [[Wall alloc] initWithModel:gameModelWalls  
+                                       position:GLKVector3Make(1.5, 0.0, 0.5) 
+                                   shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                       position:GLKVector3Make(1.5, 0.0, 1.5) 
+                                   shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(9.5, 0.0, 2.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(8.5, 0.0, 2) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 3.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 4.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 5.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 6.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 7.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 8.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(3.5, 0.0, 9.0) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(2.75, 0.0, 6.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(1.75, 0.0, 6.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(0.75, 0.0, 6.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(4.25, 0.0, 4.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.25, 0.0, 4.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(6.25, 0.0, 4.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(7.25, 0.0, 4.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(7.5, 0.0, 4.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(7.5, 0.0, 5.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.5, 0.0, 5.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.5, 0.0, 6.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.5, 0.0, 7.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.5, 0.0, 8.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.5, 0.0, 9.75) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(5.75, 0.0, 10.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(6.75, 0.0, 10.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(7.75, 0.0, 10.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(8.75, 0.0, 10.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(9.75, 0.0, 10.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(7.5, 0.0, 8.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(8.5, 0.0, 8.5) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(2.0, 0.0, 11.0) 
+                             shouldRotate:NO];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(2.75, 0.0, 11.25) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    
+    oneWall = [[Wall alloc] initWithModel:gameModelWalls 
+                                 position:GLKVector3Make(2.75, 0.0, 12.25) 
+                             shouldRotate:YES];
+    [self.labyrinth addObject:oneWall];
+    }*/
+  
     //  Load the ball.
-    self.gameModelBall = [self.modelManager modelNamed:@"ball"];
-    NSAssert(self.gameModelBall != nil, @"Failed to load ball");
+    UtilityModel *gameModelBall = [self.modelManager modelNamed:MODEL_BALL_NAME];
+    NSAssert(gameModelBall != nil, @"Failed to load ball");
+    
+    //  Creates the ball object.
+    self.ball = [[Ball alloc] initWithModel:gameModelBall
+                                   position:GLKVector3Make(0.5, 0.0, 0.5) 
+                                   velocity:GLKVector3Make(0.0, 0.0, 0.0)];
     
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
     self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
 }
-
-- (void)storeElementsInArray
-{
-    self.levelManager = [[LevelManager alloc] initWithNumberOfLevels:1];
-    
-    //  Initializes the arrays.
-    NSArray *positions = 
-    [[NSArray alloc] initWithArray:[self.levelManager getNextLevelStructure]];
-    
-    self.staticElements = [[NSMutableArray alloc] init];
-    self.dynamicElements = [[NSMutableArray alloc] init];
-        
-    //  Stores all the walls of the level.
-    for (int i = 0; i < positions.count; i = i+3) {
-        [self.staticElements addObject:[[Wall alloc] 
-                                  initWithModel:self.gameModelWalls 
-                                  position:GLKVector3Make([[positions objectAtIndex:i] floatValue],
-                                                          0.0,
-                                                          [[positions objectAtIndex:i+1] floatValue])
-                                  shouldRotate:[[positions objectAtIndex:i+2] boolValue]]];
-    }
-    
-    [self.dynamicElements addObject:[[Ball alloc] 
-                              initWithModel:self.gameModelBall 
-                              position:GLKVector3Make(-4.5, 0.0, -6.0) 
-                              velocity:GLKVector3Make(0.0, 0.0, 0.0)]];
-}
-
 
 #pragma mark - Animation
 
@@ -366,6 +547,9 @@
     //  model view matrix wont be done, saving CPU cycles.
     if ((self.previousXPosition != self.eyePosition.x) ||
         (self.previousZPosition != self.eyePosition.z)) {
+        
+        /* Refesco del laberinto */
+        NSLog(@"Actualizar posicion");
        
         //  Update de matrix
         self.baseEffect.transform.modelviewMatrix = 
@@ -384,8 +568,6 @@
         self.previousZPosition = self.eyePosition.z;
     }
     
-    [self.dynamicElements 
-     makeObjectsPerformSelector:@selector(updateWithController:) withObject:self];
 }
 
 
@@ -393,23 +575,7 @@
 
 - (AGLKAxisAllignedBoundingBox)borders
 {
-    return self.gameModelBorders.axisAlignedBoundingBox;
-}
-
-- (NSArray *)walls
-{
-    return self.staticElements;
-}
-
-- (NSArray *)monsters
-{
-    NSMutableArray *monstersArray = [[NSMutableArray alloc] init];
-    
-    for (int i = 1; i < self.dynamicElements.count; i++) {
-        [monstersArray addObject:[self.dynamicElements objectAtIndex:i]];
-    }
-    
-    return (NSArray *)monstersArray;
+    return self.boardGame.getBoardgameDimension;
 }
 
 - (float)getXVelocity
@@ -417,22 +583,22 @@
     return -self.xVelocity;
 }
 
-- (float)getYVelocity
+- (float)getZVelocity
 {
-    return -self.yVelocity;
+    return -self.zVelocity;
 }
 
 /*
  *  Simuladores del sensor de movimiento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender {
-    self.xVelocity = sender.value;
+    self.xVelocity = (BOARD_GAME_WIDTH / 2) + sender.value;
     self.eyePosition = GLKVector3Make(self.xVelocity, self.eyePosition.y, self.eyePosition.z);
 }
 
-- (IBAction)tiltYAxis:(UISlider *)sender {
-    self.yVelocity = sender.value;
-    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, self.yVelocity);
+- (IBAction)tiltZAxis:(UISlider *)sender {
+    self.zVelocity = (BOARD_GAME_HEIGHT / 2) + sender.value;
+    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, self.zVelocity);
 
 }
 @end

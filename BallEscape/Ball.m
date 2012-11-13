@@ -24,7 +24,7 @@
 
 //  This method detexts any collision between the ball
 //  and the labyrinth walls.
-- (void)bounceOffWalls:(NSArray *)walls elapsedTime:(NSTimeInterval)elapsedTime;
+//- (void)bounceOffWalls:(NSArray *)walls;
 
 //  Checks if a position, represented as a |GLKvector3| is inside
 //  of another object, represented by its Bounding Box.
@@ -70,7 +70,7 @@
     self.velocity = GLKVector3Add(self.velocity, 
                                     GLKVector3Make([controller getXVelocity],
                                                     0.0, 
-                                                    [controller getYVelocity]));
+                                                    [controller getZVelocity]));
     
     GLKVector3 traveledDistance = GLKVector3MultiplyScalar(self.velocity,
                                                            elapsedTimeSeconds);
@@ -79,7 +79,7 @@
     
     //  Detectes collisions.
     [self bounceOffBorders:[controller borders]];
-    [self bounceOffWalls:[controller walls] elapsedTime:elapsedTimeSeconds];
+//    [self bounceOffWalls:[controller labyrinth]];
     
     self.position = self.nextPosition;
 }
@@ -88,13 +88,13 @@
 {
     // Detects collisions with the four borders.
     //  Updates the velocity, as the ball was hitten, and sets up the nextPosition.
-    if ((borders.min.x + BORDER_WIDTH + self.radius) > self.nextPosition.x) {
-        self.nextPosition = GLKVector3Make(borders.min.x + BORDER_WIDTH + self.radius,
+    if ((borders.min.x + self.radius) > self.nextPosition.x) {
+        self.nextPosition = GLKVector3Make(borders.min.x + self.radius,
                                            self.nextPosition.y, self.nextPosition.z);
-        self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
+        self.velocity = GLKVector3Make(-self.velocity.x, 
                                        self.velocity.y, self.velocity.z);
     } 
-    if ((borders.max.x - BORDER_WIDTH - self.radius) < self.nextPosition.x) {
+    /*if ((borders.max.x - BORDER_WIDTH - self.radius) < self.nextPosition.x) {
         self.nextPosition = GLKVector3Make(borders.max.x - BORDER_WIDTH - self.radius,
                                            self.nextPosition.y, self.nextPosition.z);
         self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
@@ -111,36 +111,7 @@
                                            borders.max.z - BORDER_WIDTH - self.radius);
         self.velocity = GLKVector3Make(self.velocity.x, self.velocity.y,
                                        -self.velocity.z * BOUNDING_COEFFICIENT);
-    }
-}
-
-- (void)bounceOffWalls:(NSArray *)walls elapsedTime:(NSTimeInterval)elapsedTime
-{    
-    for (Wall *currentWall in walls) {
-        
-        if ([self isInsideOfObjectWithPosition:currentWall.position 
-                                   boundingBox:currentWall.model.axisAlignedBoundingBox]) {
-            
-            float wallXWidth = currentWall.model.axisAlignedBoundingBox.max.x - currentWall.model.axisAlignedBoundingBox.min.x;
-            float wallZWidth = currentWall.model.axisAlignedBoundingBox.max.z - currentWall.model.axisAlignedBoundingBox.min.z;
-            
-            NSLog(@"%f, %f inide of block %f, %f",
-                  self.position.x, self.position.z, currentWall.position.x, currentWall.position.z);
-            GLKVector3 direction = GLKVector3Normalize(GLKVector3Subtract(currentWall.position, self.position));
-            NSLog(@"Vector direction: [%f, %f]", direction.x, direction.z);
-            
-            if ((currentWall.position.x > 0) && (currentWall.position.z > 0)) {
-                
-            }
-            
-            self.nextPosition = GLKVector3Make(currentWall.position.x - (wallXWidth / 2) - self.radius,
-                                               self.nextPosition.y, self.nextPosition.z);
-            self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
-                                           self.velocity.y, self.velocity.z);
-            
-            
-        }
-    }
+    }*/
 }
 
 - (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 
