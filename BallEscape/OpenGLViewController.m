@@ -76,10 +76,10 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 //  played and the position of every element into the game.
 @property (nonatomic, strong) LevelManager *levelManager;
 
-//  Properties with the velocity of the ball in a point of time.
+//  Properties with the slope of the boardgame.
 //  Both variables are updated with the motion controller.
-@property float xVelocity;
-@property float zVelocity;
+@property float xSlope;
+@property float zSlope;
 
 //  Configures the current GLKView.
 //  - Initializes a new one;
@@ -125,8 +125,8 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 @synthesize previousZPosition = _previousZPosition;
 
 @synthesize levelManager = _levelManager;
-@synthesize xVelocity = _xVelocity;
-@synthesize zVelocity = _zVelocity;
+@synthesize xSlope = _xSlope;
+@synthesize zSlope = _zSlope;
 
 //  Sent to the view controller when the app receives a memory warning.
 //  Release any cached data, images, etc that aren't in use.
@@ -543,13 +543,12 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 //  the controller’s view redraws. 
 - (void)update
 {
-    //  If the position of the matrix has not been altered, the calulation of the new
-    //  model view matrix wont be done, saving CPU cycles.
+    //  Update the boardgame movement.
     if ((self.previousXPosition != self.eyePosition.x) ||
         (self.previousZPosition != self.eyePosition.z)) {
-        
-        /* Refesco del laberinto */
-        NSLog(@"Actualizar posicion");
+        //  If the position of the matrix has not been altered, 
+        //  the calulation of the new model view matrix wont be done,
+        //  saving CPU cycles.
        
         //  Update de matrix
         self.baseEffect.transform.modelviewMatrix = 
@@ -568,6 +567,9 @@ static NSString *const MODEL_BALL_NAME = @"ball";
         self.previousZPosition = self.eyePosition.z;
     }
     
+    //  Updates the ball movement.
+    [self.ball updateWithController:self];
+    
 }
 
 
@@ -578,27 +580,29 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     return self.boardGame.getBoardgameDimension;
 }
 
-- (float)getXVelocity
+- (float)getXSlope
 {
-    return -self.xVelocity;
+    return self.xSlope;
 }
 
-- (float)getZVelocity
+- (float)getZSlope
 {
-    return -self.zVelocity;
+    return self.zSlope;
 }
 
 /*
  *  Simuladores del sensor de movimiento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender {
-    self.xVelocity = (BOARD_GAME_WIDTH / 2) + sender.value;
-    self.eyePosition = GLKVector3Make(self.xVelocity, self.eyePosition.y, self.eyePosition.z);
+    self.xSlope = sender.value;
+    float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlope;
+    self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
 }
 
 - (IBAction)tiltZAxis:(UISlider *)sender {
-    self.zVelocity = (BOARD_GAME_HEIGHT / 2) + sender.value;
-    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, self.zVelocity);
+    self.zSlope = sender.value;
+    float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlope;
+    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);
 
 }
 @end

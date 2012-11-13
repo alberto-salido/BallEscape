@@ -28,8 +28,8 @@
 //  should have more.
 //- (NSArray *)monsters;
 
-//  Gets the direction and speed of the movement.
-- (float)getXVelocity;
-- (float)getZVelocity;
+//  Gets the slope of the boardgame.
+- (float)getXSlope;
+- (float)getZSlope;
 
 @end

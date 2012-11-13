@@ -8,6 +8,11 @@
 
 #import "Ball.h"
 
+//  Factor of bounding for the ball.
+//  As greater is the factor, the ball becomes more elastic,
+//  making longer bounds.
+static float const BOUNDING_FACTOR = 0.4;
+
 @interface Ball ()
 
 @property (nonatomic) GLKVector3 position;
@@ -24,7 +29,7 @@
 
 //  This method detexts any collision between the ball
 //  and the labyrinth walls.
-//- (void)bounceOffWalls:(NSArray *)walls;
+- (void)bounceOffWalls:(NSSet *)walls;
 
 //  Checks if a position, represented as a |GLKvector3| is inside
 //  of another object, represented by its Bounding Box.
@@ -68,50 +73,131 @@
         
     //  Updates the velocity using the motion controller.
     self.velocity = GLKVector3Add(self.velocity, 
-                                    GLKVector3Make([controller getXVelocity],
+                                    GLKVector3Make(-[controller getXSlope],
                                                     0.0, 
-                                                    [controller getZVelocity]));
+                                                    -[controller getZSlope]));
     
     GLKVector3 traveledDistance = GLKVector3MultiplyScalar(self.velocity,
                                                            elapsedTimeSeconds);
     
     self.nextPosition = GLKVector3Add(self.position, traveledDistance);
     
-    //  Detectes collisions.
+    //  Detects collisions.
     [self bounceOffBorders:[controller borders]];
-//    [self bounceOffWalls:[controller labyrinth]];
+    [self bounceOffWalls:[controller labyrinth]];
     
     self.position = self.nextPosition;
 }
 
 - (void)bounceOffBorders:(AGLKAxisAllignedBoundingBox)borders
 {
-    // Detects collisions with the four borders.
+    //  Detects collisions with the four borders.
     //  Updates the velocity, as the ball was hitten, and sets up the nextPosition.
-    if ((borders.min.x + self.radius) > self.nextPosition.x) {
-        self.nextPosition = GLKVector3Make(borders.min.x + self.radius,
-                                           self.nextPosition.y, self.nextPosition.z);
-        self.velocity = GLKVector3Make(-self.velocity.x, 
-                                       self.velocity.y, self.velocity.z);
-    } 
-    /*if ((borders.max.x - BORDER_WIDTH - self.radius) < self.nextPosition.x) {
-        self.nextPosition = GLKVector3Make(borders.max.x - BORDER_WIDTH - self.radius,
-                                           self.nextPosition.y, self.nextPosition.z);
-        self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_COEFFICIENT, 
-                                       self.velocity.y, self.velocity.z);
-    } 
-    if ((borders.min.z + BORDER_WIDTH + self.radius) > self.nextPosition.z) {
-        self.nextPosition = GLKVector3Make(self.nextPosition.x, self.nextPosition.y, 
-                                           borders.min.z + BORDER_WIDTH + self.radius);
-        self.velocity = GLKVector3Make(self.velocity.x, self.velocity.y,
-                                       -self.velocity.z * BOUNDING_COEFFICIENT);
+    //  The borders of the boardgame are defined by its height and width, starting in
+    //  the 0,0 point. 
+    
+    //  Collision with the bottom:
+    //  Checks if the next position plus the ball's radius (the equation has the
+    //  '-' because it is checking the bottom) is lower than 0.
+    if (self.nextPosition.x - self.radius < 0) {
+        self.nextPosition = GLKVector3Make(self.radius,
+                                            self.nextPosition.y, 
+                                            self.nextPosition.z);
+        self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_FACTOR,
+                                       self.velocity.y,
+                                       self.velocity.z);
     }
-    if ((borders.max.z - BORDER_WIDTH - self.radius) < self.nextPosition.z) {
-        self.nextPosition = GLKVector3Make(self.nextPosition.x, self.nextPosition.y,
-                                           borders.max.z - BORDER_WIDTH - self.radius);
-        self.velocity = GLKVector3Make(self.velocity.x, self.velocity.y,
-                                       -self.velocity.z * BOUNDING_COEFFICIENT);
-    }*/
+    
+    //  Collision with the top:
+    float top = (borders.max.x - borders.min.x);
+    if (self.nextPosition.x + self.radius > top) {
+        self.nextPosition = GLKVector3Make(top - self.radius,
+                                           self.nextPosition.y,
+                                           self.nextPosition.z);
+        self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_FACTOR,
+                                       self.velocity.y,
+                                       self.velocity.z);
+    }
+    
+    //  Collision with the left border:
+    if (self.nextPosition.z - self.radius < 0) {
+        self.nextPosition = GLKVector3Make(self.nextPosition.x,
+                                           self.nextPosition.y,
+                                           self.radius);
+        self.velocity = GLKVector3Make(self.velocity.x,
+                                       self.velocity.y,
+                                       -self.velocity.z * BOUNDING_FACTOR);
+    }
+    
+    //  Collision with the right border:
+    float width = (borders.max.z - borders.min.z);
+    if (self.nextPosition.z + self.radius > width) {
+        self.nextPosition = GLKVector3Make(self.nextPosition.x,
+                                           self.nextPosition.y,
+                                           width - self.radius);
+        self.velocity = GLKVector3Make(self.velocity.x,
+                                       self.velocity.y,
+                                       -self.velocity.z * BOUNDING_FACTOR);
+    }
+}
+
+- (void)bounceOffWalls:(NSSet *)walls
+{
+    //  Detects a collision with any wall.
+    for (Wall *currentWall in walls) {
+        if ([self isInsideOfObjectWithPosition:currentWall.position 
+                                   boundingBox:currentWall.model.axisAlignedBoundingBox]) {
+            //  It's sure that the ball is going to crash with the wall.
+            //  Now have to check where are the ball and the wall
+            //  for making the bound.
+            
+            AGLKAxisAllignedBoundingBox wallBBox = currentWall.model.axisAlignedBoundingBox;
+            
+            float height = wallBBox.max.x - wallBBox.min.x;
+            
+            float width = wallBBox.max.z - wallBBox.min.z;
+            
+            //  The Ball is under the wall.
+            if (self.position.x < currentWall.position.x - (height / 2)) {
+                self.nextPosition = GLKVector3Make(currentWall.position.x - (height / 2) - self.radius,
+                                                   self.nextPosition.y,
+                                                   self.nextPosition.z);
+                self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_FACTOR,
+                                               self.velocity.y,
+                                               self.velocity.z);
+            }
+            
+            //  The Ball is over the wall.
+            else if (self.position.x > currentWall.position.x + (height / 2)) {
+                self.nextPosition = GLKVector3Make(currentWall.position.x + (height / 2) + self.radius,
+                                                   self.nextPosition.y,
+                                                   self.nextPosition.z);
+                self.velocity = GLKVector3Make(-self.velocity.x * BOUNDING_FACTOR,
+                                               self.velocity.y,
+                                               self.velocity.z);
+            }
+            
+            //  The Ball is on the left.
+            else if (self.position.z < currentWall.position.z - (width / 2)) {
+                self.nextPosition = GLKVector3Make(self.nextPosition.x,
+                                                   self.nextPosition.y, 
+                                                   currentWall.position.z - (width / 2) - self.radius);
+                self.velocity = GLKVector3Make(self.velocity.x,
+                                               self.velocity.y,
+                                               -self.velocity.z * BOUNDING_FACTOR);
+            }
+            
+            //  The Ball is on the right.
+            else if (self.position.z > currentWall.position.z + (width / 2)) {
+                self.nextPosition = GLKVector3Make(self.nextPosition.x,
+                                                   self.nextPosition.y, 
+                                                   currentWall.position.z + (width / 2) + self.radius);
+                self.velocity = GLKVector3Make(self.velocity.x,
+                                               self.velocity.y,
+                                               -self.velocity.z * BOUNDING_FACTOR);
+            }
+        }
+    }
 }
 
 - (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 
