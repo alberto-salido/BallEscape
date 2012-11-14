@@ -17,6 +17,11 @@
 //  The model must be rotated over the Y Axis.
 @property BOOL shouldRotate;
 
+//  The model's bounding box is different is the object is
+//  rotated or not. In this case, is needed a property for
+//  storing it with modifying the main model's boundig box.
+@property AGLKAxisAllignedBoundingBox boundingBox;
+
 //  Initializes the object with a model, a position and a rotation.
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 

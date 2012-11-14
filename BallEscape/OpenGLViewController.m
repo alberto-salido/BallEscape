@@ -331,14 +331,17 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     //  Creates a Level manager for handling the information of each level.
     self.levelManager = [[LevelManager alloc] initWithNumberOfLevels:1];
     
-    //  Creates the walls and stores them into a vector, making the entire labyrinth.
+    //  Creates the walls and stores them into a set, making the entire labyrinth.
     NSArray *coordinates = [[NSArray alloc] initWithArray:self.levelManager.getNextLevelStructure];
     self.labyrinth = [[NSMutableSet alloc] init];
+    
+    Wall *wallToAdd;
+    GLKVector3 position;
     for (int i = 0; i < coordinates.count; i = i + 3) {
-       GLKVector3 position = GLKVector3Make([[coordinates objectAtIndex:i] floatValue],
+       position = GLKVector3Make([[coordinates objectAtIndex:i] floatValue],
                                              0.0,
                                              [[coordinates objectAtIndex:(i + 1)] floatValue]);
-        Wall *wallToAdd = [[Wall alloc]
+        wallToAdd = [[Wall alloc]
                            initWithModel:gameModelWalls
                            position:position
                            shouldRotate:[[coordinates objectAtIndex:(i + 2)] boolValue]];
@@ -569,9 +572,7 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     
     //  Updates the ball movement.
     [self.ball updateWithController:self];
-    
 }
-
 
 #pragma mark - Protocol ObjectController
 

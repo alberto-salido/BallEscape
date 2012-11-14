@@ -113,7 +113,6 @@ static AGLKAxisAllignedBoundingBox UtilityBoundingBoxFromString(
 
 @end
 
-
 /////////////////////////////////////////////////////////////////
 // This function returns an axis aligned bounding box initialized
 // with dimensions parsed from aString.
