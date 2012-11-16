@@ -32,7 +32,8 @@
            velocity:(GLKVector3)velocity;
 
 //  Updates the position and velocity of the receiver
-//  to simulate effects of collision with walls or other cars.
-- (void)updateWithController:(id <ObjectController>)controller;
+//  to simulate effects of collision with walls.
+//  The method returns YES if the ball has touched the door.
+- (BOOL)updateWithController:(id <ObjectController>)controller;
 
 @end

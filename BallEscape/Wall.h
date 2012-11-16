@@ -17,6 +17,9 @@
 //  The model must be rotated over the Y Axis.
 @property BOOL shouldRotate;
 
+//  Indicates if the Wall is also a Door.
+@property BOOL isADoor;
+
 //  The model's bounding box is different is the object is
 //  rotated or not. In this case, is needed a property for
 //  storing it with modifying the main model's boundig box.

@@ -27,6 +27,9 @@
 		5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */; };
 		5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */; };
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
+		503D9C6D16551385009E1986 /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 503D9C6B16551385009E1986 /* ballEscape.modelplist */; };
+		503D9C6E16551385009E1986 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 503D9C6C16551385009E1986 /* texture.jpg */; };
+		506A33A2165535F600792B8A /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506A33A1165535F600792B8A /* GameViewController.m */; };
 		507D1CFA1651284F007FC594 /* BoardGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CF91651284F007FC594 /* BoardGame.m */; };
 		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
 		507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D0216512F25007FC594 /* Ball+viewAdditions.m */; };
@@ -36,8 +39,6 @@
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
-		50FCF5E5164BE981008CD89E /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5E3164BE981008CD89E /* ballEscape.modelplist */; };
-		50FCF5E6164BE981008CD89E /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5E4164BE981008CD89E /* texture.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,10 @@
 		5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UtilityTextureInfo+viewAdditions.m"; sourceTree = "<group>"; };
 		5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTextureInfo.h; sourceTree = "<group>"; };
 		5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTextureInfo.m; sourceTree = "<group>"; };
+		503D9C6B16551385009E1986 /* ballEscape.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ballEscape.modelplist; sourceTree = "<group>"; };
+		503D9C6C16551385009E1986 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
+		506A33A0165535F600792B8A /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		506A33A1165535F600792B8A /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		507D1CF81651284F007FC594 /* BoardGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGame.h; sourceTree = "<group>"; };
 		507D1CF91651284F007FC594 /* BoardGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardGame.m; sourceTree = "<group>"; };
 		507D1CFE16512C14007FC594 /* BoardGame+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BoardGame+viewAdditions.h"; sourceTree = "<group>"; };
@@ -93,8 +98,6 @@
 		50FCF5DD164BA249008CD89E /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
 		50FCF5DE164BA249008CD89E /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 		50FCF5E2164BC83F008CD89E /* ObjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectController.h; sourceTree = "<group>"; };
-		50FCF5E3164BE981008CD89E /* ballEscape.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ballEscape.modelplist; sourceTree = "<group>"; };
-		50FCF5E4164BE981008CD89E /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,10 +151,11 @@
 			isa = PBXGroup;
 			children = (
 				5009CE9E163F1FD80082C5A7 /* Game files */,
-				5009CE88163F1AA50082C5A7 /* View */,
-				5009CE76163F14540082C5A7 /* Model */,
-				5009CE75163F01C50082C5A7 /* Controller */,
-				5009CE74163F01A30082C5A7 /* AGLKit */,
+				506A33A0165535F600792B8A /* GameViewController.h */,
+				506A33A1165535F600792B8A /* GameViewController.m */,
+				5009CE44163EE7500082C5A7 /* MainStoryboard_iPad.storyboard */,
+				5009CE41163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard */,
+				506A33A316565D3A00792B8A /* OpenGLMVC */,
 				5009CE36163EE7500082C5A7 /* Supporting Files */,
 			);
 			path = BallEscape;
@@ -216,8 +220,6 @@
 		5009CE88163F1AA50082C5A7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5009CE44163EE7500082C5A7 /* MainStoryboard_iPad.storyboard */,
-				5009CE41163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard */,
 				5009CE8F163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.h */,
 				5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */,
 				5009CE8C163F1B580082C5A7 /* UtilityModel+viewAdditions.h */,
@@ -239,11 +241,22 @@
 		5009CE9E163F1FD80082C5A7 /* Game files */ = {
 			isa = PBXGroup;
 			children = (
-				50FCF5E3164BE981008CD89E /* ballEscape.modelplist */,
-				50FCF5E4164BE981008CD89E /* texture.jpg */,
+				503D9C6B16551385009E1986 /* ballEscape.modelplist */,
+				503D9C6C16551385009E1986 /* texture.jpg */,
 				50FCF5D5164AF7D5008CD89E /* level0.txt */,
 			);
 			name = "Game files";
+			sourceTree = "<group>";
+		};
+		506A33A316565D3A00792B8A /* OpenGLMVC */ = {
+			isa = PBXGroup;
+			children = (
+				5009CE74163F01A30082C5A7 /* AGLKit */,
+				5009CE75163F01C50082C5A7 /* Controller */,
+				5009CE76163F14540082C5A7 /* Model */,
+				5009CE88163F1AA50082C5A7 /* View */,
+			);
+			name = OpenGLMVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,8 +313,8 @@
 				5009CE43163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5009CE46163EE7500082C5A7 /* MainStoryboard_iPad.storyboard in Resources */,
 				50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */,
-				50FCF5E5164BE981008CD89E /* ballEscape.modelplist in Resources */,
-				50FCF5E6164BE981008CD89E /* texture.jpg in Resources */,
+				503D9C6D16551385009E1986 /* ballEscape.modelplist in Resources */,
+				503D9C6E16551385009E1986 /* texture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +344,7 @@
 				507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */,
 				507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */,
 				507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */,
+				506A33A2165535F600792B8A /* GameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

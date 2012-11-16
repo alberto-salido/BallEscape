@@ -27,9 +27,10 @@ static float const BOUNDING_FACTOR = 0.4;
 //  bounce of the ball from the borders.
 - (void)bounceOffBorders:(AGLKAxisAllignedBoundingBox)borders;
 
-//  This method detexts any collision between the ball
-//  and the labyrinth walls.
-- (void)bounceOffWalls:(NSSet *)walls;
+//  This method detects any collision between the ball
+//  and the labyrinth's walls.
+//  Returns true is the ball has touched the door.
+- (BOOL)bounceOffWalls:(NSSet *)walls;
 
 //  Checks if a position, represented as a |GLKvector3| is inside
 //  of another object, represented by its Bounding Box.
@@ -66,7 +67,7 @@ static float const BOUNDING_FACTOR = 0.4;
     return self;
 }
 
-- (void)updateWithController:(id<ObjectController>)controller
+- (BOOL)updateWithController:(id<ObjectController>)controller
 {
     NSTimeInterval elapsedTimeSeconds = 
     MIN(MAX([controller timeSinceLastUpdate], 0.1), 0.5);
@@ -84,9 +85,11 @@ static float const BOUNDING_FACTOR = 0.4;
     
     //  Detects collisions.
     [self bounceOffBorders:[controller borders]];
-    [self bounceOffWalls:[controller labyrinth]];
+    BOOL gameOver = [self bounceOffWalls:[controller labyrinth]];
         
     self.position = self.nextPosition;
+    
+    return gameOver; 
 }
 
 - (void)bounceOffBorders:(AGLKAxisAllignedBoundingBox)borders
@@ -142,7 +145,7 @@ static float const BOUNDING_FACTOR = 0.4;
     }
 }
 
-- (void)bounceOffWalls:(NSSet *)walls
+- (BOOL)bounceOffWalls:(NSSet *)walls
 {
     float height;
     float width;
@@ -157,6 +160,11 @@ static float const BOUNDING_FACTOR = 0.4;
         //  for making the bound.
         if ([self isInsideOfObjectWithPosition:currentWall.position 
                                    boundingBox:wallBBox]) {
+            
+            if ([currentWall isADoor]) {
+                return YES;
+                break;
+            }
                         
            height = (wallBBox.max.x - wallBBox.min.x) / 2;
            width = (wallBBox.max.z - wallBBox.min.z) / 2;
@@ -214,6 +222,7 @@ static float const BOUNDING_FACTOR = 0.4;
             }
         }
     }
+    return NO;
 }
 
 - (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 

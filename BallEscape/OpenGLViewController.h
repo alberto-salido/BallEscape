@@ -25,8 +25,13 @@
 //
 @interface OpenGLViewController : GLKViewController <ObjectController>
 
+//  Property for the time elapsed since the
+//  player started to play.
+@property (weak, nonatomic) IBOutlet UILabel *time;
+
+
 /*
- *  Sliders para simular el sensor de movimento.
+ *  Sliders para simular el nsor de movimento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender;
 - (IBAction)tiltZAxis:(UISlider *)sender;

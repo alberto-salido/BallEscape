@@ -12,6 +12,7 @@
 
 @synthesize shouldRotate = _shouldRotate;
 @synthesize boundingBox = _boundingBox;
+@synthesize isADoor = _isADoor;
 
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 

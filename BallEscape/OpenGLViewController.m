@@ -7,6 +7,7 @@
 //
 
 #import "OpenGLViewController.h"
+#import "GameViewController.h"
 
 //  Constants with the information about the size of the boardgame.
 //  Size of the board game in the X-Axis.
@@ -23,6 +24,7 @@ static NSString *const MODEL_FLOOR_NAME = @"floor";
 static NSString *const MODEL_BORDERS_NAME = @"borders";
 static NSString *const MODEL_WALL_NAME = @"walls";
 static NSString *const MODEL_BALL_NAME = @"ball";
+static NSString *const MODEL_DOOR_NAME = @"door";
 
 //  The OpenGLViewController () interface extends the previous one
 //  (public) with some addtional mehtods and variables hidden.
@@ -128,6 +130,9 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 @synthesize xSlope = _xSlope;
 @synthesize zSlope = _zSlope;
 
+@synthesize time = _time;
+
+
 //  Sent to the view controller when the app receives a memory warning.
 //  Release any cached data, images, etc that aren't in use.
 - (void)didReceiveMemoryWarning
@@ -146,7 +151,7 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     
     //  Sets the GLKView context.
     [self configureGLView];
-    
+        
     //  Sets the enviroment for the scene.
     [self configureEnviroment];
     
@@ -162,10 +167,16 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 //  Called when the controller’s view is released from memory.
 - (void)viewDidUnload
 {
+    [self setTime:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
     self.glView = nil;
+    self.baseEffect = nil;
+    self.modelManager = nil;
+    self.boardGame = nil;
+    self.labyrinth = nil;
+    self.ball = nil;
     [EAGLContext setCurrentContext:nil];
     
 }
@@ -180,9 +191,15 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     [super viewDidAppear:animated];
 }
 
+//  Notifies the view controller that its view is about to be removed
+//  from a view hierarchy.
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    
+    //  Sends to the GameViewController the time used for complete the level.
+    ((GameViewController *)self.presentingViewController).timeUsedInCompleteLevel
+    = [self.time.text floatValue];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -192,12 +209,7 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
+    return ((interfaceOrientation != UIInterfaceOrientationPortrait) && (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown));
 }
 
 
@@ -208,7 +220,7 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 {
     //  Erase any previous data.
     [(AGLKContext *)view.context clear:GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT];
-    
+        
     //  Calculates the aspect ratio.
     const GLfloat aspectRatio = (GLfloat)view.drawableWidth / (GLfloat)view.drawableHeight;
     
@@ -259,6 +271,9 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     //  triangle. It's an optimization when render. 
     [((AGLKContext *)self.glView.context) enable:GL_DEPTH_TEST];
     //[((AGLKContext *)self.glView.context) enable:GL_CULL_FACE];
+    
+    //  Sets the background color (RGBA).
+    ((AGLKContext *)self.glView.context).clearColor = GLKVector4Make(0.0, 0.0, 0.0, 1.0);
 }
 
 - (void)configureEnviroment
@@ -534,6 +549,17 @@ static NSString *const MODEL_BALL_NAME = @"ball";
                                    position:GLKVector3Make(0.5, 0.0, 0.5) 
                                    velocity:GLKVector3Make(0.0, 0.0, 0.0)];
     
+    //  Load the Door.
+    UtilityModel *gameModelDoor = [self.modelManager modelNamed:MODEL_DOOR_NAME];
+    NSAssert(gameModelDoor != nil, @"Failed to load door");
+    
+    //  Creates the door, a door is a kind of wall with other texture, and stores it.
+    Wall *door = [[Wall alloc] initWithModel:gameModelDoor
+                                    position:GLKVector3Make(0.0, 0.0, 7.0)
+                                shouldRotate:NO];
+    door.isADoor = YES;
+    [self.labyrinth addObject:door];
+    
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
     self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
@@ -546,6 +572,10 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 //  the controller’s view redraws. 
 - (void)update
 {
+    //  Updates the time elapsed.
+    double time = [self.time.text doubleValue] + 0.05;
+    self.time.text = [NSString stringWithFormat:@"%.2f", time];
+    
     //  Update the boardgame movement.
     if ((self.previousXPosition != self.eyePosition.x) ||
         (self.previousZPosition != self.eyePosition.z)) {
@@ -571,7 +601,11 @@ static NSString *const MODEL_BALL_NAME = @"ball";
     }
     
     //  Updates the ball movement.
-    [self.ball updateWithController:self];
+    if ([self.ball updateWithController:self])
+    {
+       // ((GameViewController *)self.presentingViewController).timeUsedInCompleteLevel = [self.time.text floatValue];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - Protocol ObjectController
@@ -590,6 +624,7 @@ static NSString *const MODEL_BALL_NAME = @"ball";
 {
     return self.zSlope;
 }
+
 
 /*
  *  Simuladores del sensor de movimiento.
