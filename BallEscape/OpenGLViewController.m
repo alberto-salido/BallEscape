@@ -7,7 +7,6 @@
 //
 
 #import "OpenGLViewController.h"
-#import "GameViewController.h"
 
 //  Constants with the information about the size of the boardgame.
 //  Size of the board game in the X-Axis.
@@ -75,12 +74,14 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 //  Properties with the slope of the boardgame.
 //  Both variables are updated with the motion controller.
-@property float xSlope;
-@property float zSlope;
+@property float xSlopeInGrades;
+@property float zSlopeInGrades;
 
 //  Property that indicates if the game is paused or not.
 //  if the game is paused, no updates are made.
 @property BOOL isPaused;
+
+@property (nonatomic, strong) CMMotionManager *motionManager;
 
 //  Configures the current GLKView.
 //  - Initializes a new one;
@@ -88,6 +89,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 //  - Sets the Z-Buffer;
 //  - Sets the context.
 - (void)configureGLView;
+
+//  Configures the Device Motion.
+- (void)configureDeviceMotion;
 
 //  Configures the enviroment for the scene.
 //  - Sets the lights; color and direction;
@@ -104,6 +108,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 //  divide it, saving each mesh into an object.
 //  - Throws exception in case of error.
 - (void)loadObjects;
+
+//  Updates the slope of the boardgame using, for that propose, 
+//  the gyroscope.
+- (void)updateSlopeUsingMotionController;
 
 @end
 
@@ -125,13 +133,14 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize previousXPosition = _previousXPosition;
 @synthesize previousZPosition = _previousZPosition;
 
-@synthesize xSlope = _xSlope;
-@synthesize zSlope = _zSlope;
+@synthesize xSlopeInGrades = _xSlopeInGrades;
+@synthesize zSlopeInGrades = _zSlopeInGrades;
 
 @synthesize isPaused = _isPaused;
 
 @synthesize time = _time;
 
+@synthesize motionManager = _motionManager;
 
 //  Sent to the view controller when the app receives a memory warning.
 //  Release any cached data, images, etc that aren't in use.
@@ -149,8 +158,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     //  Loads any previous data from the father class.
     [super viewDidLoad];
     
-    //  Sets the GLKView context.
+    //  Sets up the GLKView context.
     [self configureGLView];
+    
+    //  Sets up the Device Motion.
+    [self configureDeviceMotion];
         
     //  Sets the enviroment for the scene.
     [self configureEnviroment];
@@ -243,7 +255,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 }
 
 
-#pragma mark - Private methods
+#pragma mark - Controller's private methods.
 
 - (void)configureGLView
 {
@@ -276,6 +288,14 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     ((AGLKContext *)self.glView.context).clearColor = GLKVector4Make(0.0, 0.0, 0.0, 1.0);
 }
 
+- (void)configureDeviceMotion
+{
+   /* NSAssert((self.motionManager.gyroAvailable) || 
+        (self.motionManager.accelerometerAvailable), 
+             @"Device motion not available");*/
+    [self.motionManager startDeviceMotionUpdates];
+}
+
 - (void)configureEnviroment
 {
     //  Creates a BaseEffect.
@@ -285,12 +305,15 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     self.baseEffect.light0.enabled = GL_TRUE;
     
     //  Sets the light color (RGBA)
-    self.baseEffect.light0.ambientColor = GLKVector4Make(0.8, 0.8, 0.8, 1.0);
-    self.baseEffect.light0.diffuseColor = GLKVector4Make(1.0, 1.0, 1.0, 1.0);
+    self.baseEffect.light0.ambientColor = GLKVector4Make(0.8, 0.8, 1.0, 1.0);
+    self.baseEffect.light0.diffuseColor = GLKVector4Make(0.8, 0.8, 0.8, 1.0);
     
     //  Sets the main position.
-    self.baseEffect.light0.position = GLKVector4Make(1.0, 0.8, 0.4, 0.0);
-    
+    self.baseEffect.light0.position = GLKVector4Make(BOARD_GAME_WIDTH,
+                                                     EYE_HEIGHT,
+                                                     BOARD_GAME_HEIGHT,
+                                                     0.0);
+        
     //  Sets the background color (RGBA).
     ((AGLKContext *)self.glView.context).clearColor = GLKVector4Make(0.0, 0.0, 0.0, 1.0);
 }
@@ -584,6 +607,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             //  the calulation of the new model view matrix wont be done,
             //  saving CPU cycles.
             
+            [self updateSlopeUsingMotionController];
+            
+            //  Update vectors and update the matrix.
+            //  ...
+            
             //  Update de matrix
             self.baseEffect.transform.modelviewMatrix = 
             GLKMatrix4MakeLookAt(self.eyePosition.x,
@@ -622,28 +650,35 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 - (float)getXSlope
 {
-    return self.xSlope;
+    return self.xSlopeInGrades;
 }
 
 - (float)getZSlope
 {
-    return self.zSlope;
+    return self.zSlopeInGrades;
 }
 
 
 #pragma mark - Motion Controller
+
+- (void)updateSlopeUsingMotionController
+{
+    self.xSlopeInGrades = GLKMathDegreesToRadians(self.motionManager.gyroData.rotationRate.x);
+    self.zSlopeInGrades = GLKMathDegreesToRadians(self.motionManager.gyroData.rotationRate.z);
+}
+
 /*
  *  Simuladores del sensor de movimiento.
  */
 - (IBAction)tiltXAxis:(UISlider *)sender {
-    self.xSlope = sender.value;
-    float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlope;
+    self.xSlopeInGrades = sender.value;
+    float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades;
     self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
 }
 
 - (IBAction)tiltZAxis:(UISlider *)sender {
-    self.zSlope = sender.value;
-    float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlope;
+    self.zSlopeInGrades = sender.value;
+    float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades;
     self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);
 
 }

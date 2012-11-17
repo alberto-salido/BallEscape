@@ -36,6 +36,7 @@
 		507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D05165131B2007FC594 /* Wall+viewAdditions.m */; };
 		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
 		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
+		50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D848891657F92F003DEEB5 /* CoreMotion.framework */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
@@ -92,6 +93,7 @@
 		509DC3791646CF1D00251009 /* 3DObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DObject.m; sourceTree = "<group>"; };
 		509DC37C1646D19B00251009 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		509DC37D1646D19B00251009 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		50D848891657F92F003DEEB5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 		50FCF5D5164AF7D5008CD89E /* level0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0.txt; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */,
 				5009CE54163EE7C40082C5A7 /* GLKit.framework in Frameworks */,
 				5009CE52163EE7BD0082C5A7 /* QuartzCore.framework in Frameworks */,
 				5009CE50163EE7B60082C5A7 /* OpenGLES.framework in Frameworks */,
@@ -137,6 +140,7 @@
 		5009CE2E163EE7500082C5A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50D848891657F92F003DEEB5 /* CoreMotion.framework */,
 				5009CE53163EE7C40082C5A7 /* GLKit.framework */,
 				5009CE51163EE7BD0082C5A7 /* QuartzCore.framework */,
 				5009CE4F163EE7B60082C5A7 /* OpenGLES.framework */,

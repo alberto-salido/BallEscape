@@ -7,12 +7,16 @@
 //
 
 #import <GLKit/GLKit.h>
+#import <CoreMotion/CoreMotion.h>
+
 #import "AGLKContext.h"
+#import "GameViewController.h"
 #import "UtilityModelManager.h"
 #import "UtilityModel+viewAdditions.h"
 #import "BoardGame+viewAdditions.h"
 #import "Wall.h"
 #import "Ball+viewAdditions.h"
+
  
 //  The GLKViewController class provides all of the standard view
 //  controller functionality, but additionally implements an
@@ -27,7 +31,6 @@
 //  Property for the time elapsed since the
 //  player started to play.
 @property (weak, nonatomic) IBOutlet UILabel *time;
-
 
 /*
  *  Sliders para simular el nsor de movimento.
