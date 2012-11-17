@@ -8,37 +8,63 @@
 
 #import "GameViewController.h"
 
+static const int NUMBER_OF_LEVELS = 1;
+
+@interface GameViewController ()
+
+@property (nonatomic, strong) LevelManager *levelManager;
+
+- (void)performSegueToPlayGame;
+
+@end
+
 @implementation GameViewController
 
 @synthesize timeUsedInCompleteLevel = _timeUsedInCompleteLevel;
 @synthesize showTime = _showTime;
 @synthesize congratulationsMessage = _congratulationsMessage;
+@synthesize playButton = _playButton;
+@synthesize continueButton = _continueButton;
+@synthesize menuButton = _menuButton;
+@synthesize restartLevelButton = _restartLevelButton;
+@synthesize levelManager = _levelManager;
 
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+    [super didReceiveMemoryWarning];    
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    self.levelManager = [[LevelManager alloc] 
+                         initWithNumberOfLevels:NUMBER_OF_LEVELS];
+    [super viewDidLoad];   
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    //  If the user has complete a level...
     if (self.timeUsedInCompleteLevel) {
-        NSLog(@"Estoy aqui");
+        
+        //  Show messages and buttons.
         self.congratulationsMessage.hidden = NO;
         self.showTime.hidden = NO;
-        self.showTime.text = [NSString stringWithFormat:@"%@ %.2f",
-                              self.showTime.text, 
+        self.showTime.text = [NSString stringWithFormat:@"Your time: %.2f",
                               self.timeUsedInCompleteLevel];
+        self.playButton.hidden = YES;
+        
+        //  If there are more levels...
+        if ([self.levelManager numberOfLevels] != [self.levelManager currentLevel]) {
+            //  Enables the "Continue" button.
+            self.continueButton.hidden = NO;
+        }
+        
+        //  Enables the "Restart" button.
+        self.restartLevelButton.hidden = NO;
     }
 }
 
@@ -46,6 +72,10 @@
 {
     [self setShowTime:nil];
     [self setCongratulationsMessage:nil];
+    [self setPlayButton:nil];
+    [self setContinueButton:nil];
+    [self setMenuButton:nil];
+    [self setRestartLevelButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -58,8 +88,24 @@
 
 - (IBAction)playGame:(UIButton *)sender 
 {
-    self.congratulationsMessage.hidden = YES;
-    self.showTime.hidden = YES;
+    [self performSegueToPlayGame];
+}
+
+- (IBAction)continueWithNextLevel:(id)sender {
+    [self performSegueToPlayGame];
+}
+
+- (IBAction)goBackToMenu:(id)sender {
+    //  TODO
+}
+
+- (IBAction)restartCurrentLevel:(id)sender {
+    [self.levelManager restartCurrentLevel];
+    [self performSegueToPlayGame];
+}
+
+- (void)performSegueToPlayGame
+{
     [self performSegueWithIdentifier:@"playGame" sender:self];
 }
 @end

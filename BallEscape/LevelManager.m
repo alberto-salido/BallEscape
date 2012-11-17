@@ -75,4 +75,14 @@
     return [stringWithCoordinatesOfLevel componentsSeparatedByString:@","];
 }
 
+- (void)restartCurrentLevel
+{
+    self.currentLevel --;
+}
+
+- (void)restartGame
+{
+    self.currentLevel = 0;
+}
+
 @end

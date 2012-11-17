@@ -12,7 +12,6 @@
 #import "UtilityModel+viewAdditions.h"
 #import "BoardGame+viewAdditions.h"
 #import "Wall.h"
-#import "LevelManager.h"
 #import "Ball+viewAdditions.h"
  
 //  The GLKViewController class provides all of the standard view
@@ -35,5 +34,8 @@
  */
 - (IBAction)tiltXAxis:(UISlider *)sender;
 - (IBAction)tiltZAxis:(UISlider *)sender;
+
+//  Pauses the current game.
+- (IBAction)pauseGame:(UIButton *)sender;
 
 @end

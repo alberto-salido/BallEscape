@@ -73,15 +73,14 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @property float previousXPosition;
 @property float previousZPosition;
 
-//  Manages the information about each level. Returns importat
-//  data about the levels; number of levels in the game, current level
-//  played and the position of every element into the game.
-@property (nonatomic, strong) LevelManager *levelManager;
-
 //  Properties with the slope of the boardgame.
 //  Both variables are updated with the motion controller.
 @property float xSlope;
 @property float zSlope;
+
+//  Property that indicates if the game is paused or not.
+//  if the game is paused, no updates are made.
+@property BOOL isPaused;
 
 //  Configures the current GLKView.
 //  - Initializes a new one;
@@ -126,9 +125,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize previousXPosition = _previousXPosition;
 @synthesize previousZPosition = _previousZPosition;
 
-@synthesize levelManager = _levelManager;
 @synthesize xSlope = _xSlope;
 @synthesize zSlope = _zSlope;
+
+@synthesize isPaused = _isPaused;
 
 @synthesize time = _time;
 
@@ -343,11 +343,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     UtilityModel *gameModelWalls = [self.modelManager modelNamed:MODEL_WALL_NAME];
     NSAssert(gameModelWalls != nil, @"Failed to load walls");
     
-    //  Creates a Level manager for handling the information of each level.
-    self.levelManager = [[LevelManager alloc] initWithNumberOfLevels:1];
-    
+    //  Makes a reference to the GameViewController's property LevelManager.
+    LevelManager *levelManager = ((GameViewController *)self.presentingViewController).levelManager;
+        
     //  Creates the walls and stores them into a set, making the entire labyrinth.
-    NSArray *coordinates = [[NSArray alloc] initWithArray:self.levelManager.getNextLevelStructure];
+    NSArray *coordinates = [[NSArray alloc] initWithArray:levelManager.getNextLevelStructure];
     self.labyrinth = [[NSMutableSet alloc] init];
     
     Wall *wallToAdd;
@@ -572,40 +572,45 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 //  the controller’s view redraws. 
 - (void)update
 {
-    //  Updates the time elapsed.
-    double time = [self.time.text doubleValue] + 0.05;
-    self.time.text = [NSString stringWithFormat:@"%.2f", time];
-    
-    //  Update the boardgame movement.
-    if ((self.previousXPosition != self.eyePosition.x) ||
-        (self.previousZPosition != self.eyePosition.z)) {
-        //  If the position of the matrix has not been altered, 
-        //  the calulation of the new model view matrix wont be done,
-        //  saving CPU cycles.
-       
-        //  Update de matrix
-        self.baseEffect.transform.modelviewMatrix = 
-        GLKMatrix4MakeLookAt(self.eyePosition.x,
-                             self.eyePosition.y,
-                             self.eyePosition.z,
-                             self.lookAtPosition.x,
-                             self.lookAtPosition.y,
-                             self.lookAtPosition.z, 
-                             self.upVector.x,
-                             self.upVector.y, 
-                             self.upVector.z);
+    if (!self.isPaused) {
+        //  Updates the time elapsed.
+        double time = [self.time.text doubleValue] + 0.05;
+        self.time.text = [NSString stringWithFormat:@"%.2f", time];
         
-        //  Update the variables.
-        self.previousXPosition = self.eyePosition.x;
-        self.previousZPosition = self.eyePosition.z;
+        //  Update the boardgame movement.
+        if ((self.previousXPosition != self.eyePosition.x) ||
+            (self.previousZPosition != self.eyePosition.z)) {
+            //  If the position of the matrix has not been altered, 
+            //  the calulation of the new model view matrix wont be done,
+            //  saving CPU cycles.
+            
+            //  Update de matrix
+            self.baseEffect.transform.modelviewMatrix = 
+            GLKMatrix4MakeLookAt(self.eyePosition.x,
+                                 self.eyePosition.y,
+                                 self.eyePosition.z,
+                                 self.lookAtPosition.x,
+                                 self.lookAtPosition.y,
+                                 self.lookAtPosition.z, 
+                                 self.upVector.x,
+                                 self.upVector.y, 
+                                 self.upVector.z);
+            
+            //  Update the variables.
+            self.previousXPosition = self.eyePosition.x;
+            self.previousZPosition = self.eyePosition.z;
+        }
+        
+        //  Updates the ball movement.
+        if ([self.ball updateWithController:self])
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }
-    
-    //  Updates the ball movement.
-    if ([self.ball updateWithController:self])
-    {
-       // ((GameViewController *)self.presentingViewController).timeUsedInCompleteLevel = [self.time.text floatValue];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+}
+
+- (IBAction)pauseGame:(UIButton *)sender {
+    self.isPaused = !self.isPaused;
 }
 
 #pragma mark - Protocol ObjectController
@@ -626,6 +631,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 }
 
 
+#pragma mark - Motion Controller
 /*
  *  Simuladores del sensor de movimiento.
  */
@@ -641,4 +647,5 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);
 
 }
+
 @end
