@@ -37,6 +37,10 @@
 		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
 		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
 		50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D848891657F92F003DEEB5 /* CoreMotion.framework */; };
+		50D848921658E23F003DEEB5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848911658E23F003DEEB5 /* MainViewController.m */; };
+		50D848951658F5DD003DEEB5 /* HighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848941658F5DD003DEEB5 /* HighScoresViewController.m */; };
+		50D8489D165BE7A6003DEEB5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8489C165BE7A6003DEEB5 /* CoreData.framework */; };
+		50D848D6165BFEA4003DEEB5 /* scores.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50D848D5165BFEA4003DEEB5 /* scores.txt */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
@@ -94,6 +98,12 @@
 		509DC37C1646D19B00251009 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		509DC37D1646D19B00251009 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
 		50D848891657F92F003DEEB5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		50D848901658E23E003DEEB5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		50D848911658E23F003DEEB5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		50D848931658F5DD003DEEB5 /* HighScoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresViewController.h; sourceTree = "<group>"; };
+		50D848941658F5DD003DEEB5 /* HighScoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresViewController.m; sourceTree = "<group>"; };
+		50D8489C165BE7A6003DEEB5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		50D848D5165BFEA4003DEEB5 /* scores.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scores.txt; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 		50FCF5D5164AF7D5008CD89E /* level0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0.txt; sourceTree = "<group>"; };
@@ -107,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50D8489D165BE7A6003DEEB5 /* CoreData.framework in Frameworks */,
 				50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */,
 				5009CE54163EE7C40082C5A7 /* GLKit.framework in Frameworks */,
 				5009CE52163EE7BD0082C5A7 /* QuartzCore.framework in Frameworks */,
@@ -140,6 +151,7 @@
 		5009CE2E163EE7500082C5A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50D8489C165BE7A6003DEEB5 /* CoreData.framework */,
 				50D848891657F92F003DEEB5 /* CoreMotion.framework */,
 				5009CE53163EE7C40082C5A7 /* GLKit.framework */,
 				5009CE51163EE7BD0082C5A7 /* QuartzCore.framework */,
@@ -157,10 +169,14 @@
 				5009CE9E163F1FD80082C5A7 /* Game files */,
 				506A33A0165535F600792B8A /* GameViewController.h */,
 				506A33A1165535F600792B8A /* GameViewController.m */,
+				50D848901658E23E003DEEB5 /* MainViewController.h */,
+				50D848911658E23F003DEEB5 /* MainViewController.m */,
 				5009CE44163EE7500082C5A7 /* MainStoryboard_iPad.storyboard */,
 				5009CE41163EE7500082C5A7 /* MainStoryboard_iPhone.storyboard */,
 				506A33A316565D3A00792B8A /* OpenGLMVC */,
 				5009CE36163EE7500082C5A7 /* Supporting Files */,
+				50D848931658F5DD003DEEB5 /* HighScoresViewController.h */,
+				50D848941658F5DD003DEEB5 /* HighScoresViewController.m */,
 			);
 			path = BallEscape;
 			sourceTree = "<group>";
@@ -246,8 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				503D9C6B16551385009E1986 /* ballEscape.modelplist */,
-				503D9C6C16551385009E1986 /* texture.jpg */,
+				50D848D5165BFEA4003DEEB5 /* scores.txt */,
 				50FCF5D5164AF7D5008CD89E /* level0.txt */,
+				503D9C6C16551385009E1986 /* texture.jpg */,
 			);
 			name = "Game files";
 			sourceTree = "<group>";
@@ -319,6 +336,7 @@
 				50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */,
 				503D9C6D16551385009E1986 /* ballEscape.modelplist in Resources */,
 				503D9C6E16551385009E1986 /* texture.jpg in Resources */,
+				50D848D6165BFEA4003DEEB5 /* scores.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +367,8 @@
 				507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */,
 				507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */,
 				506A33A2165535F600792B8A /* GameViewController.m in Sources */,
+				50D848921658E23F003DEEB5 /* MainViewController.m in Sources */,
+				50D848951658F5DD003DEEB5 /* HighScoresViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

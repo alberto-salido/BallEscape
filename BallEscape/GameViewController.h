@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *showTime;
 @property (weak, nonatomic) IBOutlet UILabel *congratulationsMessage;
 
+//  Label with the current level to play.
+@property (weak, nonatomic) IBOutlet UILabel *levelToPlayLabel;
+
 //  Play button.
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 

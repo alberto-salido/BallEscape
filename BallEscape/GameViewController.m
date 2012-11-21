@@ -23,6 +23,7 @@ static const int NUMBER_OF_LEVELS = 1;
 @synthesize timeUsedInCompleteLevel = _timeUsedInCompleteLevel;
 @synthesize showTime = _showTime;
 @synthesize congratulationsMessage = _congratulationsMessage;
+@synthesize levelToPlayLabel = _levelToPlayLabel;
 @synthesize playButton = _playButton;
 @synthesize continueButton = _continueButton;
 @synthesize menuButton = _menuButton;
@@ -47,6 +48,10 @@ static const int NUMBER_OF_LEVELS = 1;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
+                                  (self.levelManager.currentLevel + 1)];
+    
     //  If the user has complete a level...
     if (self.timeUsedInCompleteLevel) {
         
@@ -76,6 +81,7 @@ static const int NUMBER_OF_LEVELS = 1;
     [self setContinueButton:nil];
     [self setMenuButton:nil];
     [self setRestartLevelButton:nil];
+    [self setLevelToPlayLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

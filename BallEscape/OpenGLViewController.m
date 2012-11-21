@@ -607,7 +607,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             //  the calulation of the new model view matrix wont be done,
             //  saving CPU cycles.
             
-            [self updateSlopeUsingMotionController];
+            //[self updateSlopeUsingMotionController];
             
             //  Update vectors and update the matrix.
             //  ...
