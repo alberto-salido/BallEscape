@@ -73,6 +73,17 @@ static const int NUMBER_OF_LEVELS = 1;
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //  Stores the score.
+    if (self.timeUsedInCompleteLevel) {
+        Score *s = [[Score alloc] initWithTime:self.timeUsedInCompleteLevel 
+                                       atLevel:(self.levelManager.currentLevel - 1)];
+        
+        [((MainViewController *)self.presentingViewController).scoresList addObject:s];
+    }
+}
+
 - (void)viewDidUnload
 {
     [self setShowTime:nil];
@@ -102,7 +113,7 @@ static const int NUMBER_OF_LEVELS = 1;
 }
 
 - (IBAction)goBackToMenu:(id)sender {
-    //  TODO
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)restartCurrentLevel:(id)sender {

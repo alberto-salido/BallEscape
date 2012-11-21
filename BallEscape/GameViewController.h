@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LevelManager.h"
+#import "Score.h"
+#import "MainViewController.h"
 
 @interface GameViewController : UIViewController
 

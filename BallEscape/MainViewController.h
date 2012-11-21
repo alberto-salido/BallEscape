@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HighScoresViewController.h"
+#import "Score.h"
 
 @interface MainViewController : UIViewController
+
+@property (nonatomic, strong, readonly) NSMutableArray *scoresList;
 
 - (IBAction)playButton:(UIButton *)sender;
 - (IBAction)settingsButton:(UIButton *)sender;
