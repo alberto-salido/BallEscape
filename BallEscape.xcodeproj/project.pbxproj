@@ -40,7 +40,6 @@
 		50D848921658E23F003DEEB5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848911658E23F003DEEB5 /* MainViewController.m */; };
 		50D848951658F5DD003DEEB5 /* HighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848941658F5DD003DEEB5 /* HighScoresViewController.m */; };
 		50D8489D165BE7A6003DEEB5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8489C165BE7A6003DEEB5 /* CoreData.framework */; };
-		50D848D6165BFEA4003DEEB5 /* scores.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50D848D5165BFEA4003DEEB5 /* scores.txt */; };
 		50D848DD165D260C003DEEB5 /* Score.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848DC165D260C003DEEB5 /* Score.m */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
@@ -104,7 +103,6 @@
 		50D848931658F5DD003DEEB5 /* HighScoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoresViewController.h; sourceTree = "<group>"; };
 		50D848941658F5DD003DEEB5 /* HighScoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresViewController.m; sourceTree = "<group>"; };
 		50D8489C165BE7A6003DEEB5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		50D848D5165BFEA4003DEEB5 /* scores.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scores.txt; sourceTree = "<group>"; };
 		50D848DB165D260C003DEEB5 /* Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Score.h; sourceTree = "<group>"; };
 		50D848DC165D260C003DEEB5 /* Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Score.m; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
@@ -179,9 +177,9 @@
 				50D848901658E23E003DEEB5 /* MainViewController.h */,
 				50D848911658E23F003DEEB5 /* MainViewController.m */,
 				506A33A316565D3A00792B8A /* OpenGLMVC */,
-				5009CE36163EE7500082C5A7 /* Supporting Files */,
 				50D848DB165D260C003DEEB5 /* Score.h */,
 				50D848DC165D260C003DEEB5 /* Score.m */,
+				5009CE36163EE7500082C5A7 /* Supporting Files */,
 			);
 			path = BallEscape;
 			sourceTree = "<group>";
@@ -267,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				503D9C6B16551385009E1986 /* ballEscape.modelplist */,
-				50D848D5165BFEA4003DEEB5 /* scores.txt */,
 				50FCF5D5164AF7D5008CD89E /* level0.txt */,
 				503D9C6C16551385009E1986 /* texture.jpg */,
 			);
@@ -341,7 +338,6 @@
 				50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */,
 				503D9C6D16551385009E1986 /* ballEscape.modelplist in Resources */,
 				503D9C6E16551385009E1986 /* texture.jpg in Resources */,
-				50D848D6165BFEA4003DEEB5 /* scores.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

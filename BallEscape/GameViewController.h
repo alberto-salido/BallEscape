@@ -3,7 +3,7 @@
 //  BallEscape
 //
 //  Created by Alberto Salido López on 15/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,6 +11,10 @@
 #import "Score.h"
 #import "MainViewController.h"
 
+//  Controller previous to the game.
+//  It loads the current level to play and manages the information
+//  about the game.
+//
 @interface GameViewController : UIViewController
 
 //  Property with the time used by the player

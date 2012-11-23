@@ -16,6 +16,6 @@
 
 - (id)initWithTime:(float)timeUsed atLevel:(int)level;
 - (NSString *)printCSVString;
-+ (NSMutableArray *)arrayWithScoresFromCSVString:(NSString *)csvString;
++ (NSMutableDictionary *)dictionaryWithScoresFromCSVString:(NSString *)csvString;
 
 @end

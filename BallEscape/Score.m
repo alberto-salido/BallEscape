@@ -49,10 +49,11 @@
             self.timeUsedInCompleteLevel, self.date, self.level];
 }
 
-+ (NSMutableArray *)arrayWithScoresFromCSVString:(NSString *)csvString
++ (NSMutableDictionary *)dictionaryWithScoresFromCSVString:(NSString *)csvString
 {
     NSArray *stringSlitted = [csvString componentsSeparatedByString:@","];
-    NSMutableArray *result = [[NSMutableArray alloc] init];
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    NSMutableArray *values = [[NSMutableArray alloc] init];
     
     Score *aux;
     
@@ -62,9 +63,17 @@
                                       atLevel:[[stringSlitted objectAtIndex:i + 2] floatValue]];
             aux.date = [stringSlitted objectAtIndex:i + 1];
             
-            [result addObject:aux];
+            NSString *levelString = [NSString stringWithFormat:@"%d", aux.level];
+            
+            if ((values = (NSMutableArray *)[result objectForKey:levelString])) {
+                [values addObject:aux];
+            }else {
+                values = [[NSMutableArray alloc] initWithObjects:aux, nil];
+            }
+            
+            [result setObject:values 
+                       forKey:levelString];
         }
-
     }
     return result;
 }

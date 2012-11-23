@@ -3,20 +3,29 @@
 //  BallEscape
 //
 //  Created by Alberto Salido López on 18/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import "MainViewController.h"
 
+//  Constants.
+static NSString *const FILE_NAME = @"scores.plist"; 
+static NSString *const PLAY_SEGUE_ID = @"goToPlayMenu";
+static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
+
 @interface MainViewController ()
 
-@property (nonatomic, strong) NSMutableArray *scoresList;
+@property (nonatomic, strong) NSMutableDictionary *scoresDictionary;
+
+//  Property with the path in which store the file with the scores.
+@property (nonatomic, strong) NSString *scoresPath;
 
 @end
 
 @implementation MainViewController
 
-@synthesize scoresList = _scoresList;
+@synthesize scoresDictionary = _scoresDictionary;
+@synthesize scoresPath = _scoresPath;
 
 - (void)didReceiveMemoryWarning
 {
@@ -28,56 +37,37 @@
 
 #pragma mark - View lifecycle
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    //  Initializes the scores array loading the content stored in a file.
-    NSError *fileError;
-    
-    //  Initializes the array of scores.
-    self.scoresList = [[NSMutableArray alloc] init];
-    
-    //  Reads previous scores from a text file. If there are not a file, a new one 
-    //  is created.
-    NSString *scoresPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+    //  Sets the path in Documents/scores.plist.
+    self.scoresPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                                 NSUserDomainMask,
                                                                 YES) lastObject];
-    scoresPath = [scoresPath stringByAppendingPathComponent:@"scores.txt"];
+    self.scoresPath = [self.scoresPath stringByAppendingPathComponent:FILE_NAME];
     
-    //  Reads the file.
-    NSString *fileContent = [NSString stringWithContentsOfFile:scoresPath
-                                                      encoding:NSUTF8StringEncoding 
-                                                         error:&fileError];
-    if (!fileError) {
-        //  Stores its content into an array.
-        //self.scoresList = [fileContent componentsSeparatedByString:@","];
-        self.scoresList = [Score arrayWithScoresFromCSVString:fileContent];
-    } else {
-        fileError = nil;
-        //  Creates a new empty file.
-        [@"" writeToFile:scoresPath 
-              atomically:YES 
-                encoding:NSUTF8StringEncoding 
-                   error:&fileError];
-        NSAssert(!fileError, @"Error creating a new file for storing scores.");
-    }
-    NSLog(@"%@", self.scoresList);
+    //  Reads the file and stores its content into a dictionary.
+    self.scoresDictionary = [[NSMutableDictionary alloc] init];
+    /*
+     *  Crear metodo propio.
+     *  self.scoresDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:self.scoresPath];
+     */
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    if ([self.scoresList count] > 0) {
-        NSLog(@"%f", ((Score *)[self.scoresList objectAtIndex:0]).timeUsedInCompleteLevel);
-    }
+    /*
+     *  Tener una copia del dictionary, si la copia es diferente del actual
+     *  sobreescribir fichero, sino, dejarlo como esta.
+     */
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.scoresPath = nil;
+    self.scoresPath = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -87,14 +77,14 @@
 }
 
 - (IBAction)playButton:(id)sender {
-    [self performSegueWithIdentifier:@"goToPlayMenu" sender:self];
+    [self performSegueWithIdentifier:PLAY_SEGUE_ID sender:self];
 }
 
 - (IBAction)settingsButton:(id)sender {
 }
 
 - (IBAction)showHighScoresButton:(id)sender {
-    [self performSegueWithIdentifier:@"showHighScores" sender:self];
+    [self performSegueWithIdentifier:HIGHSCORES_SEGUE_ID sender:self];
 }
 
 - (IBAction)howToPlayButton:(id)sender {
@@ -103,12 +93,13 @@
 - (IBAction)aboutMeButton:(id)sender {
 }
 
+//  Prepares the next view controller before the segue is triggered.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //  Sends information to the next segue.
-    if ([[segue identifier] isEqualToString:@"showHighScores"]) {
+    //  Sends information about the dictionary to the next segue.
+    if ([[segue identifier] isEqualToString:HIGHSCORES_SEGUE_ID]) {
         HighScoresViewController *hvc = [segue destinationViewController];
-        hvc.scoresList = self.scoresList;
+        hvc.scoresDictionary = self.scoresDictionary;
     }
 }
 @end

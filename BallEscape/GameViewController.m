@@ -3,12 +3,14 @@
 //  BallEscape
 //
 //  Created by Alberto Salido López on 15/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import "GameViewController.h"
 
-static const int NUMBER_OF_LEVELS = 1;
+//  Constants.
+static int const NUMBER_OF_LEVELS = 1;
+static NSString *const PLAY_GAME_SEGUE_ID = @"playGame";
 
 @interface GameViewController ()
 
@@ -40,6 +42,7 @@ static const int NUMBER_OF_LEVELS = 1;
 
 - (void)viewDidLoad
 {
+    //  Initializes the LevelManages with the number of levels.
     self.levelManager = [[LevelManager alloc] 
                          initWithNumberOfLevels:NUMBER_OF_LEVELS];
     [super viewDidLoad];   
@@ -75,12 +78,28 @@ static const int NUMBER_OF_LEVELS = 1;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
     //  Stores the score.
     if (self.timeUsedInCompleteLevel) {
         Score *s = [[Score alloc] initWithTime:self.timeUsedInCompleteLevel 
                                        atLevel:(self.levelManager.currentLevel - 1)];
         
-        [((MainViewController *)self.presentingViewController).scoresList addObject:s];
+        //  Updates the dictionary.
+        NSString *level = [NSString stringWithFormat:@"%d", (s.level + 1)];
+        NSMutableDictionary *dic = ((MainViewController *)self.presentingViewController).scoresDictionary;
+        NSMutableArray *array;
+        
+        if((array = (NSMutableArray *)[dic objectForKey:level])) {
+            [array addObject:s];
+            /*
+             *  Ordenar por puntuacion.
+             */
+        } else {
+            array =[[NSMutableArray alloc] initWithObjects:s, nil];
+        }
+        
+        [dic setObject:array forKey:level];
     }
 }
 
@@ -93,9 +112,9 @@ static const int NUMBER_OF_LEVELS = 1;
     [self setMenuButton:nil];
     [self setRestartLevelButton:nil];
     [self setLevelToPlayLabel:nil];
+    self.levelManager = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -123,6 +142,6 @@ static const int NUMBER_OF_LEVELS = 1;
 
 - (void)performSegueToPlayGame
 {
-    [self performSegueWithIdentifier:@"playGame" sender:self];
+    [self performSegueWithIdentifier:PLAY_GAME_SEGUE_ID sender:self];
 }
 @end
