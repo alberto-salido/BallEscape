@@ -10,9 +10,9 @@
 
 @interface Score : NSObject
 
-@property (readonly) float timeUsedInCompleteLevel;
-@property (nonatomic, readonly, strong) NSString *date;
-@property (readonly) int level;
+@property float timeUsedInCompleteLevel;
+@property (nonatomic, strong) NSString *date;
+@property int level;
 
 - (id)initWithTime:(float)timeUsed atLevel:(int)level;
 - (NSString *)printCSVString;

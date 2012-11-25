@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "OpenGLAppDelegate.h"
 
 //  Constants.
 static NSString *const FILE_NAME = @"scores.plist"; 
@@ -16,6 +17,7 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 @interface MainViewController ()
 
 @property (nonatomic, strong) NSMutableDictionary *scoresDictionary;
+@property (nonatomic, weak) NSDictionary *dictionaryCache;
 
 //  Property with the path in which store the file with the scores.
 @property (nonatomic, strong) NSString *scoresPath;
@@ -26,6 +28,7 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 
 @synthesize scoresDictionary = _scoresDictionary;
 @synthesize scoresPath = _scoresPath;
+@synthesize dictionaryCache = _dictionaryCache;
 
 - (void)didReceiveMemoryWarning
 {
@@ -40,7 +43,7 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     //  Sets the path in Documents/scores.plist.
     self.scoresPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                                 NSUserDomainMask,
@@ -49,18 +52,8 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
     
     //  Reads the file and stores its content into a dictionary.
     self.scoresDictionary = [[NSMutableDictionary alloc] init];
-    /*
-     *  Crear metodo propio.
-     *  self.scoresDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:self.scoresPath];
-     */
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    /*
-     *  Tener una copia del dictionary, si la copia es diferente del actual
-     *  sobreescribir fichero, sino, dejarlo como esta.
-     */
+    [self.scoresDictionary readFromFile:self.scoresPath];
+    self.dictionaryCache = self.scoresDictionary.copy;
 }
 
 - (void)viewDidUnload
@@ -100,6 +93,15 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
     if ([[segue identifier] isEqualToString:HIGHSCORES_SEGUE_ID]) {
         HighScoresViewController *hvc = [segue destinationViewController];
         hvc.scoresDictionary = self.scoresDictionary;
+    }
+}
+
+- (void)saveData
+{
+    [self.scoresDictionary writeToFile:self.scoresPath];
+
+    if (![self.dictionaryCache isEqualToDictionary:self.scoresDictionary]) {
+        [self.scoresDictionary writeToFile:self.scoresPath];
     }
 }
 @end

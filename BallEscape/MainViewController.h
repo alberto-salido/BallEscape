@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HighScoresViewController.h"
 #import "Score.h"
+#import "NSDictionary+fileAdditions.h"
 
 //  This controller manages the complete application, creating segues to
 //  the other view controller.
@@ -33,4 +34,7 @@
 
 //  Shows a description of the app.
 - (IBAction)aboutMeButton:(UIButton *)sender;
+
+//  Save the current data to a plist file.
+- (void)saveData;
 @end

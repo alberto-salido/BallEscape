@@ -8,14 +8,6 @@
 
 #import "Score.h"
 
-@interface Score ()
-
-@property float timeUsedInCompleteLevel;
-@property (nonatomic, strong) NSString *date;
-@property int level;
-
-@end
-
 @implementation Score
 
 @synthesize timeUsedInCompleteLevel = _timeUsedInCompleteLevel;
