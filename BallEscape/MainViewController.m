@@ -7,12 +7,14 @@
 //
 
 #import "MainViewController.h"
-#import "OpenGLAppDelegate.h"
+#import "AppDelegate.h"
 
 //  Constants.
 static NSString *const FILE_NAME = @"scores.plist"; 
 static NSString *const PLAY_SEGUE_ID = @"goToPlayMenu";
 static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
+static NSString *const SETTINGS_SEGUE_ID = @"settings";
+static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
 
 @interface MainViewController ()
 
@@ -74,6 +76,7 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 }
 
 - (IBAction)settingsButton:(id)sender {
+    [self performSegueWithIdentifier:SETTINGS_SEGUE_ID sender:self];
 }
 
 - (IBAction)showHighScoresButton:(id)sender {
@@ -84,6 +87,7 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 }
 
 - (IBAction)aboutMeButton:(id)sender {
+    [self performSegueWithIdentifier:ABOUT_ME_SEGUE_ID sender:self];
 }
 
 //  Prepares the next view controller before the segue is triggered.

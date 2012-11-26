@@ -33,8 +33,8 @@
         
         for (Score *score in values) {
             body = [body stringByAppendingString:@"<score>\n"];
-            scoreAsString = [NSString stringWithFormat:@"<time>%2.f</time>\n<date>%@</date>\n<level>%d</level>\n</score>\n",
-                             score.timeUsedInCompleteLevel, score.date, (score.level + 1)];
+            scoreAsString = [NSString stringWithFormat:@"<time>%.2f</time>\n<date>%@</date>\n<level>%d</level>\n</score>\n",
+                             score.timeUsedInCompleteLevel, score.date, score.level];
             body = [body stringByAppendingString:scoreAsString];
         }
         
@@ -70,7 +70,10 @@
     
     NSString *elementKey;
     NSMutableArray *values = [[NSMutableArray alloc] init];
-    Score *scoreValue = [[Score alloc] initWithTime:0.0 atLevel:0];
+    
+    float time;
+    NSString *date;
+    int level;
     
     for (NSString *element in elements) {
         
@@ -80,11 +83,11 @@
         } else if (value) {
             NSArray *elementSplitted = [element componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
             if ([[elementSplitted objectAtIndex:1] isEqualToString:@"time"]) {
-                scoreValue.timeUsedInCompleteLevel = [[elementSplitted objectAtIndex:2] floatValue];
+                time = [[elementSplitted objectAtIndex:2] floatValue];
             } else if ([[elementSplitted objectAtIndex:1] isEqualToString:@"date"]) {
-                scoreValue.date = [elementSplitted objectAtIndex:2];
+                date = [elementSplitted objectAtIndex:2];
             } else if ([[elementSplitted objectAtIndex:1] isEqualToString:@"level"]) {
-                scoreValue.level = [[elementSplitted objectAtIndex:2] intValue];
+                level = [[elementSplitted objectAtIndex:2] intValue];
             }
         }
         
@@ -93,14 +96,15 @@
         } else if ([element isEqualToString:@"<score>"]) {
             value = YES;
         } else if ([element isEqualToString:@"</score>"]) {
+            Score *scoreValue = [[Score alloc] initWithTime:time atLevel:level];
+            scoreValue.date = date;
             [values addObject:scoreValue];
-                        value = NO;
+            value = NO;
         }
-    }
-    if ([values count] > 0) {
-        [((NSMutableDictionary *)self) setValue:values 
-                                         forKey:[NSString stringWithFormat:@"%d", 
-                                                 scoreValue.level]];
+        if ([values count] > 0) {
+            [((NSMutableDictionary *)self) setValue:values 
+                                             forKey:elementKey];
+        }
     }
     return YES;
 }

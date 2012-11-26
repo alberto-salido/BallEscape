@@ -12,9 +12,16 @@
 //  Constants.
 static NSString *const CELL_NAME = @"scoreCell";
 
+@interface HighScoresViewController ()
+
+@property (nonatomic, strong) NSMutableArray *scoresByLevel;
+
+@end
+
 @implementation HighScoresViewController
 
 @synthesize scoresDictionary = _scoresDictionary;
+@synthesize scoresByLevel = _scoresByLevel;
 
 - (void)viewDidLoad
 {
@@ -31,8 +38,8 @@ static NSString *const CELL_NAME = @"scoreCell";
     
     // Configure the cell...
     //  Obtains the scores(NSArray) form the Dictionary with Key(level) equals to the section.
-    NSArray *scores = (NSArray *)[self.scoresDictionary objectForKey:[NSString stringWithFormat:@"%d", 
-                                                                 (indexPath.section + 1)]];
+    NSMutableArray *scores = [self.scoresDictionary objectForKey:[NSString stringWithFormat:@"%d", 
+                                                                 indexPath.section]];
     //  Gets a score from the array.
     Score *score = (Score *)[scores objectAtIndex:indexPath.row];
     
@@ -48,7 +55,7 @@ static NSString *const CELL_NAME = @"scoreCell";
 {
     //  Sets the section title using the keys of the dic.
     NSArray *keys = [((NSEnumerator *)[self.scoresDictionary keyEnumerator]) allObjects];
-    return [NSString stringWithFormat:@"Level - %@", [keys objectAtIndex:section]];
+    return [NSString stringWithFormat:@"Level - %d", ([[keys objectAtIndex:section] intValue] + 1)];
 }
 
 //  Sets the number of sections.
@@ -64,7 +71,7 @@ static NSString *const CELL_NAME = @"scoreCell";
     int rows = 0;
     for (int i = 0; i < keys; i++) {
         rows += [((NSArray *)[self.scoresDictionary 
-                              objectForKey:[NSString stringWithFormat:@"%d", (i + 1)]]) count];
+                              objectForKey:[NSString stringWithFormat:@"%d", i]]) count];
     }
     return rows;
 }

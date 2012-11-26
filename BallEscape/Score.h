@@ -15,7 +15,6 @@
 @property int level;
 
 - (id)initWithTime:(float)timeUsed atLevel:(int)level;
-- (NSString *)printCSVString;
-+ (NSMutableDictionary *)dictionaryWithScoresFromCSVString:(NSString *)csvString;
+- (NSComparisonResult)compareScores:(Score *)sc1;
 
 @end

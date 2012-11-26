@@ -637,8 +637,14 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     }
 }
 
-- (IBAction)pauseGame:(UIButton *)sender {
+- (IBAction)pauseGame:(UIButton *)sender
+{
     self.isPaused = !self.isPaused;
+}
+
+- (void)pauseFrameRate
+{
+    self.isPaused = YES;
 }
 
 #pragma mark - Protocol ObjectController

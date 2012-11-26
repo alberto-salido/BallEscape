@@ -11,6 +11,7 @@
 //  Constants.
 static int const NUMBER_OF_LEVELS = 1;
 static NSString *const PLAY_GAME_SEGUE_ID = @"playGame";
+static int const SCORES_PER_SECTION = 5;
 
 @interface GameViewController ()
 
@@ -86,15 +87,16 @@ static NSString *const PLAY_GAME_SEGUE_ID = @"playGame";
                                        atLevel:(self.levelManager.currentLevel - 1)];
         
         //  Updates the dictionary.
-        NSString *level = [NSString stringWithFormat:@"%d", (s.level + 1)];
+        NSString *level = [NSString stringWithFormat:@"%d", s.level];
         NSMutableDictionary *dic = ((MainViewController *)self.presentingViewController).scoresDictionary;
         NSMutableArray *array;
         
-        if((array = (NSMutableArray *)[dic objectForKey:level])) {
+        if ((array = [dic objectForKey:level])) {
             [array addObject:s];
-            /*
-             *  Ordenar por puntuacion.
-             */
+            array = [array sortedArrayUsingSelector:@selector(compareScores:)].mutableCopy;
+            if ([array count] > SCORES_PER_SECTION) {
+                [array removeLastObject];
+            }
         } else {
             array =[[NSMutableArray alloc] initWithObjects:s, nil];
         }

@@ -35,39 +35,16 @@
     return self;
 }
 
-- (NSString *)printCSVString
-{
-    return [NSString stringWithFormat:@"%@,%@,%@,", 
-            self.timeUsedInCompleteLevel, self.date, self.level];
-}
 
-+ (NSMutableDictionary *)dictionaryWithScoresFromCSVString:(NSString *)csvString
+- (NSComparisonResult)compareScores:(Score *)sc1
 {
-    NSArray *stringSlitted = [csvString componentsSeparatedByString:@","];
-    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    NSMutableArray *values = [[NSMutableArray alloc] init];
-    
-    Score *aux;
-    
-    if ([stringSlitted count] > 3) {
-        for (int i = 0; i < [stringSlitted count]; i = i + 3) {
-            aux = [[Score alloc] initWithTime:[[stringSlitted objectAtIndex:i]  floatValue] 
-                                      atLevel:[[stringSlitted objectAtIndex:i + 2] floatValue]];
-            aux.date = [stringSlitted objectAtIndex:i + 1];
-            
-            NSString *levelString = [NSString stringWithFormat:@"%d", aux.level];
-            
-            if ((values = (NSMutableArray *)[result objectForKey:levelString])) {
-                [values addObject:aux];
-            }else {
-                values = [[NSMutableArray alloc] initWithObjects:aux, nil];
-            }
-            
-            [result setObject:values 
-                       forKey:levelString];
-        }
+    if (sc1.timeUsedInCompleteLevel < self.timeUsedInCompleteLevel) {
+        return NSOrderedDescending;
+    } else if (sc1.timeUsedInCompleteLevel > self.timeUsedInCompleteLevel) {
+        return NSOrderedAscending;
+    } else {
+        return NSOrderedSame;
     }
-    return result;
 }
 
 @end

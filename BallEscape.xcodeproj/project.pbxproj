@@ -12,7 +12,7 @@
 		5009CE34163EE7500082C5A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE33163EE7500082C5A7 /* CoreGraphics.framework */; };
 		5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5009CE38163EE7500082C5A7 /* InfoPlist.strings */; };
 		5009CE3C163EE7500082C5A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE3B163EE7500082C5A7 /* main.m */; };
-		5009CE40163EE7500082C5A7 /* OpenGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE3F163EE7500082C5A7 /* OpenGLAppDelegate.m */; };
+		5009CE40163EE7500082C5A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE3F163EE7500082C5A7 /* AppDelegate.m */; };
 		5009CE43163EE7500082C5A7 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5009CE41163EE7500082C5A7 /* iPhone.storyboard */; };
 		5009CE46163EE7500082C5A7 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5009CE44163EE7500082C5A7 /* iPad.storyboard */; };
 		5009CE49163EE7500082C5A7 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE48163EE7500082C5A7 /* OpenGLViewController.m */; };
@@ -42,6 +42,8 @@
 		50D8489D165BE7A6003DEEB5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8489C165BE7A6003DEEB5 /* CoreData.framework */; };
 		50D848DD165D260C003DEEB5 /* Score.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848DC165D260C003DEEB5 /* Score.m */; };
 		50D848EA165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */; };
+		50D848EE16628707003DEEB5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848ED16628706003DEEB5 /* SettingsViewController.m */; };
+		50D848F116628A35003DEEB5 /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848F016628A35003DEEB5 /* AboutMeViewController.m */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
@@ -56,8 +58,8 @@
 		5009CE39163EE7500082C5A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5009CE3B163EE7500082C5A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5009CE3D163EE7500082C5A7 /* BallEscape-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BallEscape-Prefix.pch"; sourceTree = "<group>"; };
-		5009CE3E163EE7500082C5A7 /* OpenGLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLAppDelegate.h; sourceTree = "<group>"; };
-		5009CE3F163EE7500082C5A7 /* OpenGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLAppDelegate.m; sourceTree = "<group>"; };
+		5009CE3E163EE7500082C5A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5009CE3F163EE7500082C5A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5009CE42163EE7500082C5A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		5009CE45163EE7500082C5A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		5009CE47163EE7500082C5A7 /* OpenGLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLViewController.h; sourceTree = "<group>"; };
@@ -108,6 +110,10 @@
 		50D848DC165D260C003DEEB5 /* Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Score.m; sourceTree = "<group>"; };
 		50D848E8165FC99F003DEEB5 /* NSDictionary+fileAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+fileAdditions.h"; sourceTree = "<group>"; };
 		50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+fileAdditions.m"; sourceTree = "<group>"; };
+		50D848EC16628705003DEEB5 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		50D848ED16628706003DEEB5 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		50D848EF16628A35003DEEB5 /* AboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
+		50D848F016628A35003DEEB5 /* AboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 		50FCF5D5164AF7D5008CD89E /* level0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0.txt; sourceTree = "<group>"; };
@@ -181,12 +187,16 @@
 				50D848911658E23F003DEEB5 /* MainViewController.m */,
 				50D848E8165FC99F003DEEB5 /* NSDictionary+fileAdditions.h */,
 				50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */,
-				5009CE3E163EE7500082C5A7 /* OpenGLAppDelegate.h */,
-				5009CE3F163EE7500082C5A7 /* OpenGLAppDelegate.m */,
+				5009CE3E163EE7500082C5A7 /* AppDelegate.h */,
+				5009CE3F163EE7500082C5A7 /* AppDelegate.m */,
 				506A33A316565D3A00792B8A /* OpenGLMVC */,
 				50D848DB165D260C003DEEB5 /* Score.h */,
 				50D848DC165D260C003DEEB5 /* Score.m */,
 				5009CE36163EE7500082C5A7 /* Supporting Files */,
+				50D848EC16628705003DEEB5 /* SettingsViewController.h */,
+				50D848ED16628706003DEEB5 /* SettingsViewController.m */,
+				50D848EF16628A35003DEEB5 /* AboutMeViewController.h */,
+				50D848F016628A35003DEEB5 /* AboutMeViewController.m */,
 			);
 			path = BallEscape;
 			sourceTree = "<group>";
@@ -354,7 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5009CE3C163EE7500082C5A7 /* main.m in Sources */,
-				5009CE40163EE7500082C5A7 /* OpenGLAppDelegate.m in Sources */,
+				5009CE40163EE7500082C5A7 /* AppDelegate.m in Sources */,
 				5009CE49163EE7500082C5A7 /* OpenGLViewController.m in Sources */,
 				5009CE73163EF6FA0082C5A7 /* AGLKContext.m in Sources */,
 				5009CE83163F18100082C5A7 /* UtilityMesh.m in Sources */,
@@ -377,6 +387,8 @@
 				50D848951658F5DD003DEEB5 /* HighScoresViewController.m in Sources */,
 				50D848DD165D260C003DEEB5 /* Score.m in Sources */,
 				50D848EA165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m in Sources */,
+				50D848EE16628707003DEEB5 /* SettingsViewController.m in Sources */,
+				50D848F116628A35003DEEB5 /* AboutMeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

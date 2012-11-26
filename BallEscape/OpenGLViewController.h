@@ -40,5 +40,8 @@
 
 //  Pauses the current game.
 - (IBAction)pauseGame:(UIButton *)sender;
+- (void)pauseFrameRate;
+
+
 
 @end
