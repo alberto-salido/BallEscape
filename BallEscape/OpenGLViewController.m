@@ -23,6 +23,7 @@ static NSString *const MODEL_FLOOR_NAME = @"floor";
 static NSString *const MODEL_BORDERS_NAME = @"borders";
 static NSString *const MODEL_WALL_NAME = @"walls";
 static NSString *const MODEL_BALL_NAME = @"ball";
+static NSString *const MODEL_GHOST_NAME = @"ghost";
 static NSString *const MODEL_DOOR_NAME = @"door";
 
 //  The OpenGLViewController () interface extends the previous one
@@ -56,6 +57,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @property (nonatomic, strong) BoardGame *boardGame;
 @property (nonatomic, strong) NSMutableSet *labyrinth;
 @property (nonatomic, strong) Ball *ball;
+@property (nonatomic, strong) Ghost *ghost;
 
 //  Vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
@@ -125,6 +127,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize boardGame = _boardGame;
 @synthesize labyrinth = _labyrinth;
 @synthesize ball = _ball;
+@synthesize ghost = _ghost;
 
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
@@ -250,8 +253,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     [self.labyrinth makeObjectsPerformSelector:@selector(drawWithBaseEffect:) 
                                     withObject:self.baseEffect];
     
-    //  Draw the ball.
+    //  Draw the characters.
     [self.ball drawWithBaseEffect:self.baseEffect];
+    [self.ghost drawWithBaseEffect:self.baseEffect];
+    
 }
 
 
@@ -570,7 +575,19 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     //  Creates the ball object.
     self.ball = [[Ball alloc] initWithModel:gameModelBall
                                    position:GLKVector3Make(0.5, 0.0, 0.5) 
-                                   velocity:GLKVector3Make(0.0, 0.0, 0.0)];
+                                   velocity:GLKVector3Make(0.0, 0.0, 0.0)
+                                 yawRadians:GLKMathDegreesToRadians(0)];
+    
+    //  Load the ghost.
+    UtilityModel *gameModelGhost = [self.modelManager modelNamed:MODEL_GHOST_NAME];
+    NSAssert(gameModelGhost != nil, @"Failed to load ghost");
+    
+    //  Creates the ghost object.
+    self.ghost = [[Ghost alloc] initWithModel:gameModelGhost 
+                                     position:GLKVector3Make(BOARD_GAME_WIDTH / 2, 0.0, BOARD_GAME_HEIGHT / 2) 
+                                     velocity:GLKVector3Make(0.5, 0.0, 0.5) 
+                                   yawRadians:GLKMathDegreesToRadians(0) 
+                                   throwWalls:NO];
     
     //  Load the Door.
     UtilityModel *gameModelDoor = [self.modelManager modelNamed:MODEL_DOOR_NAME];
@@ -629,11 +646,15 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             self.previousZPosition = self.eyePosition.z;
         }
         
-        //  Updates the ball movement.
+        //  Updates the ball movement and checks if the ball has touched the door.
         if ([self.ball updateWithController:self])
         {
+            //  Ends the current game and returns to the previous View Controller.
             [self dismissViewControllerAnimated:YES completion:nil];
         }
+        
+        //  Updates the ghost movement.
+        [self.ghost updateWithController:self];
     }
 }
 

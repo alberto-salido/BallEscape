@@ -23,11 +23,6 @@
 //  Set with the position of the labyrinth's walls.
 - (NSSet *)labyrinth;
 
-//  Array with the position of the monsters.
-//  At first, is only one monster, but in futures implementations
-//  should have more.
-//- (NSArray *)monsters;
-
 //  Gets the slope of the boardgame.
 - (float)getXSlope;
 - (float)getZSlope;

@@ -16,7 +16,7 @@
 #import "BoardGame+viewAdditions.h"
 #import "Wall.h"
 #import "Ball+viewAdditions.h"
-
+#import "Ghost+viewAdditions.h"
  
 //  The GLKViewController class provides all of the standard view
 //  controller functionality, but additionally implements an
@@ -39,7 +39,10 @@
 - (IBAction)tiltZAxis:(UISlider *)sender;
 
 //  Pauses the current game.
+//  Pauses and play the game.
 - (IBAction)pauseGame:(UIButton *)sender;
+
+//  Pauses the game.
 - (void)pauseFrameRate;
 
 
