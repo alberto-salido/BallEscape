@@ -24,6 +24,7 @@ static int const SCORES_PER_SECTION = 5;
 @implementation GameViewController
 
 @synthesize timeUsedInCompleteLevel = _timeUsedInCompleteLevel;
+@synthesize gameOver = _gameOver;
 @synthesize showTime = _showTime;
 @synthesize congratulationsMessage = _congratulationsMessage;
 @synthesize levelToPlayLabel = _levelToPlayLabel;
@@ -74,6 +75,18 @@ static int const SCORES_PER_SECTION = 5;
         
         //  Enables the "Restart" button.
         self.restartLevelButton.hidden = NO;
+    }
+    
+    //  If the user losses the previous game;
+    if (self.gameOver) {
+        self.congratulationsMessage.text = @"Ooooh!, You failed!!";
+        self.congratulationsMessage.hidden = NO;
+        self.showTime.hidden = YES;
+        self.playButton.hidden = YES;
+        self.continueButton.hidden = YES;
+        self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
+                                      (self.levelManager.currentLevel)];
+
     }
 }
 

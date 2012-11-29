@@ -21,6 +21,9 @@
 //  in complete the game.
 @property float timeUsedInCompleteLevel;
 
+//  Property indicating if the user losses the last game.
+@property BOOL gameOver;
+
 //  Manages the information about each level. Returns importat
 //  data about the levels; number of levels in the game, current level
 //  played and the position of every element into the game.

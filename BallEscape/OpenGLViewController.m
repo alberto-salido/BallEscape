@@ -83,6 +83,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 //  if the game is paused, no updates are made.
 @property BOOL isPaused;
 
+//  Indicates if the game ends with gameover.
+@property BOOL gameOver;
+
 @property (nonatomic, strong) CMMotionManager *motionManager;
 
 //  Configures the current GLKView.
@@ -142,6 +145,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize isPaused = _isPaused;
 
 @synthesize time = _time;
+@synthesize gameOver = _gameOver;
 
 @synthesize motionManager = _motionManager;
 
@@ -213,8 +217,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 	[super viewWillDisappear:animated];
     
     //  Sends to the GameViewController the time used for complete the level.
-    ((GameViewController *)self.presentingViewController).timeUsedInCompleteLevel
-    = [self.time.text floatValue];
+    GameViewController *gvc = ((GameViewController *)self.presentingViewController);
+    gvc.timeUsedInCompleteLevel = [self.time.text floatValue];
+    
+    //  Sends if the game ends with game over.
+    gvc.gameOver = self.gameOver;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -585,7 +592,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     //  Creates the ghost object.
     self.ghost = [[Ghost alloc] initWithModel:gameModelGhost 
                                      position:GLKVector3Make(BOARD_GAME_WIDTH / 2, 0.0, BOARD_GAME_HEIGHT / 2) 
-                                     velocity:GLKVector3Make(0.5, 0.0, 0.5) 
+                                     velocity:GLKVector3Make(-0.5, 0.0, -0.5) 
                                    yawRadians:GLKMathDegreesToRadians(0) 
                                    throwWalls:NO];
     
@@ -654,7 +661,12 @@ static NSString *const MODEL_DOOR_NAME = @"door";
         }
         
         //  Updates the ghost movement.
-        [self.ghost updateWithController:self];
+        if ((self.gameOver = [self.ghost updateWithController:self]))
+        {
+            //  Game Over!
+            [self dismissViewControllerAnimated:YES completion:nil];
+
+        }
     }
 }
 
@@ -683,6 +695,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 - (float)getZSlope
 {
     return self.zSlopeInGrades;
+}
+
+- (GLKVector3)getBallPosition
+{
+    return self.ball.position;
 }
 
 

@@ -27,4 +27,6 @@
 - (float)getXSlope;
 - (float)getZSlope;
 
+//  Gets the ball's position.
+- (GLKVector3)getBallPosition;
 @end
