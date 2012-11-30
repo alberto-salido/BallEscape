@@ -86,6 +86,7 @@ static int const SCORES_PER_SECTION = 5;
         self.continueButton.hidden = YES;
         self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
                                       (self.levelManager.currentLevel)];
+        self.gameOver = NO;
 
     }
 }

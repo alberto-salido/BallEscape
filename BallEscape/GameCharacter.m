@@ -43,12 +43,11 @@ static float const BOUNDING_FACTOR = 0.4;
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 
            velocity:(GLKVector3)velocity
-         yawRadians:(float)radians
 {
     if ((self = [super initWithModel:model position:position])
         != nil) {
         self.velocity = velocity;
-        self.yawRadians = radians;
+        self.yawRadians = 0;
         
         //  Gets the bounding box of the object.
         AGLKAxisAllignedBoundingBox boundingBox = self.model.axisAlignedBoundingBox;

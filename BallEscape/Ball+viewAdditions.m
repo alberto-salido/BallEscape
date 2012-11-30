@@ -25,6 +25,12 @@
     GLKMatrix4Translate(savedModelviewMatrix,
                         self.position.x, self.position.y, self.position.z);
     
+    // Rotate to match model's yaw angle (rotation about Y)
+    baseEffect.transform.modelviewMatrix = 
+    GLKMatrix4Rotate(baseEffect.transform.modelviewMatrix,
+                     self.yawRadians,
+                     0.0, 1.0, 0.0);
+    
     [baseEffect prepareToDraw];
     
     // Draw the model

@@ -20,7 +20,6 @@
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 
            velocity:(GLKVector3)velocity
-         yawRadians:(float)radians
          throwWalls:(BOOL)throwWalls;
 
 @end

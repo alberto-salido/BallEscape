@@ -40,10 +40,9 @@ static float const BOARD_GAME_HEIGHT = 13.68;
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 
            velocity:(GLKVector3)velocity
-         yawRadians:(float)radians
          throwWalls:(BOOL)throwWalls
 {
-    if ((self = [super initWithModel:model position:position velocity:velocity yawRadians:radians]) != nil) {
+    if ((self = [super initWithModel:model position:position velocity:velocity]) != nil) {
         self.shouldPassThrowTheWalls = throwWalls;
     }
     
@@ -89,10 +88,10 @@ static float const BOARD_GAME_HEIGHT = 13.68;
         
         //  The dot product is the cos() of the angle between two
         //  vectors: in this case, the default orientation of the
-        //  ghost model and the car's velocity vector.
+        //  ghost model and the ghost's velocity vector.
         float dotProduct = GLKVector3DotProduct(
                                                 GLKVector3Normalize(self.velocity),
-                                                GLKVector3Make(0.0, 0, 1.0));
+                                                GLKVector3Make(0.0, 0, -1.0));
         
         //  Checks if the velocity is negative, the ghost is moving to the lower border, in this case, the 
         //  yaw angle sign must be changed to positive to simulate the rotation.

@@ -29,16 +29,12 @@
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 
            velocity:(GLKVector3)velocity
-         yawRadians:(float)radians;
 {
     return (self = [super initWithModel:model 
                                position:position 
-                               velocity:velocity
-                             yawRadians:radians]);
+                               velocity:velocity]);
 }
         
-    
-
 #pragma mark - Game Character Logic Protocol.
 
 - (BOOL)updateWithController:(id <ObjectController>)controller
@@ -60,6 +56,22 @@
     //  Detects collisions.
     [self bounceOffBorders:[controller borders]];
     BOOL gameOver = [self bounceOffWalls:[controller labyrinth]];
+    
+    //  The dot product is the cos() of the angle between two
+    //  vectors: in this case, the default orientation of the
+    //  ball model and the ball's velocity vector.
+    float dotProduct = GLKVector3DotProduct(
+                                            GLKVector3Normalize(self.velocity),
+                                            GLKVector3Make(0.0, 0, 1.0));
+    
+    //  Checks if the velocity is negative, the ghost is moving to the lower border, in this case, the 
+    //  yaw angle sign must be changed to positive to simulate the rotation.
+    if (self.velocity.x > 0) {
+        self.yawRadians = acosf(dotProduct);
+    } else {
+        self.yawRadians = -acosf(dotProduct);
+    }
+
     
     self.position = self.nextPosition;
     

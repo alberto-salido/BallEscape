@@ -19,11 +19,8 @@
 @property (readonly, nonatomic, strong) UtilityModel *model;
 @property (readonly, nonatomic) GLKVector3 position;
 @property (readonly, nonatomic) GLKVector3 velocity;
-@property (readonly, nonatomic) float yawRadians;
 
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 
-           velocity:(GLKVector3)velocity
-         yawRadians:(float)radians;
-
+           velocity:(GLKVector3)velocity;
 @end

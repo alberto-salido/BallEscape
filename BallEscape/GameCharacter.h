@@ -25,8 +25,7 @@
 //  Creates a new instance for this object.
 - (id)initWithModel:(UtilityModel *)model 
            position:(GLKVector3)position 
-           velocity:(GLKVector3)velocity
-         yawRadians:(float)radians;
+           velocity:(GLKVector3)velocity;
 
 //  This function checks if the object has collisioned
 //  with the borders of the board-game. The collisions
