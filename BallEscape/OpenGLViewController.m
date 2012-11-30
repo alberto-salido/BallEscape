@@ -582,7 +582,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     //  Creates the ball object.
     self.ball = [[Ball alloc] initWithModel:gameModelBall
                                    position:GLKVector3Make(0.5, 0.0, 0.5) 
-                                   velocity:GLKVector3Make(0.0, 0.0, 0.0)];    
+                                   velocity:GLKVector3Make(0.1, 0.0, 0.0)];    
     //  Load the ghost.
     UtilityModel *gameModelGhost = [self.modelManager modelNamed:MODEL_GHOST_NAME];
     NSAssert(gameModelGhost != nil, @"Failed to load ghost");

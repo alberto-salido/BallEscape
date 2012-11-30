@@ -62,11 +62,11 @@
     //  ball model and the ball's velocity vector.
     float dotProduct = GLKVector3DotProduct(
                                             GLKVector3Normalize(self.velocity),
-                                            GLKVector3Make(0.0, 0, 1.0));
+                                            GLKVector3Make(0.0, 0, -1.0));
     
     //  Checks if the velocity is negative, the ghost is moving to the lower border, in this case, the 
     //  yaw angle sign must be changed to positive to simulate the rotation.
-    if (self.velocity.x > 0) {
+    if (self.velocity.x < 0) {
         self.yawRadians = acosf(dotProduct);
     } else {
         self.yawRadians = -acosf(dotProduct);
