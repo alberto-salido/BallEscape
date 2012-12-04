@@ -20,8 +20,9 @@
 //  Position of the borders. Used for collision.
 - (AGLKAxisAllignedBoundingBox)borders;
 
-//  Set with the position of the labyrinth's walls.
-- (NSSet *)labyrinth;
+//  Dictionary with the position of the labyrinth's walls,
+//  sorted by quadrants.
+- (NSDictionary *)labyrinthByQuadrants;
 
 //  Gets the slope of the boardgame.
 - (float)getXSlope;

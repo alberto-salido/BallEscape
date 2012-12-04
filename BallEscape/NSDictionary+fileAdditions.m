@@ -10,7 +10,7 @@
 
 @implementation NSDictionary (fileAdditions)
 
-- (BOOL)writeToFile:(NSString *)filePath
+- (BOOL)writeScoresToFile:(NSString *)filePath
 {
     NSError *error;
     NSString *header = @"<!-- Copyright (c) 2012 Alberto Salido López. All rights reserved. -->\n <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n";
@@ -54,10 +54,12 @@
     }
 }
 
-- (BOOL)readFromFile:(NSString *)filePath
+- (BOOL)readScoresFromFile:(NSString *)filePath
 {
     NSError *error;
-    NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    NSString *fileContent = [NSString stringWithContentsOfFile:filePath 
+                                                      encoding:NSUTF8StringEncoding 
+                                                         error:&error];
     
     if (error) {
         return NO;
@@ -102,10 +104,105 @@
             value = NO;
         }
         if ([values count] > 0) {
-            [((NSMutableDictionary *)self) setValue:values 
-                                             forKey:elementKey];
+            [self setValue:values forKey:elementKey];
         }
     }
+    return YES;
+}
+
+- (BOOL)readLevelStructureFromFile:(NSString *)filePath
+{
+    NSError *error;
+    
+    NSString *fileContent = [NSString stringWithContentsOfFile:filePath 
+                                                      encoding:NSUTF8StringEncoding 
+                                                         error:&error];
+    if (error) {
+        return NO;
+    }
+    
+    NSArray *elements = [fileContent componentsSeparatedByCharactersInSet:
+                         [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    
+    BOOL wall = NO;
+    BOOL position = NO;
+    BOOL ball = NO;
+    BOOL ghost = NO;
+    BOOL door = NO;
+    
+    NSMutableArray *wallPostions = [[NSMutableArray alloc] init];
+    NSMutableArray *ballPostion = [[NSMutableArray alloc] init];
+    NSMutableArray *ghostPostion = [[NSMutableArray alloc] init];
+    NSMutableArray *doorPostion = [[NSMutableArray alloc] init];
+    
+    for (NSString *elementWithSpecialChar in elements) {
+        
+        //  Removes the \n and the withe spaces.
+        NSString *element = 
+        [[elementWithSpecialChar stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        //  If is not an empty string.
+        if (![element isEqualToString:@""]) {            
+            
+            if (wall) {
+                if (position) {
+                    NSArray *positions = [element componentsSeparatedByString:@","];
+                    [wallPostions addObjectsFromArray:positions];
+                    position = NO;
+                }
+            }
+            
+            if (ball) {
+                if (position) {
+                    NSArray *positions = [element componentsSeparatedByString:@","];
+                    [ballPostion addObjectsFromArray:positions];
+                    position = NO;
+                }
+            }
+            
+            if (ghost) {
+                if (position) {
+                    NSArray *positions = [element componentsSeparatedByString:@","];
+                    [ghostPostion addObjectsFromArray:positions];
+                    position = NO;
+                }
+            }
+            
+            if (door) {
+                if (position) {
+                    NSArray *positions = [element componentsSeparatedByString:@","];
+                    [doorPostion addObjectsFromArray:positions];
+                    position = NO;
+                }
+            }
+            
+            if ([element isEqualToString:@"wall"]) {
+                wall = YES;
+            } else if ([element isEqualToString:@"position"]) {
+                position = YES;
+            } else if ([element isEqualToString:@"/wall"]) {
+                wall = NO;
+            } else if ([element isEqualToString:@"ball"]) {
+                ball = YES;
+            } else if ([element isEqualToString:@"/ball"]) {
+                ball = NO;
+            } else if ([element isEqualToString:@"ghost"]) {
+                ghost = YES;
+            } else if ([element isEqualToString:@"/ghost"]) {
+                ghost = NO;
+            } else if ([element isEqualToString:@"door"]) {
+                door = YES;
+            } else if ([element isEqualToString:@"/door"]) {
+                door = NO;
+            }
+        }
+    }
+        
+    [self setValue:(NSArray *)wallPostions forKey:@"wall"];
+    [self setValue:ballPostion forKey:@"ball"];
+    [self setValue:ghostPostion forKey:@"ghost"];
+    [self setValue:doorPostion forKey:@"door"];
+       
     return YES;
 }
 

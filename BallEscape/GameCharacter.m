@@ -13,6 +13,11 @@
 //  making longer bounds.
 static float const BOUNDING_FACTOR = 0.4;
 
+//  Constants with the information about the size of the boardgame.
+//  Size of the board game in the X-Axis.
+static float const BOARD_GAME_WIDTH = 10.0;
+static float const BOARD_GAME_HEIGHT = 13.68;
+
 @interface GameCharacter ()
 
 @property (nonatomic) GLKVector3 position;
@@ -120,13 +125,35 @@ static float const BOUNDING_FACTOR = 0.4;
     self.yawRadians += GLKMathDegreesToRadians(180);
 }
 
-- (BOOL)bounceOffWalls:(NSSet *)walls
+- (BOOL)bounceOffWalls:(NSDictionary *)walls
 {
     float height;
     float width;
     
+    NSSet *subWalls;
+        
+    if (self.position.x > (BOARD_GAME_WIDTH / 2)) {
+        //  Object in the upper half.
+        if (self.position.z < (BOARD_GAME_HEIGHT / 2)) {
+            //  First Quadrant.
+            subWalls = [walls objectForKey:@"1"];
+        } else {
+            //  Second Quadrant.
+            subWalls = [walls objectForKey:@"2"];
+        }
+    } else {
+        //  Object in the lower half. 
+        if (self.position.z < (BOARD_GAME_HEIGHT / 2)) {
+            //  Third Quadrant.
+            subWalls = [walls objectForKey:@"3"];
+        } else {
+            //  Forth Quadrant.
+            subWalls = [walls objectForKey:@"4"];
+        }
+    }
+    
     //  Detects a collision with any wall.
-    for (Wall *currentWall in walls) {
+    for (Wall *currentWall in subWalls) {
         
         AGLKAxisAllignedBoundingBox  wallBBox = currentWall.boundingBox;
         

@@ -54,7 +54,7 @@ static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
     
     //  Reads the file and stores its content into a dictionary.
     self.scoresDictionary = [[NSMutableDictionary alloc] init];
-    [self.scoresDictionary readFromFile:self.scoresPath];
+    [self.scoresDictionary readScoresFromFile:self.scoresPath];
     self.dictionaryCache = self.scoresDictionary.copy;
 }
 
@@ -102,10 +102,13 @@ static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
 
 - (void)saveData
 {
-    [self.scoresDictionary writeToFile:self.scoresPath];
+    /*
+     * test
+     */
+    [self.scoresDictionary writeScoresToFile:self.scoresPath];
 
     if (![self.dictionaryCache isEqualToDictionary:self.scoresDictionary]) {
-        [self.scoresDictionary writeToFile:self.scoresPath];
+        [self.scoresDictionary writeScoresToFile:self.scoresPath];
     }
 }
 @end

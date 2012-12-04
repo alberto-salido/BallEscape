@@ -44,9 +44,9 @@
     
     //  Updates the velocity using the motion controller.
     self.velocity = GLKVector3Add(self.velocity, 
-                                  GLKVector3Make(-([controller getXSlope] / 6),
+                                  GLKVector3Make(-([controller getXSlope] / 4),
                                                  0.0, 
-                                                 -([controller getZSlope] / 6)));
+                                                 -([controller getZSlope] / 4)));
     
     GLKVector3 traveledDistance = GLKVector3MultiplyScalar(self.velocity,
                                                            elapsedTimeSeconds);
@@ -55,7 +55,7 @@
     
     //  Detects collisions.
     [self bounceOffBorders:[controller borders]];
-    BOOL gameOver = [self bounceOffWalls:[controller labyrinth]];
+    BOOL gameOver = [self bounceOffWalls:[controller labyrinthByQuadrants]];
     
     //  The dot product is the cos() of the angle between two
     //  vectors: in this case, the default orientation of the

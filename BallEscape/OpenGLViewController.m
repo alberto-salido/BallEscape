@@ -59,6 +59,16 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @property (nonatomic, strong) Ball *ball;
 @property (nonatomic, strong) Ghost *ghost;
 
+//  Dictionary with the walls into the labyrinth sort by 
+//  quadrants. In this way, is faster to check collision
+//  between the wall and the ball.
+//  +-----+-----+
+//  |  I  |  II |
+//  +-----+-----+
+//  | III |  IV |
+//  +-----+-----+
+@property (nonatomic, strong) NSDictionary *labyrinthByQuadrants;
+
 //  Vectors with the information of the current point of view.
 //  The first vector represent the postion of the "eye".
 //  The second one, makes a target for the view.
@@ -114,6 +124,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 //  - Throws exception in case of error.
 - (void)loadObjects;
 
+//  Divides the walls into a NSDictionary sort by quadrant.
+- (void)divideByQuadrants;
+
 //  Updates the slope of the boardgame using, for that propose, 
 //  the gyroscope.
 - (void)updateSlopeUsingMotionController;
@@ -131,6 +144,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize labyrinth = _labyrinth;
 @synthesize ball = _ball;
 @synthesize ghost = _ghost;
+@synthesize labyrinthByQuadrants = _labyrinthByQuadrants;
 
 @synthesize eyePosition = _eyePosition;
 @synthesize lookAtPosition = _lookAtPosition;
@@ -380,9 +394,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     
     //  Makes a reference to the GameViewController's property LevelManager.
     LevelManager *levelManager = ((GameViewController *)self.presentingViewController).levelManager;
+    [levelManager setUpLevel];
         
     //  Creates the walls and stores them into a set, making the entire labyrinth.
-    NSArray *coordinates = [[NSArray alloc] initWithArray:levelManager.getNextLevelStructure];
+    //  The coordinates of every wall are read from the level manager.
+    NSArray *coordinates = [[NSArray alloc] initWithArray:levelManager.levelStructure];
     self.labyrinth = [[NSMutableSet alloc] init];
     
     Wall *wallToAdd;
@@ -397,6 +413,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
                            shouldRotate:[[coordinates objectAtIndex:(i + 2)] boolValue]];
         [self.labyrinth addObject:wallToAdd];
     }
+    
+    //  Divides the wall by quadrants, storing into a NSDictionary.
+    [self divideByQuadrants];
+    
     /* Constructor de laberintos.
      {
     Wall *oneWall = [[Wall alloc] initWithModel:gameModelWalls  
@@ -430,7 +450,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     [self.labyrinth addObject:oneWall];
     
     oneWall = [[Wall alloc] initWithModel:gameModelWalls 
-                                 position:GLKVector3Make(3.5, 0.0, 5.0) 
+                                 position:GLKVecto3Make(3.5, 0.0, 5.0) 
                              shouldRotate:YES];
     [self.labyrinth addObject:oneWall];
     
@@ -580,16 +600,22 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     NSAssert(gameModelBall != nil, @"Failed to load ball");
     
     //  Creates the ball object.
+    NSArray *ballCoordinates = levelManager.ballPosition;
     self.ball = [[Ball alloc] initWithModel:gameModelBall
-                                   position:GLKVector3Make(0.5, 0.0, 0.5) 
+                                    position:GLKVector3Make([[ballCoordinates objectAtIndex:0] floatValue],
+                                                            0.0,
+                                                            [[ballCoordinates objectAtIndex:1] floatValue]) 
                                    velocity:GLKVector3Make(0.1, 0.0, 0.0)];    
     //  Load the ghost.
     UtilityModel *gameModelGhost = [self.modelManager modelNamed:MODEL_GHOST_NAME];
     NSAssert(gameModelGhost != nil, @"Failed to load ghost");
     
     //  Creates the ghost object.
+    NSArray *ghostCoordinates = levelManager.ghostPosition;
     self.ghost = [[Ghost alloc] initWithModel:gameModelGhost 
-                                     position:GLKVector3Make(BOARD_GAME_WIDTH / 2, 0.0, BOARD_GAME_HEIGHT / 2) 
+                                     position:GLKVector3Make([[ghostCoordinates objectAtIndex:0] floatValue],
+                                                             0.0,
+                                                             [[ghostCoordinates objectAtIndex:1] floatValue]) 
                                      velocity:GLKVector3Make(-0.5, 0.0, -0.5) 
                                    throwWalls:NO];
     
@@ -598,15 +624,58 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     NSAssert(gameModelDoor != nil, @"Failed to load door");
     
     //  Creates the door, a door is a kind of wall with other texture, and stores it.
+    NSArray *doorCoordinates = levelManager.doorPosition;
     Wall *door = [[Wall alloc] initWithModel:gameModelDoor
-                                    position:GLKVector3Make(0.0, 0.0, 7.0)
-                                shouldRotate:NO];
+                                    position:GLKVector3Make([[doorCoordinates objectAtIndex:0] floatValue],
+                                                            0.0,
+                                                            [[doorCoordinates objectAtIndex:1] floatValue]) 
+
+                                shouldRotate:[[doorCoordinates objectAtIndex:2] boolValue]];
     door.isADoor = YES;
     [self.labyrinth addObject:door];
     
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;
     self.baseEffect.texture2d0.target = self.modelManager.textureInfo.target;
+}
+
+- (void)divideByQuadrants
+{
+    //  +-----+-----+
+    //  |  I  |  II |
+    //  +-----+-----+
+    //  | III |  IV | 
+    //  +-----+-----+
+    
+    NSMutableSet *firstQuadrant = [[NSMutableSet alloc] init];
+    NSMutableSet *secondQuadrant = [[NSMutableSet alloc] init];
+    NSMutableSet *thirdQuadrant = [[NSMutableSet alloc] init];
+    NSMutableSet *forthQuadrant = [[NSMutableSet alloc] init];
+
+    for (Wall *wall in self.labyrinth) {
+        //  Upper half (I & II).
+        if (wall.position.x > (BOARD_GAME_WIDTH / 2) - 1) {
+            if (wall.position.z < (BOARD_GAME_HEIGHT / 2) + 1) {
+                [firstQuadrant addObject:wall];
+            }
+            if (wall.position.z > (BOARD_GAME_HEIGHT / 2) - 1) {
+                [secondQuadrant addObject:wall];
+            }
+        }
+        //  Lower half (III & IV).
+        if (wall.position.x < (BOARD_GAME_WIDTH / 2) + 1) {
+            if (wall.position.z < (BOARD_GAME_HEIGHT / 2) + 1) {
+                [thirdQuadrant addObject:wall];
+            }
+            if (wall.position.z > (BOARD_GAME_HEIGHT / 2) - 1) {
+                [forthQuadrant addObject:wall];
+            }
+        }
+    }
+    self.labyrinthByQuadrants = [[NSDictionary alloc] initWithObjectsAndKeys:firstQuadrant, @"1",
+                                 secondQuadrant, @"2",
+                                 thirdQuadrant, @"3",
+                                 forthQuadrant, @"4", nil];
 }
 
 #pragma mark - Animation
@@ -662,7 +731,6 @@ static NSString *const MODEL_DOOR_NAME = @"door";
         {
             //  Game Over!
             [self dismissViewControllerAnimated:YES completion:nil];
-
         }
     }
 }

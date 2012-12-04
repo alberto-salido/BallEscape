@@ -35,6 +35,6 @@
 //  This method detects any collision between the object
 //  and the labyrinth's walls.
 //  Returns true is the object has completed his propose.
-- (BOOL)bounceOffWalls:(NSSet *)walls;
+- (BOOL)bounceOffWalls:(NSDictionary *)walls;
 
 @end

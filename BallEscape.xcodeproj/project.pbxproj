@@ -34,6 +34,7 @@
 		507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D05165131B2007FC594 /* Wall+viewAdditions.m */; };
 		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
 		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
+		50B45B9E166CBD1800CAF2D2 /* level1.gameplist in Resources */ = {isa = PBXBuildFile; fileRef = 50B45B9D166CBD1800CAF2D2 /* level1.gameplist */; };
 		50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D848891657F92F003DEEB5 /* CoreMotion.framework */; };
 		50D848921658E23F003DEEB5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848911658E23F003DEEB5 /* MainViewController.m */; };
 		50D848951658F5DD003DEEB5 /* HighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848941658F5DD003DEEB5 /* HighScoresViewController.m */; };
@@ -100,6 +101,7 @@
 		509DC3791646CF1D00251009 /* 3DObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DObject.m; sourceTree = "<group>"; };
 		509DC37C1646D19B00251009 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		509DC37D1646D19B00251009 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		50B45B9D166CBD1800CAF2D2 /* level1.gameplist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.gameplist; sourceTree = "<group>"; };
 		50D848891657F92F003DEEB5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		50D848901658E23E003DEEB5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		50D848911658E23F003DEEB5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				50D8490516661394003DEEB5 /* ballEscape.modelplist */,
 				50FCF5D5164AF7D5008CD89E /* level0.txt */,
+				50B45B9D166CBD1800CAF2D2 /* level1.gameplist */,
 			);
 			name = "Game files";
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				5009CE46163EE7500082C5A7 /* iPad.storyboard in Resources */,
 				50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */,
 				50D8490616661394003DEEB5 /* ballEscape.modelplist in Resources */,
+				50B45B9E166CBD1800CAF2D2 /* level1.gameplist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

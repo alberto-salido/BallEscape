@@ -15,10 +15,14 @@
 
 //  Writes the NSDictionary with the scores of the game
 //  into a file.
-- (BOOL)writeToFile:(NSString *)filePath;
+- (BOOL)writeScoresToFile:(NSString *)filePath;
 
 //  Reads from a file the information about de game's 
 //  socres and stores it into a NSDictionary.
-- (BOOL)readFromFile:(NSString *)filePath;
+- (BOOL)readScoresFromFile:(NSString *)filePath;
+
+//  Reads the elements of a level from a file.
+//  The elements are stored into a |NSDictionary|.
+- (BOOL)readLevelStructureFromFile:(NSString *)filePath;
 
 @end

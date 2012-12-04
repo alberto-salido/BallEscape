@@ -8,19 +8,27 @@
 
 #import "LevelManager.h"
 
+//  Constants for the Dictionary's keys.
+static NSString *const WALL_KEY = @"wall";
+static NSString *const BALL_KEY = @"ball";
+static NSString *const GHOST_KEY = @"ghost";
+static NSString *const DOOR_KEY = @"door";
+
 @class LevelManager;
 
 @interface LevelManager ()
 
 @property int numberOfLevels;
 @property int currentLevel;
+@property (nonatomic, strong) NSArray *levelStructure;
+@property (nonatomic, strong) NSArray *ballPosition;
+@property (nonatomic, strong) NSArray *ghostPosition;
+@property (nonatomic, strong) NSArray *doorPosition;
 
-//  Loads the game level corresponding to the number
-//  pased by parameter, number.
-//  Reads the file with the coordinates of the level's
-//  obejcts, and returns an array with all the coordinates
-//  inside.
-- (NSArray *)loadLevelWithNumber:(int)number;
+//  Property with the infromation about the game level.
+//  It stores the location of each element, index by a key with
+//  the object name.
+@property (nonatomic, strong) NSMutableDictionary *gameLevelStructure;
 
 @end
 
@@ -28,6 +36,11 @@
 
 @synthesize numberOfLevels = _numberOfLevels;
 @synthesize currentLevel = _currentLevel;
+@synthesize levelStructure = _levelStructure;
+@synthesize ballPosition = _ballPosition;
+@synthesize ghostPosition = _ghostPosition;
+@synthesize doorPosition = _doorPosition;
+@synthesize gameLevelStructure = _gameLevelStructure;
 
 //  Super class initializer, must be override.
 //  Returns nil and thorws an assertion.
@@ -43,36 +56,33 @@
     if ((self = [super init]) != nil) {
         self.currentLevel = 0;
         self.numberOfLevels = number;
+        self.gameLevelStructure = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
-- (NSArray *)getNextLevelStructure
+- (BOOL)hasNextLevel
 {
-    NSArray *elementsPositions = [[NSArray alloc] init];
-    
-    if (self.currentLevel < self.numberOfLevels) {
-        elementsPositions = [self loadLevelWithNumber:self.currentLevel];
-        self.currentLevel ++;
-    } else {
-        return nil;
-    }
-    return elementsPositions;
+    return (self.currentLevel < self.numberOfLevels);
 }
 
-- (NSArray *)loadLevelWithNumber:(int)number
+- (void)setUpLevel
 {    
-    //  The level coordinates file is a CSV (Comma Separated File) file.
-    //  Each file has the coordinates of a level. The name starts with "level"
-    //  followed by the number of the level.
-    NSError *error;
     NSString *stringWithLevelPath = [[NSBundle mainBundle] 
-                                     pathForResource:[NSString stringWithFormat:@"level%d", self.currentLevel] 
-                                     ofType:@"txt"]; 
-    NSString *stringWithCoordinatesOfLevel = [NSString stringWithContentsOfFile:stringWithLevelPath
-                                                                       encoding:NSUTF8StringEncoding
-                                                                          error:&error];
-    return [stringWithCoordinatesOfLevel componentsSeparatedByString:@","];
+                                     pathForResource:[NSString stringWithFormat:@"level%d", self.currentLevel + 1] 
+                                     ofType:@"gameplist"]; 
+    
+    if (![self.gameLevelStructure readLevelStructureFromFile:stringWithLevelPath])
+    {
+        NSAssert(NO, @"FATAL ERROR: Error reading level structure.");
+    }
+    
+    self.levelStructure = [self.gameLevelStructure objectForKey:WALL_KEY];
+    self.ballPosition = [self.gameLevelStructure objectForKey:BALL_KEY];
+    self.ghostPosition = [self.gameLevelStructure objectForKey:GHOST_KEY];
+    self.doorPosition = [self.gameLevelStructure objectForKey:DOOR_KEY];
+        
+    self.currentLevel ++;
 }
 
 - (void)restartCurrentLevel
