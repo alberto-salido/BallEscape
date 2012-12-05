@@ -32,6 +32,9 @@
 //  player started to play.
 @property (weak, nonatomic) IBOutlet UILabel *time;
 
+//  Settings.
+@property (nonatomic) BOOL ghostThrowWall;
+
 /*
  *  Sliders para simular el nsor de movimento.
  */

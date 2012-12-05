@@ -12,6 +12,9 @@
 static int const NUMBER_OF_LEVELS = 1;
 static NSString *const PLAY_GAME_SEGUE_ID = @"playGame";
 static int const SCORES_PER_SECTION = 5;
+static NSString *const CONGRATS_MSG = @"Congratulations!\n You have escaped!!";
+static NSString *const FAIL_MSG = @"Ooooh!, You failed!!";
+static int const OK = 1;
 
 @interface GameViewController ()
 
@@ -25,6 +28,7 @@ static int const SCORES_PER_SECTION = 5;
 
 @synthesize timeUsedInCompleteLevel = _timeUsedInCompleteLevel;
 @synthesize gameOver = _gameOver;
+@synthesize ghostThrowWall = _ghostThrowWall;
 @synthesize showTime = _showTime;
 @synthesize congratulationsMessage = _congratulationsMessage;
 @synthesize levelToPlayLabel = _levelToPlayLabel;
@@ -61,6 +65,7 @@ static int const SCORES_PER_SECTION = 5;
     if (self.timeUsedInCompleteLevel) {
         
         //  Show messages and buttons.
+        self.congratulationsMessage.text = CONGRATS_MSG;
         self.congratulationsMessage.hidden = NO;
         self.showTime.hidden = NO;
         self.showTime.text = [NSString stringWithFormat:@"Your time: %.2f",
@@ -79,7 +84,7 @@ static int const SCORES_PER_SECTION = 5;
     
     //  If the user losses the previous game;
     if (self.gameOver) {
-        self.congratulationsMessage.text = @"Ooooh!, You failed!!";
+        self.congratulationsMessage.text = FAIL_MSG;
         self.congratulationsMessage.hidden = NO;
         self.showTime.hidden = YES;
         self.playButton.hidden = YES;
@@ -87,7 +92,7 @@ static int const SCORES_PER_SECTION = 5;
         self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
                                       (self.levelManager.currentLevel)];
         self.gameOver = NO;
-
+        self.timeUsedInCompleteLevel = 0.0;
     }
 }
 
@@ -147,8 +152,29 @@ static int const SCORES_PER_SECTION = 5;
     [self performSegueToPlayGame];
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == OK) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (IBAction)goBackToMenu:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if (self.levelManager.currentLevel == 0) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } else {
+        
+        UIAlertView *warningAboutEndCurrentGame = [[UIAlertView alloc] 
+                                                   initWithTitle:@"Warning" 
+                                                   message:@"If you go back, you will lose all your progress. Next time you will start on Level - 1" 
+                                                   delegate:self 
+                                                   cancelButtonTitle:@"Cancel" 
+                                                   otherButtonTitles:@"Okay", nil];
+        [warningAboutEndCurrentGame show];
+    }
+    
 }
 
 - (IBAction)restartCurrentLevel:(id)sender {
@@ -160,4 +186,14 @@ static int const SCORES_PER_SECTION = 5;
 {
     [self performSegueWithIdentifier:PLAY_GAME_SEGUE_ID sender:self];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:PLAY_GAME_SEGUE_ID]) {
+        OpenGLViewController *ovc = [segue destinationViewController];
+        ovc.ghostThrowWall = self.ghostThrowWall;
+    }
+}
+
+
 @end

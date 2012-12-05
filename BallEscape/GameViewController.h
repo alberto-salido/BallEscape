@@ -10,6 +10,7 @@
 #import "LevelManager.h"
 #import "Score.h"
 #import "MainViewController.h"
+#import "OpenGLViewController.h"
 
 //  Controller previous to the game.
 //  It loads the current level to play and manages the information
@@ -23,6 +24,9 @@
 
 //  Property indicating if the user losses the last game.
 @property BOOL gameOver;
+
+//  Settings.
+@property BOOL ghostThrowWall;
 
 //  Manages the information about each level. Returns importat
 //  data about the levels; number of levels in the game, current level

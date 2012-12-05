@@ -7,10 +7,9 @@
 //
 
 #import "MainViewController.h"
-#import "AppDelegate.h"
 
 //  Constants.
-static NSString *const FILE_NAME = @"scores.plist"; 
+static NSString *const FILE_NAME = @"ball_Escape_HScores.scoreplist"; 
 static NSString *const PLAY_SEGUE_ID = @"goToPlayMenu";
 static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 static NSString *const SETTINGS_SEGUE_ID = @"settings";
@@ -31,6 +30,7 @@ static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
 @synthesize scoresDictionary = _scoresDictionary;
 @synthesize scoresPath = _scoresPath;
 @synthesize dictionaryCache = _dictionaryCache;
+@synthesize ghostThrowWalls = _ghostThrowWalls;
 
 - (void)didReceiveMemoryWarning
 {
@@ -63,6 +63,11 @@ static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
     [super viewDidUnload];
     self.scoresPath = nil;
     self.scoresPath = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -98,17 +103,27 @@ static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
         HighScoresViewController *hvc = [segue destinationViewController];
         hvc.scoresDictionary = self.scoresDictionary;
     }
+    
+    if ([[segue identifier] isEqualToString:PLAY_SEGUE_ID]) {
+        GameViewController *gvc = [segue destinationViewController];
+        gvc.ghostThrowWall = self.ghostThrowWalls;
+    }
+    
+    if ([[segue identifier] isEqualToString:SETTINGS_SEGUE_ID]) {
+        SettingsViewController *svc = [segue destinationViewController];
+        svc.ghostThrowSwitch.on = self.ghostThrowWalls;
+    }
 }
 
 - (void)saveData
 {
-    /*
-     * test
-     */
-    [self.scoresDictionary writeScoresToFile:self.scoresPath];
-
     if (![self.dictionaryCache isEqualToDictionary:self.scoresDictionary]) {
         [self.scoresDictionary writeScoresToFile:self.scoresPath];
     }
+}
+
+- (void)restartScores
+{
+    self.scoresDictionary = [[NSMutableDictionary alloc] init];
 }
 @end

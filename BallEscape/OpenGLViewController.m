@@ -161,6 +161,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize time = _time;
 @synthesize gameOver = _gameOver;
 
+@synthesize ghostThrowWall = _ghostThrowWall;
+
 @synthesize motionManager = _motionManager;
 
 //  Sent to the view controller when the app receives a memory warning.
@@ -414,9 +416,6 @@ static NSString *const MODEL_DOOR_NAME = @"door";
         [self.labyrinth addObject:wallToAdd];
     }
     
-    //  Divides the wall by quadrants, storing into a NSDictionary.
-    [self divideByQuadrants];
-    
     /* Constructor de laberintos.
      {
     Wall *oneWall = [[Wall alloc] initWithModel:gameModelWalls  
@@ -617,7 +616,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
                                                              0.0,
                                                              [[ghostCoordinates objectAtIndex:1] floatValue]) 
                                      velocity:GLKVector3Make(-0.5, 0.0, -0.5) 
-                                   throwWalls:NO];
+                                   throwWalls:self.ghostThrowWall];
     
     //  Load the Door.
     UtilityModel *gameModelDoor = [self.modelManager modelNamed:MODEL_DOOR_NAME];
@@ -633,6 +632,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
                                 shouldRotate:[[doorCoordinates objectAtIndex:2] boolValue]];
     door.isADoor = YES;
     [self.labyrinth addObject:door];
+    
+    //  Divides the walls and the door by quadrants, storing into a NSDictionary.
+    [self divideByQuadrants];
     
     //  Load the textures.
     self.baseEffect.texture2d0.name = self.modelManager.textureInfo.name;

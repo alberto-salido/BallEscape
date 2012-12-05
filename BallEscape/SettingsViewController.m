@@ -3,13 +3,21 @@
 //  BallEscape
 //
 //  Created by Alberto Salido López on 25/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import "SettingsViewController.h"
 
 static int const MULTIMEDIA = 0;
 static int const GAME = 1;
+static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist"; 
+static int const OK = 1;
+
+@interface SettingsViewController ()
+
+@property (nonatomic, strong) MainViewController *mvc;
+
+@end
 
 @implementation SettingsViewController
 @synthesize optionMenu;
@@ -24,6 +32,8 @@ static int const GAME = 1;
 @synthesize ghostThrowSwitch;
 @synthesize clearButton;
 
+@synthesize mvc = _mvc;
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -37,7 +47,7 @@ static int const GAME = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     
+    
 }
 
 - (void)viewDidUnload
@@ -58,14 +68,13 @@ static int const GAME = 1;
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    
+    //  Gets a reference to the previous ViewController.
+    self.mvc = ((MainViewController *) self.presentingViewController);
+    self.ghostThrowSwitch.on = self.mvc.ghostThrowWalls;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -93,8 +102,23 @@ static int const GAME = 1;
 - (IBAction)SFXSwitcher:(id)sender {
 }
 
-- (IBAction)ClearDataButtonAction:(id)sender {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == OK) {
+        [self.mvc restartScores];
+    } 
 }
+
+- (IBAction)ClearDataButtonAction:(UIButton *)sender {
+    UIAlertView *warningAboutDeletingScores = [[UIAlertView alloc] 
+                                               initWithTitle:@"Warning" 
+                                               message:@"You will delete all your saved scores." 
+                                               delegate:self
+                                               cancelButtonTitle:@"Cancel" 
+                                               otherButtonTitles:@"Okay", nil];
+    [warningAboutDeletingScores show];
+}
+
 
 - (IBAction)OptionsSwitcher:(id)sender {
     if (self.optionMenu.selectedSegmentIndex ==  MULTIMEDIA) {
@@ -118,12 +142,14 @@ static int const GAME = 1;
         self.ghostThowWallsLabel.hidden = NO;
         self.ghostThrowSwitch.hidden = NO;
         self.clearDataLabel.hidden = NO;
-        self.clearButton.hidden = NO;    }
+        self.clearButton.hidden = NO;    
+    }
 }
 
 - (IBAction)BallSpeedSlider:(id)sender {
 }
 
-- (IBAction)GhostCanPassThrowWall:(id)sender {
+- (IBAction)GhostCanPassThrowWall:(UISwitch *)sender {
+    self.mvc.ghostThrowWalls = sender.on;
 }
 @end

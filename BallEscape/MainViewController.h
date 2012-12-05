@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "HighScoresViewController.h"
+#import "SettingsViewController.h"
+#import "GameViewController.h"
 #import "Score.h"
 #import "NSDictionary+fileAdditions.h"
 
@@ -18,6 +20,9 @@
 
 //  Dictionary with the scores obtained(Values) in each level(Key).
 @property (nonatomic, strong, readonly) NSMutableDictionary *scoresDictionary;
+
+//  Settings.
+@property (nonatomic) BOOL ghostThrowWalls;
 
 //  Actions.
 //  Changes to the |GameViewController| for prepare the eviroment to play.
@@ -37,4 +42,7 @@
 
 //  Save the current data to a plist file.
 - (void)saveData;
+
+//  Deletes the |NSDictionary| with the scores.
+- (void)restartScores;
 @end

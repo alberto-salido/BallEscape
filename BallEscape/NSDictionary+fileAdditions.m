@@ -13,7 +13,7 @@
 - (BOOL)writeScoresToFile:(NSString *)filePath
 {
     NSError *error;
-    NSString *header = @"<!-- Copyright (c) 2012 Alberto Salido López. All rights reserved. -->\n <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n";
+    NSString *header = @"<!-- Copyright (c) 2012 Alberto Salido López. All rights reserved. -->\n <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     
     NSString *body = @"<dict>\n";
     
@@ -60,15 +60,17 @@
     NSString *fileContent = [NSString stringWithContentsOfFile:filePath 
                                                       encoding:NSUTF8StringEncoding 
                                                          error:&error];
-    
     if (error) {
         return NO;
     }
-        
-    NSArray *elements = [fileContent componentsSeparatedByString:@"\n"];
     
+    NSArray *elements = [fileContent componentsSeparatedByCharactersInSet:
+                         [NSCharacterSet characterSetWithCharactersInString:@"<>"]];    
     BOOL key = NO;
     BOOL value = NO;
+    BOOL timeTag = NO;
+    BOOL dateTag = NO;
+    BOOL levelTag = NO;
     
     NSString *elementKey;
     NSMutableArray *values = [[NSMutableArray alloc] init];
@@ -77,35 +79,53 @@
     NSString *date;
     int level;
     
-    for (NSString *element in elements) {
+    for (NSString *elementWithSpecialChar in elements) {
         
-        if (key) {
-            elementKey = element;
-            key = NO;
-        } else if (value) {
-            NSArray *elementSplitted = [element componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-            if ([[elementSplitted objectAtIndex:1] isEqualToString:@"time"]) {
-                time = [[elementSplitted objectAtIndex:2] floatValue];
-            } else if ([[elementSplitted objectAtIndex:1] isEqualToString:@"date"]) {
-                date = [elementSplitted objectAtIndex:2];
-            } else if ([[elementSplitted objectAtIndex:1] isEqualToString:@"level"]) {
-                level = [[elementSplitted objectAtIndex:2] intValue];
+        //  Removes the \n and the withe spaces.
+        NSString *element = 
+        [[elementWithSpecialChar stringByReplacingOccurrencesOfString:@"\n" withString:@""]
+         stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        //  If is not an empty string.
+        if (![element isEqualToString:@""]) {   
+            if (key) {
+                elementKey = element;
+                key = NO;
+            } else if (value) {
+                if (timeTag) {
+                    time = [element floatValue];
+                    timeTag = NO;
+                } else if (dateTag) {
+                    date = element.copy;
+                    dateTag = NO;
+                } else if (levelTag) {
+                    level = [element intValue];
+                    levelTag = NO;
+                }
             }
+            
+            if ([element isEqualToString:@"key"]) {
+                key = YES;
+            } else if ([element isEqualToString:@"score"]) {
+                value = YES;
+            } else if ([element isEqualToString:@"/score"]) {
+                Score *scoreValue = [[Score alloc] initWithTime:time atLevel:level];
+                scoreValue.date = date;
+                [values addObject:scoreValue];
+                value = NO;
+            } else if ([element isEqualToString:@"time"]) {
+                timeTag = YES;
+            } else if ([element isEqualToString:@"date"]) {
+                dateTag = YES;
+            } else if ([element isEqualToString:@"level"]) {
+                levelTag = YES;
+            }             
         }
         
-        if ([element isEqualToString:@"<key>"]) {
-            key = YES;
-        } else if ([element isEqualToString:@"<score>"]) {
-            value = YES;
-        } else if ([element isEqualToString:@"</score>"]) {
-            Score *scoreValue = [[Score alloc] initWithTime:time atLevel:level];
-            scoreValue.date = date;
-            [values addObject:scoreValue];
-            value = NO;
-        }
         if ([values count] > 0) {
             [self setValue:values forKey:elementKey];
         }
+        
     }
     return YES;
 }

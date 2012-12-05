@@ -64,9 +64,7 @@ static float const BOARD_GAME_HEIGHT = 13.68;
     if (!gameOver) {
         
         [self bounceOffBorders:[controller borders]];
-        if (self.shouldPassThrowTheWalls) {
-            //[self bounceOffBall:(Ball *)[controller ball]];
-        } else {
+        if (!self.shouldPassThrowTheWalls) {
             [self bounceOffWalls:[controller labyrinthByQuadrants]];
         }
         
