@@ -35,6 +35,8 @@
 //  Settings.
 @property (nonatomic) BOOL ghostThrowWall;
 
+
+
 /*
  *  Sliders para simular el nsor de movimento.
  */

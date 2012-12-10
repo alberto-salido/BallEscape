@@ -73,7 +73,7 @@
     BOOL levelTag = NO;
     
     NSString *elementKey;
-    NSMutableArray *values = [[NSMutableArray alloc] init];
+    NSMutableArray *values;
     
     float time;
     NSString *date;
@@ -90,6 +90,7 @@
         if (![element isEqualToString:@""]) {   
             if (key) {
                 elementKey = element;
+               values = [[NSMutableArray alloc] init];
                 key = NO;
             } else if (value) {
                 if (timeTag) {

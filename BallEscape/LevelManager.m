@@ -71,6 +71,10 @@ static NSString *const DOOR_KEY = @"door";
     NSString *stringWithLevelPath = [[NSBundle mainBundle] 
                                      pathForResource:[NSString stringWithFormat:@"level%d", self.currentLevel + 1] 
                                      ofType:@"gameplist"]; 
+    /*NSString *stringWithLevelPath = [[NSBundle mainBundle] 
+                                     pathForResource:[NSString stringWithFormat:@"level2"] 
+                                     ofType:@"gameplist"];*/
+    
     
     if (![self.gameLevelStructure readLevelStructureFromFile:stringWithLevelPath])
     {

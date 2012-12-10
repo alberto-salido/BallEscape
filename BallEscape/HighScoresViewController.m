@@ -40,6 +40,10 @@ static NSString *const CELL_NAME = @"scoreCell";
     //  Obtains the scores(NSArray) form the Dictionary with Key(level) equals to the section.
     NSMutableArray *scores = [self.scoresDictionary objectForKey:[NSString stringWithFormat:@"%d", 
                                                                  indexPath.section]];
+    
+    NSLog(@"%@", self.scoresDictionary);
+    NSLog(@"index: %d", indexPath.section);
+    NSLog(@"index.row: %d", indexPath.row);
     //  Gets a score from the array.
     Score *score = (Score *)[scores objectAtIndex:indexPath.row];
     
@@ -66,14 +70,9 @@ static NSString *const CELL_NAME = @"scoreCell";
 
 //  Sets the number of rows.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    int keys = [self.scoresDictionary count];
-    int rows = 0;
-    for (int i = 0; i < keys; i++) {
-        rows += [((NSArray *)[self.scoresDictionary 
-                              objectForKey:[NSString stringWithFormat:@"%d", i]]) count];
-    }
-    return rows;
+{    
+    NSArray *scoresInSection = [self.scoresDictionary objectForKey:[NSString stringWithFormat:@"%d", section]];
+    return [scoresInSection count];
 }
 
 @end

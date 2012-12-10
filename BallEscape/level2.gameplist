@@ -1,0 +1,123 @@
+<!-- Copyright (c) 2012 Alberto Salido López. All rights reserved. -->
+<!-- Level 1 -->
+ <?xml version="1.0" encoding="UTF-8"?>
+    <wall>
+        <position>
+            0.5, 2.0, NO
+        </position> 
+        <position>
+            1.5,  2.0, NO
+        </position> 
+        <position>
+            2.15,  2.25, YES
+        </position> 
+        <position>
+            2.15,  3.25, YES
+        </position> 
+        <position>
+            2.15,  4.25, YES
+        </position> 
+        <position>
+            2.40,  5.0, NO
+        </position> 
+        <position>
+            4.5,  2.0, NO
+        </position> 
+        <position>
+            5.5,  2.0, NO
+        </position> 
+    <position>
+            6.5,  2.0, NO
+        </position> 
+        <position>
+            7.5,  2.0, NO
+        </position> 
+        <position>
+            8.5,  4.0, YES
+        </position> 
+        <position>
+            8.5,  5.0, YES
+        </position>
+         <position>
+            8.5,  6.0, YES
+        </position> 
+    <position>
+            8.5,  7.0, YES
+        </position> 
+         <position>
+            2.50,  7.0, NO
+        </position> 
+ <position>
+            3.50,  7.0, NO
+        </position> 
+ <position>
+            4.50,  7.0, NO
+        </position> 
+         <position>
+            4.50,  7.75, YES
+        </position> 
+        <position>
+            4.50,  8.75, YES
+        </position> 
+         <position>
+            5.50,  7.0, NO
+        </position> 
+         <position>
+            6.50,  7.0, NO
+        </position> 
+        <position>
+            6.50,  9.75, YES
+        </position> 
+        <position>
+            6.50,  10.75, YES
+        </position> 
+        <position>
+            6.25,  11.5, NO
+        </position> 
+<position>
+            5.25,  11.5, NO
+        </position> 
+        <position>
+            0.5,  11.0, NO
+        </position> 
+        <position>
+            1.5,  11.0, NO
+        </position> 
+        <position>
+            2.25,  11.0, YES
+        </position> 
+    <position>
+        2.25,  10.0, YES
+    </position>
+    <position>
+            2.25,  12.0, YES
+    </position> 
+    <position>
+            5.0,  5.0, YES
+    </position>  
+    <position>
+            5.0,  4.0, YES
+    </position>
+    <position>
+            5.75,  4.5, NO
+    </position> 
+    <position>
+            4.25,  4.5, NO
+    </position>  
+    </wall>
+    <ball>
+        <position>
+            0.5, 0.5
+        </position>
+    </ball>
+    <ghost>
+        <position>
+            9.0, 11.0
+        </position>
+    </ghost>
+        <door>
+            <position>
+                5.0, 13.38, YES
+            </position>
+    </door>
+</xml>

@@ -9,7 +9,7 @@
 #import "GameViewController.h"
 
 //  Constants.
-static int const NUMBER_OF_LEVELS = 1;
+static int const NUMBER_OF_LEVELS = 2;
 static NSString *const PLAY_GAME_SEGUE_ID = @"playGame";
 static int const SCORES_PER_SECTION = 5;
 static NSString *const CONGRATS_MSG = @"Congratulations!\n You have escaped!!";
@@ -37,6 +37,7 @@ static int const OK = 1;
 @synthesize menuButton = _menuButton;
 @synthesize restartLevelButton = _restartLevelButton;
 @synthesize levelManager = _levelManager;
+@synthesize labelNewHighScore = _labelNewHighScore;
 
 - (void)didReceiveMemoryWarning
 {
@@ -58,29 +59,11 @@ static int const OK = 1;
 {
     [super viewDidAppear:animated];
     
+    self.labelNewHighScore.hidden = YES;
+    self.continueButton.hidden = YES;
+    
     self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
                                   (self.levelManager.currentLevel + 1)];
-    
-    //  If the user has complete a level...
-    if (self.timeUsedInCompleteLevel) {
-        
-        //  Show messages and buttons.
-        self.congratulationsMessage.text = CONGRATS_MSG;
-        self.congratulationsMessage.hidden = NO;
-        self.showTime.hidden = NO;
-        self.showTime.text = [NSString stringWithFormat:@"Your time: %.2f",
-                              self.timeUsedInCompleteLevel];
-        self.playButton.hidden = YES;
-        
-        //  If there are more levels...
-        if ([self.levelManager numberOfLevels] != [self.levelManager currentLevel]) {
-            //  Enables the "Continue" button.
-            self.continueButton.hidden = NO;
-        }
-        
-        //  Enables the "Restart" button.
-        self.restartLevelButton.hidden = NO;
-    }
     
     //  If the user losses the previous game;
     if (self.gameOver) {
@@ -94,14 +77,18 @@ static int const OK = 1;
         self.gameOver = NO;
         self.timeUsedInCompleteLevel = 0.0;
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
     
-    //  Stores the score.
+    //  If the user has complete a level...
     if (self.timeUsedInCompleteLevel) {
+        
+        //  Show messages and buttons.
+        self.congratulationsMessage.text = CONGRATS_MSG;
+        self.congratulationsMessage.hidden = NO;
+        self.showTime.hidden = NO;
+        self.showTime.text = [NSString stringWithFormat:@"Your time: %.2f",
+                              self.timeUsedInCompleteLevel];
+        self.playButton.hidden = YES;
+        
         Score *s = [[Score alloc] initWithTime:self.timeUsedInCompleteLevel 
                                        atLevel:(self.levelManager.currentLevel - 1)];
         
@@ -113,15 +100,39 @@ static int const OK = 1;
         if ((array = [dic objectForKey:level])) {
             [array addObject:s];
             array = [array sortedArrayUsingSelector:@selector(compareScores:)].mutableCopy;
+            
+            //  Show a message of new High Score.
+            int index = [array indexOfObject:s];
+            if (index == 0) {
+                self.labelNewHighScore.hidden = NO;
+            }
+            
             if ([array count] > SCORES_PER_SECTION) {
                 [array removeLastObject];
-            }
+            } 
         } else {
             array =[[NSMutableArray alloc] initWithObjects:s, nil];
         }
         
         [dic setObject:array forKey:level];
+
+        NSLog(@"%d, %d", self.levelManager.currentLevel, self.levelManager.numberOfLevels);
+        
+        //  If there are more levels...
+        if ([self.levelManager currentLevel] < [self.levelManager numberOfLevels]) {
+            //  Enables the "Continue" button.
+            self.continueButton.hidden = NO;
+        }
+        
+        //  Enables the "Restart" button.
+        self.restartLevelButton.hidden = NO;
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
 }
 
 - (void)viewDidUnload
@@ -134,6 +145,7 @@ static int const OK = 1;
     [self setRestartLevelButton:nil];
     [self setLevelToPlayLabel:nil];
     self.levelManager = nil;
+    [self setLabelNewHighScore:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

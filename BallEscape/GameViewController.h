@@ -25,6 +25,7 @@
 //  Property indicating if the user losses the last game.
 @property BOOL gameOver;
 
+
 //  Settings.
 @property BOOL ghostThrowWall;
 
@@ -37,6 +38,9 @@
 //  the labyrinth.
 @property (weak, nonatomic) IBOutlet UILabel *showTime;
 @property (weak, nonatomic) IBOutlet UILabel *congratulationsMessage;
+
+//  Indicates if the user got a new High Score.
+@property (weak, nonatomic) IBOutlet UILabel *labelNewHighScore;
 
 //  Label with the current level to play.
 @property (weak, nonatomic) IBOutlet UILabel *levelToPlayLabel;
