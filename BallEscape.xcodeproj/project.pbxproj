@@ -48,8 +48,10 @@
 		50D848FD1665FE7D003DEEB5 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848FC1665FE7B003DEEB5 /* Ghost.m */; };
 		50D84904166611DC003DEEB5 /* Ghost+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D84903166611DC003DEEB5 /* Ghost+viewAdditions.m */; };
 		50D8490616661394003DEEB5 /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 50D8490516661394003DEEB5 /* ballEscape.modelplist */; };
+		50F04890167DC412007CB339 /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F0488F167DC412007CB339 /* TutorialPageViewController.m */; };
+		50F04893167DC527007CB339 /* TutorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F04892167DC527007CB339 /* TutorialContentViewController.m */; };
+		50F04895167DCCAD007CB339 /* tutorialPage0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50F04894167DCCAD007CB339 /* tutorialPage0.jpg */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
-		50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 50FCF5D5164AF7D5008CD89E /* level0.txt */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
 /* End PBXBuildFile section */
 
@@ -126,9 +128,13 @@
 		50D84902166611DB003DEEB5 /* Ghost+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ghost+viewAdditions.h"; sourceTree = "<group>"; };
 		50D84903166611DC003DEEB5 /* Ghost+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ghost+viewAdditions.m"; sourceTree = "<group>"; };
 		50D8490516661394003DEEB5 /* ballEscape.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ballEscape.modelplist; sourceTree = "<group>"; };
+		50F0488E167DC412007CB339 /* TutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageViewController.h; sourceTree = "<group>"; };
+		50F0488F167DC412007CB339 /* TutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageViewController.m; sourceTree = "<group>"; };
+		50F04891167DC527007CB339 /* TutorialContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialContentViewController.h; sourceTree = "<group>"; };
+		50F04892167DC527007CB339 /* TutorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialContentViewController.m; sourceTree = "<group>"; };
+		50F04894167DCCAD007CB339 /* tutorialPage0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage0.jpg; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
-		50FCF5D5164AF7D5008CD89E /* level0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level0.txt; sourceTree = "<group>"; };
 		50FCF5DD164BA249008CD89E /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
 		50FCF5DE164BA249008CD89E /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 		50FCF5E2164BC83F008CD89E /* ObjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectController.h; sourceTree = "<group>"; };
@@ -194,6 +200,10 @@
 				50D848931658F5DD003DEEB5 /* HighScoresViewController.h */,
 				50D848941658F5DD003DEEB5 /* HighScoresViewController.m */,
 				5009CE44163EE7500082C5A7 /* iPad.storyboard */,
+				50F0488E167DC412007CB339 /* TutorialPageViewController.h */,
+				50F04891167DC527007CB339 /* TutorialContentViewController.h */,
+				50F04892167DC527007CB339 /* TutorialContentViewController.m */,
+				50F0488F167DC412007CB339 /* TutorialPageViewController.m */,
 				5009CE41163EE7500082C5A7 /* iPhone.storyboard */,
 				50D848901658E23E003DEEB5 /* MainViewController.h */,
 				50D848911658E23F003DEEB5 /* MainViewController.m */,
@@ -298,8 +308,8 @@
 		5009CE9E163F1FD80082C5A7 /* Game files */ = {
 			isa = PBXGroup;
 			children = (
+				50F04894167DCCAD007CB339 /* tutorialPage0.jpg */,
 				50D8490516661394003DEEB5 /* ballEscape.modelplist */,
-				50FCF5D5164AF7D5008CD89E /* level0.txt */,
 				50B45B9D166CBD1800CAF2D2 /* level1.gameplist */,
 				509BF9C71675F03C00F87B50 /* level2.gameplist */,
 			);
@@ -370,10 +380,10 @@
 				5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */,
 				5009CE43163EE7500082C5A7 /* iPhone.storyboard in Resources */,
 				5009CE46163EE7500082C5A7 /* iPad.storyboard in Resources */,
-				50FCF5D6164AF7D5008CD89E /* level0.txt in Resources */,
 				50D8490616661394003DEEB5 /* ballEscape.modelplist in Resources */,
 				50B45B9E166CBD1800CAF2D2 /* level1.gameplist in Resources */,
 				509BF9C81675F03C00F87B50 /* level2.gameplist in Resources */,
+				50F04895167DCCAD007CB339 /* tutorialPage0.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +423,8 @@
 				50D848FA16652D82003DEEB5 /* GameCharacter.m in Sources */,
 				50D848FD1665FE7D003DEEB5 /* Ghost.m in Sources */,
 				50D84904166611DC003DEEB5 /* Ghost+viewAdditions.m in Sources */,
+				50F04890167DC412007CB339 /* TutorialPageViewController.m in Sources */,
+				50F04893167DC527007CB339 /* TutorialContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@ static NSString *const PLAY_SEGUE_ID = @"goToPlayMenu";
 static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 static NSString *const SETTINGS_SEGUE_ID = @"settings";
 static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
+static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 
 @interface MainViewController ()
 
@@ -89,6 +90,7 @@ static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
 }
 
 - (IBAction)howToPlayButton:(id)sender {
+    [self performSegueWithIdentifier:TUTORIAL_SEGUE_ID sender:self];
 }
 
 - (IBAction)aboutMeButton:(id)sender {
