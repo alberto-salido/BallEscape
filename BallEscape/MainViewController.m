@@ -8,16 +8,21 @@
 
 #import "MainViewController.h"
 
-//  Constants.
-static NSString *const FILE_NAME = @"ball_Escape_HScores.scoreplist"; 
+// Scores file name.
+static NSString *const FILE_NAME = @"ball_Escape_HScores.scoreplist";
+
+//  Constants with the name of the segues.
 static NSString *const PLAY_SEGUE_ID = @"goToPlayMenu";
 static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 static NSString *const SETTINGS_SEGUE_ID = @"settings";
 static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
 static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 
+// Private properties.
 @interface MainViewController ()
 
+//  Two dictionaries are created, one with the real infomation of the scores,
+//  and another, working as a cache, for minimize the number of disk access.
 @property (nonatomic, strong) NSMutableDictionary *scoresDictionary;
 @property (nonatomic, weak) NSDictionary *dictionaryCache;
 
@@ -26,20 +31,14 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 
 @end
 
-@implementation MainViewController
+@implementation MainViewController 
 
+// Getter and setter implementations.
 @synthesize scoresDictionary = _scoresDictionary;
 @synthesize scoresPath = _scoresPath;
 @synthesize dictionaryCache = _dictionaryCache;
 @synthesize ghostThrowWalls = _ghostThrowWalls;
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -62,13 +61,10 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.scoresDictionary = nil;
     self.scoresPath = nil;
-    self.scoresPath = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    self.dictionaryCache = nil;
+    self.ghostThrowWalls = FALSE;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -100,17 +96,20 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 //  Prepares the next view controller before the segue is triggered.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //  Sends information about the dictionary to the next segue.
+    //  Sends information about the dictionary to the next segue in case of High
+    //  Scores View Controller.
     if ([[segue identifier] isEqualToString:HIGHSCORES_SEGUE_ID]) {
         HighScoresViewController *hvc = [segue destinationViewController];
         hvc.scoresDictionary = self.scoresDictionary;
     }
     
+    //  Sends if the ghost will pass throw the walls or not, to the Game View Controller.
     if ([[segue identifier] isEqualToString:PLAY_SEGUE_ID]) {
         GameViewController *gvc = [segue destinationViewController];
         gvc.ghostThrowWall = self.ghostThrowWalls;
     }
     
+    //  Updates the attributes in the Settings View Controller according to the game. 
     if ([[segue identifier] isEqualToString:SETTINGS_SEGUE_ID]) {
         SettingsViewController *svc = [segue destinationViewController];
         svc.ghostThrowSwitch.on = self.ghostThrowWalls;
@@ -119,6 +118,8 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 
 - (void)saveData
 {
+    //  Saves data only if the scrores in the app and in the disk are differents,
+    //  otherwise, do not spend time in writing.
     if (![self.dictionaryCache isEqualToDictionary:self.scoresDictionary]) {
         [self.scoresDictionary writeScoresToFile:self.scoresPath];
     }
@@ -126,6 +127,8 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 
 - (void)restartScores
 {
+    //  Creates a new dictionary with the scores.
     self.scoresDictionary = [[NSMutableDictionary alloc] init];
 }
+
 @end

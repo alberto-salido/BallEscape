@@ -23,6 +23,13 @@ static NSString *const CELL_NAME = @"scoreCell";
 @synthesize scoresDictionary = _scoresDictionary;
 @synthesize scoresByLevel = _scoresByLevel;
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.scoresDictionary = nil;
+    self.scoresByLevel = nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -75,4 +82,8 @@ static NSString *const CELL_NAME = @"scoreCell";
     return [scoresInSection count];
 }
 
+- (IBAction)backToMenuButton:(UIBarButtonItem *)sender
+{
+     [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

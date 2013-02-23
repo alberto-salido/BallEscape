@@ -76,6 +76,9 @@ static int const OK = 1;
                                       (self.levelManager.currentLevel)];
         self.gameOver = NO;
         self.timeUsedInCompleteLevel = 0.0;
+        
+        //  Enables the "Restart" button.
+        self.restartLevelButton.hidden = NO;
     }
     
     //  If the user has complete a level...
@@ -129,25 +132,22 @@ static int const OK = 1;
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-}
-
 - (void)viewDidUnload
-{
-    [self setShowTime:nil];
-    [self setCongratulationsMessage:nil];
-    [self setPlayButton:nil];
-    [self setContinueButton:nil];
-    [self setMenuButton:nil];
-    [self setRestartLevelButton:nil];
-    [self setLevelToPlayLabel:nil];
-    self.levelManager = nil;
-    [self setLabelNewHighScore:nil];
+{    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    self.timeUsedInCompleteLevel = 0;
+    self.gameOver = FALSE;
+    self.ghostThrowWall = FALSE;
+    self.showTime = nil;
+    self.congratulationsMessage = nil;
+    self.levelToPlayLabel = nil;
+    self.playButton = nil;
+    self.continueButton = nil;
+    self.menuButton = nil;
+    self.restartLevelButton = nil;
+    self.levelManager = nil;
+    self.labelNewHighScore = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

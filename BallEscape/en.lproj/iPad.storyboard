@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11G63" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="rmg-i1-1nc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="rmg-i1-1nc">
     <dependencies>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--About Me View Controller-->
         <scene sceneID="wPL-RR-Q64">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wqB-Xo-N6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="SRd-tT-Kdq" customClass="AboutMeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dHE-Up-Tcl">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="79j-hf-4Sh">
+                                <rect key="frame" x="932" y="20" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BackButtonAction:" destination="SRd-tT-Kdq" eventType="touchUpInside" id="HWZ-hn-uEo"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wqB-Xo-N6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4275" y="-1751"/>
         </scene>
+        <!--Main View Controller-->
         <scene sceneID="9H7-ue-CIv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aNx-xI-uq8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Main View Controller" id="rmg-i1-1nc" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pnK-OI-UqM">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
@@ -114,16 +131,17 @@
                             <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
                         </segue>
                         <segue destination="ddN-h7-4B6" kind="modal" identifier="settings" modalTransitionStyle="coverVertical" id="3fW-tl-vP8"/>
-                        <segue destination="SRd-tT-Kdq" kind="modal" identifier="aboutMe" modalPresentationStyle="pageSheet" modalTransitionStyle="coverVertical" id="2N4-cZ-ScK"/>
+                        <segue destination="SRd-tT-Kdq" kind="modal" identifier="aboutMe" modalTransitionStyle="coverVertical" id="2N4-cZ-ScK"/>
                         <segue destination="Umg-3s-omp" kind="modal" identifier="showTutorial" modalTransitionStyle="coverVertical" id="RMI-9r-iwO"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aNx-xI-uq8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6213" y="823"/>
         </scene>
+        <!--Game View Controller-->
         <scene sceneID="hOF-VC-M2Y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jHS-Kl-qa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="iIF-vM-G18" customClass="GameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IFv-60-VGU">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
@@ -234,15 +252,16 @@
                         <segue destination="2" kind="modal" identifier="playGame" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="6KP-Pz-g2K"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jHS-Kl-qa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4275" y="-785"/>
         </scene>
+        <!--High Scores View Controller-->
         <scene sceneID="4Zr-Jm-i4G">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KoH-Ob-nhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController modalPresentationStyle="pageSheet" id="xZl-Zk-ZaE" customClass="HighScoresViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="smt-3l-3T5">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -279,12 +298,13 @@
                     </tableView>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KoH-Ob-nhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4275" y="188"/>
         </scene>
+        <!--Tutorial Page View Controller-->
         <scene sceneID="DXi-BR-hJg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A5i-Nf-ZaQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Umg-3s-omp" customClass="TutorialPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aKb-yA-295">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
@@ -294,12 +314,13 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A5i-Nf-ZaQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4275" y="1400"/>
         </scene>
+        <!--Tutorial Content View Controller-->
         <scene sceneID="8rS-31-KSI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bd7-VT-o5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="contentView" id="hhi-y3-Bre" customClass="TutorialContentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nna-Cc-heu">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
@@ -333,12 +354,13 @@
                         <outlet property="imageView" destination="V8y-G1-ofC" id="FyM-2n-WCj"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bd7-VT-o5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3041" y="1400"/>
         </scene>
+        <!--Settings View Controller-->
         <scene sceneID="GBc-2d-CNn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0pD-02-HCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ddN-h7-4B6" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tqf-Dw-iZK">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
@@ -359,65 +381,29 @@
                                     <action selector="BackToMenuButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="nBE-nk-5Hf"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Jmn-9Z-wIr">
-                                <rect key="frame" x="655" y="281" width="207" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="ON"/>
-                                    <segment title="OFF"/>
-                                </segments>
-                                <connections>
-                                    <action selector="SoundSwitcher:" destination="ddN-h7-4B6" eventType="valueChanged" id="ran-Vq-6Nh"/>
-                                </connections>
-                            </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sound:" lineBreakMode="tailTruncation" minimumFontSize="10" id="Xfq-T2-ok2">
-                                <rect key="frame" x="207" y="270" width="163" height="88"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="GBf-Ap-Tyf">
-                                <rect key="frame" x="655" y="456" width="207" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="ON"/>
-                                    <segment title="OFF"/>
-                                </segments>
-                                <connections>
-                                    <action selector="SFXSwitcher:" destination="ddN-h7-4B6" eventType="valueChanged" id="wXT-J4-JnT"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SFX:" lineBreakMode="tailTruncation" minimumFontSize="10" id="0g2-di-G9u">
-                                <rect key="frame" x="207" y="434" width="163" height="88"/>
+                                <rect key="frame" x="476" y="217" width="128" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ball's Speed:" lineBreakMode="tailTruncation" minimumFontSize="10" id="qnc-jB-eIb">
-                                <rect key="frame" x="88" y="251" width="282" height="126"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ghost throw the Walls:" lineBreakMode="tailTruncation" minimumFontSize="10" id="LN5-Ea-gNg">
+                                <rect key="frame" x="182" y="362" width="422" height="126"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ghost throw the Walls:" lineBreakMode="tailTruncation" minimumFontSize="10" id="LN5-Ea-gNg">
-                                <rect key="frame" x="88" y="425" width="422" height="126"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Clear data saved:" lineBreakMode="tailTruncation" minimumFontSize="10" id="wsf-49-f7H">
+                                <rect key="frame" x="223" y="554" width="381" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Clear data saved:" lineBreakMode="tailTruncation" minimumFontSize="10" id="wsf-49-f7H">
-                                <rect key="frame" x="82" y="607" width="381" height="88"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" id="whT-Xh-ljV">
-                                <rect key="frame" x="655" y="625" width="207" height="52"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" id="whT-Xh-ljV">
+                                <rect key="frame" x="636" y="572" width="207" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="45"/>
                                 <state key="normal" title="CLEAR">
@@ -431,29 +417,18 @@
                                     <action selector="ClearDataButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="snS-MW-Ckh"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="F4J-W1-OaW">
-                                <rect key="frame" x="342" y="160" width="340" height="44"/>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="mE4-3H-YZL">
+                                <rect key="frame" x="701" y="247" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Multimedia"/>
-                                    <segment title="Game"/>
-                                </segments>
                                 <connections>
-                                    <action selector="OptionsSwitcher:" destination="ddN-h7-4B6" eventType="valueChanged" id="g7M-0p-o0r"/>
+                                    <action selector="SFXSwitcher:" destination="ddN-h7-4B6" eventType="valueChanged" id="7pO-vo-ZzV"/>
                                 </connections>
-                            </segmentedControl>
-                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="xYl-vz-eh1">
-                                <rect key="frame" x="653" y="292" width="211" height="23"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="oVB-aN-QWD">
+                                <rect key="frame" x="701" y="411" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="BallSpeedSlider:" destination="ddN-h7-4B6" eventType="valueChanged" id="302-Fz-PTN"/>
-                                </connections>
-                            </slider>
-                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="WZO-P4-byR">
-                                <rect key="frame" x="655" y="464" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="GhostCanPassThrowWall:" destination="ddN-h7-4B6" eventType="valueChanged" id="eYE-1r-wtr"/>
+                                    <action selector="GhostCanPassThrowWall:" destination="ddN-h7-4B6" eventType="valueChanged" id="x96-wz-QLT"/>
                                 </connections>
                             </switch>
                         </subviews>
@@ -462,59 +437,55 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="SFXButton" destination="GBf-Ap-Tyf" id="ntO-Vo-Gws"/>
+                        <outlet property="SFXButton" destination="mE4-3H-YZL" id="1rF-aE-WRn"/>
                         <outlet property="SFXLabel" destination="0g2-di-G9u" id="hWn-9X-CYv"/>
-                        <outlet property="ballSpeedLabel" destination="qnc-jB-eIb" id="HWS-jF-0QT"/>
                         <outlet property="clearButton" destination="whT-Xh-ljV" id="lOb-RQ-V1E"/>
                         <outlet property="clearDataLabel" destination="wsf-49-f7H" id="HCe-yr-sw0"/>
                         <outlet property="ghostThowWallsLabel" destination="LN5-Ea-gNg" id="kaT-v5-bfd"/>
-                        <outlet property="ghostThrowSwitch" destination="WZO-P4-byR" id="nlP-0j-qUo"/>
-                        <outlet property="optionMenu" destination="F4J-W1-OaW" id="dKL-P2-Bgl"/>
-                        <outlet property="soundButton" destination="Jmn-9Z-wIr" id="013-NL-j78"/>
-                        <outlet property="soundLabel" destination="Xfq-T2-ok2" id="Ebb-kp-xUG"/>
-                        <outlet property="speedSlider" destination="xYl-vz-eh1" id="JgY-nl-TfH"/>
+                        <outlet property="ghostThrowSwitch" destination="oVB-aN-QWD" id="E0n-VP-nYu"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0pD-02-HCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4275" y="2361"/>
         </scene>
+        <!--OpenGL View Controller-->
         <scene sceneID="4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="OpenGLViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5" customClass="GLKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="Aad-ZK-IUQ">
-                                <rect key="frame" x="582" y="706" width="348" height="23"/>
+                                <rect key="frame" x="582" y="726" width="348" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="tiltZAxis:" destination="2" eventType="valueChanged" id="E8z-aS-CT0"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="0ie-Ng-ips">
-                                <rect key="frame" x="96" y="706" width="348" height="23"/>
+                                <rect key="frame" x="96" y="726" width="348" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="tiltXAxis:" destination="2" eventType="valueChanged" id="xh5-V0-s9N"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tilt X" lineBreakMode="tailTruncation" minimumFontSize="10" id="mFB-CG-ukd">
-                                <rect key="frame" x="26" y="660" width="56" height="21"/>
+                                <rect key="frame" x="26" y="680" width="56" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tilt Z" lineBreakMode="tailTruncation" minimumFontSize="10" id="rr1-rq-2iq">
-                                <rect key="frame" x="552" y="660" width="56" height="21"/>
+                                <rect key="frame" x="552" y="680" width="56" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TIME:" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="26" id="h7d-Jq-vUX">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TIME:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="26" adjustsFontSizeToFit="NO" id="h7d-Jq-vUX">
                                 <rect key="frame" x="20" y="20" width="80" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="35"/>
@@ -523,7 +494,7 @@
                                 <color key="shadowColor" red="1" green="0.60045622308506019" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="1" height="-1"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0.0" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="26" id="ReB-jQ-mlM">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0.0" lineBreakMode="tailTruncation" minimumFontSize="26" adjustsFontSizeToFit="NO" id="ReB-jQ-mlM">
                                 <rect key="frame" x="108" y="15" width="96" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="35"/>
@@ -557,6 +528,7 @@
                         <outlet property="time" destination="ReB-jQ-mlM" id="JXn-H9-AWV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2560" y="-785"/>
         </scene>

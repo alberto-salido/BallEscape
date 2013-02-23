@@ -3,12 +3,15 @@
 //  BallEscape
 //
 //  Created by Alberto Salido López on 16/12/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import "TutorialPageViewController.h"
 
-static int const NUM_OF_PAGES = 1;
+//  Constants with he number of pages of the tutorial, and the name of each one of
+//  these images. The image name format is 'tutorialPage' plus an integer with the
+//  page number.
+static int const NUM_OF_PAGES = 3;
 static NSString *const IMAGE_NAME = @"tutorialPage";
 
 @interface TutorialPageViewController ()
@@ -24,15 +27,15 @@ static NSString *const IMAGE_NAME = @"tutorialPage";
 @synthesize pageViewController = _pageViewController;
 @synthesize pageContent = _pageContent;
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
+
+- (void)viewDidUnload
+{
+    self.pageViewController = nil;
+    self.pageContent = nil;
+    [super viewDidUnload];
+}
 
 - (void)viewDidLoad
 {
@@ -56,14 +59,6 @@ static NSString *const IMAGE_NAME = @"tutorialPage";
     [self addChildViewController:self.pageViewController];
     [[self view] addSubview:[self.pageViewController view]];
     [self.pageViewController didMoveToParentViewController:self];
-}
-
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -93,11 +88,24 @@ static NSString *const IMAGE_NAME = @"tutorialPage";
         return nil;
     }
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:[NSBundle mainBundle]];
+    TutorialContentViewController *dataViewController;
     
-    TutorialContentViewController *dataViewController = 
-    [storyboard instantiateViewControllerWithIdentifier:@"contentView"];
-    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIStoryboard *storyboard =
+        [UIStoryboard storyboardWithName:@"iPad" bundle:[NSBundle mainBundle]];
+        
+        dataViewController =
+        [storyboard instantiateViewControllerWithIdentifier:@"contentView"];
+
+    } else {
+        UIStoryboard *storyboard =
+        [UIStoryboard storyboardWithName:@"iPhone" bundle:[NSBundle mainBundle]];
+        
+        dataViewController =
+        [storyboard instantiateViewControllerWithIdentifier:@"contentView"];
+
+    }
+        
     dataViewController.dataObject = [self.pageContent objectAtIndex:index];
     
     return dataViewController;

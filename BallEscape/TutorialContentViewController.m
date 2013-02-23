@@ -3,22 +3,16 @@
 //  BallEscape
 //
 //  Created by Alberto Salido López on 16/12/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
 #import "TutorialContentViewController.h"
 
 @implementation TutorialContentViewController
+
 @synthesize imageView = _imageView;
 @synthesize dataObject = _dataObject;
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -28,7 +22,8 @@
     [_imageView setImage:(UIImage *)_dataObject];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setImageView:nil];
     [self setDataObject:nil];
     [super viewDidUnload];
@@ -38,6 +33,8 @@
 {
     return ((interfaceOrientation != UIInterfaceOrientationPortrait) && (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown));
 }
+
+#pragma mark - Skip Action
 
 - (IBAction)skipTutorial:(UIButton *)sender 
 {

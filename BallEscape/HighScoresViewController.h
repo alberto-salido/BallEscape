@@ -16,4 +16,7 @@
 //  Dictionary with the scores, indexed by level.
 @property (nonatomic, strong) NSMutableDictionary *scoresDictionary;
 
+// In case of iPhone storyboard, allows the user to go back to the main menu.
+- (IBAction)backToMenuButton:(UIBarButtonItem *)sender;
+
 @end

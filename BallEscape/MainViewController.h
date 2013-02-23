@@ -6,26 +6,37 @@
 //  Copyright (c) 2012 Alberto Salido López. All rights reserved.
 //
 
+// Framework References.
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
+// File References.
 #import "HighScoresViewController.h"
 #import "SettingsViewController.h"
 #import "GameViewController.h"
 #import "Score.h"
 #import "NSDictionary+fileAdditions.h"
 
+
 //  This controller manages the complete application, creating segues to
-//  the other view controller.
+//  the other view controller. MainViewController is the first controller
+//  opened when the application starts.
 //
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <AVAudioPlayerDelegate>
 
 //  Dictionary with the scores obtained(Values) in each level(Key).
+//  Example:
+//  For level 0 (key 0) there are a set of scores (value).
 @property (nonatomic, strong, readonly) NSMutableDictionary *scoresDictionary;
 
-//  Settings.
+//  Properties about the game settings:
+//  Enables the option of ghost can pass throw the wall of the labyrinth, and
+//  the SFX sound for the game.
 @property (nonatomic) BOOL ghostThrowWalls;
+@property (nonatomic) BOOL sfx;
 
-//  Actions.
-//  Changes to the |GameViewController| for prepare the eviroment to play.
+//  Actions:
+//  Changes to the |GameViewController| for preparing the eviroment to play.
 - (IBAction)playButton:(UIButton *)sender;
 
 //  Changes to the |SettingsViewController|.
@@ -37,12 +48,13 @@
 //  Changes to the |TutorialViewController|.
 - (IBAction)howToPlayButton:(UIButton *)sender;
 
-//  Shows a description of the app.
+//  Shows a description of the app and myself.
 - (IBAction)aboutMeButton:(UIButton *)sender;
 
 //  Save the current data to a plist file.
 - (void)saveData;
 
-//  Deletes the |NSDictionary| with the scores.
+//  Deletes the |NSDictionary| with the scores, creating a new one empty.
 - (void)restartScores;
+
 @end
