@@ -56,8 +56,9 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     //  Gets a reference to the previous ViewController.
     self.mvc = ((MainViewController *) self.presentingViewController);
     
-    // Updates the status of the switch.
+    // Updates the status of the switches.
     self.ghostThrowSwitch.on = self.mvc.ghostThrowWalls;
+    self.SFXButton.on = self.mvc.sfx;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -70,6 +71,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 }
 
 - (IBAction)SFXSwitcher:(UISwitch *)sender {
+    self.mvc.sfx = sender.on;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex

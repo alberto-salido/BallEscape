@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5009CE30163EE7500082C5A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE2F163EE7500082C5A7 /* UIKit.framework */; };
 		5009CE32163EE7500082C5A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE31163EE7500082C5A7 /* Foundation.framework */; };
-		5009CE34163EE7500082C5A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE33163EE7500082C5A7 /* CoreGraphics.framework */; };
 		5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5009CE38163EE7500082C5A7 /* InfoPlist.strings */; };
 		5009CE3C163EE7500082C5A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE3B163EE7500082C5A7 /* main.m */; };
 		5009CE40163EE7500082C5A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE3F163EE7500082C5A7 /* AppDelegate.m */; };
@@ -17,7 +16,6 @@
 		5009CE46163EE7500082C5A7 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5009CE44163EE7500082C5A7 /* iPad.storyboard */; };
 		5009CE49163EE7500082C5A7 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE48163EE7500082C5A7 /* OpenGLViewController.m */; };
 		5009CE50163EE7B60082C5A7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE4F163EE7B60082C5A7 /* OpenGLES.framework */; };
-		5009CE52163EE7BD0082C5A7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE51163EE7BD0082C5A7 /* QuartzCore.framework */; };
 		5009CE54163EE7C40082C5A7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE53163EE7C40082C5A7 /* GLKit.framework */; };
 		5009CE73163EF6FA0082C5A7 /* AGLKContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE72163EF6FA0082C5A7 /* AGLKContext.m */; };
 		5009CE83163F18100082C5A7 /* UtilityMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE82163F18100082C5A7 /* UtilityMesh.m */; };
@@ -27,6 +25,10 @@
 		5009CE91163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */; };
 		5009CE94163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */; };
 		5009CE97163F1BAF0082C5A7 /* UtilityTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */; };
+		504CF57A167E287400F62C41 /* tutorialPage1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 504CF579167E287400F62C41 /* tutorialPage1.jpg */; };
+		504CF57D167E287F00F62C41 /* tutorialPage2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 504CF57C167E287F00F62C41 /* tutorialPage2.jpg */; };
+		504CF57F167E3ED800F62C41 /* MistyMountains.caf in Resources */ = {isa = PBXBuildFile; fileRef = 504CF57E167E3ED800F62C41 /* MistyMountains.caf */; };
+		504CF583167E43F800F62C41 /* pin.caf in Resources */ = {isa = PBXBuildFile; fileRef = 504CF582167E43F800F62C41 /* pin.caf */; };
 		506A33A2165535F600792B8A /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506A33A1165535F600792B8A /* GameViewController.m */; };
 		507D1CFA1651284F007FC594 /* BoardGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CF91651284F007FC594 /* BoardGame.m */; };
 		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
@@ -39,7 +41,6 @@
 		50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D848891657F92F003DEEB5 /* CoreMotion.framework */; };
 		50D848921658E23F003DEEB5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848911658E23F003DEEB5 /* MainViewController.m */; };
 		50D848951658F5DD003DEEB5 /* HighScoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848941658F5DD003DEEB5 /* HighScoresViewController.m */; };
-		50D8489D165BE7A6003DEEB5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8489C165BE7A6003DEEB5 /* CoreData.framework */; };
 		50D848DD165D260C003DEEB5 /* Score.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848DC165D260C003DEEB5 /* Score.m */; };
 		50D848EA165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */; };
 		50D848EE16628707003DEEB5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848ED16628706003DEEB5 /* SettingsViewController.m */; };
@@ -51,6 +52,9 @@
 		50F04890167DC412007CB339 /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F0488F167DC412007CB339 /* TutorialPageViewController.m */; };
 		50F04893167DC527007CB339 /* TutorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F04892167DC527007CB339 /* TutorialContentViewController.m */; };
 		50F04895167DCCAD007CB339 /* tutorialPage0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50F04894167DCCAD007CB339 /* tutorialPage0.jpg */; };
+		50F70DBE16822890000E80BC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F70DBD16822890000E80BC /* AVFoundation.framework */; };
+		50F70DC016822D13000E80BC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F70DBF16822D13000E80BC /* CoreFoundation.framework */; };
+		50F70DC216822D92000E80BC /* MistyMountains.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 50F70DC116822D92000E80BC /* MistyMountains.mp3 */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
 /* End PBXBuildFile section */
@@ -90,6 +94,10 @@
 		5009CE93163F1BA00082C5A7 /* UtilityTextureInfo+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UtilityTextureInfo+viewAdditions.m"; sourceTree = "<group>"; };
 		5009CE95163F1BAF0082C5A7 /* UtilityTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTextureInfo.h; sourceTree = "<group>"; };
 		5009CE96163F1BAF0082C5A7 /* UtilityTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTextureInfo.m; sourceTree = "<group>"; };
+		504CF579167E287400F62C41 /* tutorialPage1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage1.jpg; sourceTree = "<group>"; };
+		504CF57C167E287F00F62C41 /* tutorialPage2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage2.jpg; sourceTree = "<group>"; };
+		504CF57E167E3ED800F62C41 /* MistyMountains.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MistyMountains.caf; sourceTree = "<group>"; };
+		504CF582167E43F800F62C41 /* pin.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pin.caf; sourceTree = "<group>"; };
 		506A33A0165535F600792B8A /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		506A33A1165535F600792B8A /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		507D1CF81651284F007FC594 /* BoardGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGame.h; sourceTree = "<group>"; };
@@ -133,6 +141,9 @@
 		50F04891167DC527007CB339 /* TutorialContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialContentViewController.h; sourceTree = "<group>"; };
 		50F04892167DC527007CB339 /* TutorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialContentViewController.m; sourceTree = "<group>"; };
 		50F04894167DCCAD007CB339 /* tutorialPage0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage0.jpg; sourceTree = "<group>"; };
+		50F70DBD16822890000E80BC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		50F70DBF16822D13000E80BC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		50F70DC116822D92000E80BC /* MistyMountains.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MistyMountains.mp3; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 		50FCF5DD164BA249008CD89E /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
@@ -145,14 +156,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50D8489D165BE7A6003DEEB5 /* CoreData.framework in Frameworks */,
+				50F70DC016822D13000E80BC /* CoreFoundation.framework in Frameworks */,
+				50F70DBE16822890000E80BC /* AVFoundation.framework in Frameworks */,
 				50D8488A1657F92F003DEEB5 /* CoreMotion.framework in Frameworks */,
 				5009CE54163EE7C40082C5A7 /* GLKit.framework in Frameworks */,
-				5009CE52163EE7BD0082C5A7 /* QuartzCore.framework in Frameworks */,
 				5009CE50163EE7B60082C5A7 /* OpenGLES.framework in Frameworks */,
 				5009CE30163EE7500082C5A7 /* UIKit.framework in Frameworks */,
 				5009CE32163EE7500082C5A7 /* Foundation.framework in Frameworks */,
-				5009CE34163EE7500082C5A7 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +189,8 @@
 		5009CE2E163EE7500082C5A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50F70DBF16822D13000E80BC /* CoreFoundation.framework */,
+				50F70DBD16822890000E80BC /* AVFoundation.framework */,
 				50D8489C165BE7A6003DEEB5 /* CoreData.framework */,
 				50D848891657F92F003DEEB5 /* CoreMotion.framework */,
 				5009CE53163EE7C40082C5A7 /* GLKit.framework */,
@@ -194,31 +206,27 @@
 		5009CE35163EE7500082C5A7 /* BallEscape */ = {
 			isa = PBXGroup;
 			children = (
+				50D848EF16628A35003DEEB5 /* AboutMeViewController.h */,
+				50D848F016628A35003DEEB5 /* AboutMeViewController.m */,
 				5009CE9E163F1FD80082C5A7 /* Game files */,
 				506A33A0165535F600792B8A /* GameViewController.h */,
 				506A33A1165535F600792B8A /* GameViewController.m */,
 				50D848931658F5DD003DEEB5 /* HighScoresViewController.h */,
 				50D848941658F5DD003DEEB5 /* HighScoresViewController.m */,
 				5009CE44163EE7500082C5A7 /* iPad.storyboard */,
-				50F0488E167DC412007CB339 /* TutorialPageViewController.h */,
-				50F04891167DC527007CB339 /* TutorialContentViewController.h */,
-				50F04892167DC527007CB339 /* TutorialContentViewController.m */,
-				50F0488F167DC412007CB339 /* TutorialPageViewController.m */,
 				5009CE41163EE7500082C5A7 /* iPhone.storyboard */,
 				50D848901658E23E003DEEB5 /* MainViewController.h */,
 				50D848911658E23F003DEEB5 /* MainViewController.m */,
-				50D848E8165FC99F003DEEB5 /* NSDictionary+fileAdditions.h */,
-				50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */,
-				5009CE3E163EE7500082C5A7 /* AppDelegate.h */,
-				5009CE3F163EE7500082C5A7 /* AppDelegate.m */,
 				506A33A316565D3A00792B8A /* OpenGLMVC */,
 				50D848DB165D260C003DEEB5 /* Score.h */,
 				50D848DC165D260C003DEEB5 /* Score.m */,
-				5009CE36163EE7500082C5A7 /* Supporting Files */,
 				50D848EC16628705003DEEB5 /* SettingsViewController.h */,
 				50D848ED16628706003DEEB5 /* SettingsViewController.m */,
-				50D848EF16628A35003DEEB5 /* AboutMeViewController.h */,
-				50D848F016628A35003DEEB5 /* AboutMeViewController.m */,
+				5009CE36163EE7500082C5A7 /* Supporting Files */,
+				50F04891167DC527007CB339 /* TutorialContentViewController.h */,
+				50F04892167DC527007CB339 /* TutorialContentViewController.m */,
+				50F0488E167DC412007CB339 /* TutorialPageViewController.h */,
+				50F0488F167DC412007CB339 /* TutorialPageViewController.m */,
 			);
 			path = BallEscape;
 			sourceTree = "<group>";
@@ -226,6 +234,10 @@
 		5009CE36163EE7500082C5A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5009CE3E163EE7500082C5A7 /* AppDelegate.h */,
+				5009CE3F163EE7500082C5A7 /* AppDelegate.m */,
+				50D848E8165FC99F003DEEB5 /* NSDictionary+fileAdditions.h */,
+				50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */,
 				5009CE37163EE7500082C5A7 /* BallEscape-Info.plist */,
 				5009CE38163EE7500082C5A7 /* InfoPlist.strings */,
 				5009CE3B163EE7500082C5A7 /* main.m */,
@@ -308,10 +320,15 @@
 		5009CE9E163F1FD80082C5A7 /* Game files */ = {
 			isa = PBXGroup;
 			children = (
-				50F04894167DCCAD007CB339 /* tutorialPage0.jpg */,
 				50D8490516661394003DEEB5 /* ballEscape.modelplist */,
 				50B45B9D166CBD1800CAF2D2 /* level1.gameplist */,
 				509BF9C71675F03C00F87B50 /* level2.gameplist */,
+				504CF57E167E3ED800F62C41 /* MistyMountains.caf */,
+				50F70DC116822D92000E80BC /* MistyMountains.mp3 */,
+				504CF582167E43F800F62C41 /* pin.caf */,
+				50F04894167DCCAD007CB339 /* tutorialPage0.jpg */,
+				504CF579167E287400F62C41 /* tutorialPage1.jpg */,
+				504CF57C167E287F00F62C41 /* tutorialPage2.jpg */,
 			);
 			name = "Game files";
 			sourceTree = "<group>";
@@ -353,7 +370,7 @@
 		5009CE22163EE7500082C5A7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 5009CE25163EE7500082C5A7 /* Build configuration list for PBXProject "BallEscape" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -384,6 +401,11 @@
 				50B45B9E166CBD1800CAF2D2 /* level1.gameplist in Resources */,
 				509BF9C81675F03C00F87B50 /* level2.gameplist in Resources */,
 				50F04895167DCCAD007CB339 /* tutorialPage0.jpg in Resources */,
+				504CF57A167E287400F62C41 /* tutorialPage1.jpg in Resources */,
+				504CF57D167E287F00F62C41 /* tutorialPage2.jpg in Resources */,
+				504CF57F167E3ED800F62C41 /* MistyMountains.caf in Resources */,
+				504CF583167E43F800F62C41 /* pin.caf in Resources */,
+				50F70DC216822D92000E80BC /* MistyMountains.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +486,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -477,6 +503,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
@@ -490,12 +517,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
