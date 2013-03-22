@@ -30,6 +30,8 @@
 		504CF57F167E3ED800F62C41 /* MistyMountains.caf in Resources */ = {isa = PBXBuildFile; fileRef = 504CF57E167E3ED800F62C41 /* MistyMountains.caf */; };
 		504CF583167E43F800F62C41 /* pin.caf in Resources */ = {isa = PBXBuildFile; fileRef = 504CF582167E43F800F62C41 /* pin.caf */; };
 		506A33A2165535F600792B8A /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506A33A1165535F600792B8A /* GameViewController.m */; };
+		50743AA016F64EE20061B607 /* BallEscape.MainMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 50743A9F16F64EE20061B607 /* BallEscape.MainMenu.bmp */; };
+		50743AA216F6517B0061B607 /* BallEscape.SettingsMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 50743AA116F6517B0061B607 /* BallEscape.SettingsMenu.bmp */; };
 		507D1CFA1651284F007FC594 /* BoardGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CF91651284F007FC594 /* BoardGame.m */; };
 		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
 		507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D0216512F25007FC594 /* Ball+viewAdditions.m */; };
@@ -100,6 +102,8 @@
 		504CF582167E43F800F62C41 /* pin.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pin.caf; sourceTree = "<group>"; };
 		506A33A0165535F600792B8A /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		506A33A1165535F600792B8A /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		50743A9F16F64EE20061B607 /* BallEscape.MainMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.MainMenu.bmp; sourceTree = "<group>"; };
+		50743AA116F6517B0061B607 /* BallEscape.SettingsMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.SettingsMenu.bmp; sourceTree = "<group>"; };
 		507D1CF81651284F007FC594 /* BoardGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGame.h; sourceTree = "<group>"; };
 		507D1CF91651284F007FC594 /* BoardGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardGame.m; sourceTree = "<group>"; };
 		507D1CFE16512C14007FC594 /* BoardGame+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BoardGame+viewAdditions.h"; sourceTree = "<group>"; };
@@ -320,6 +324,7 @@
 		5009CE9E163F1FD80082C5A7 /* Game files */ = {
 			isa = PBXGroup;
 			children = (
+				50743A9C16F6349D0061B607 /* Images */,
 				50D8490516661394003DEEB5 /* ballEscape.modelplist */,
 				50B45B9D166CBD1800CAF2D2 /* level1.gameplist */,
 				509BF9C71675F03C00F87B50 /* level2.gameplist */,
@@ -342,6 +347,15 @@
 				5009CE88163F1AA50082C5A7 /* View */,
 			);
 			name = OpenGLMVC;
+			sourceTree = "<group>";
+		};
+		50743A9C16F6349D0061B607 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				50743AA116F6517B0061B607 /* BallEscape.SettingsMenu.bmp */,
+				50743A9F16F64EE20061B607 /* BallEscape.MainMenu.bmp */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +420,8 @@
 				504CF57F167E3ED800F62C41 /* MistyMountains.caf in Resources */,
 				504CF583167E43F800F62C41 /* pin.caf in Resources */,
 				50F70DC216822D92000E80BC /* MistyMountains.mp3 in Resources */,
+				50743AA016F64EE20061B607 /* BallEscape.MainMenu.bmp in Resources */,
+				50743AA216F6517B0061B607 /* BallEscape.SettingsMenu.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

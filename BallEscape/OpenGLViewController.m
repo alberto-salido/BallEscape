@@ -213,6 +213,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     self.labyrinth = nil;
     self.ball = nil;
     [EAGLContext setCurrentContext:nil];
+    [self.motionManager stopDeviceMotionUpdates];
+    [self.motionManager stopAccelerometerUpdates];
+    self.motionManager = nil;
     
 }
 
@@ -238,11 +241,6 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     
     //  Sends if the game ends with game over.
     gvc.gameOver = self.gameOver;
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -318,9 +316,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 - (void)configureDeviceMotion
 {
-   /* NSAssert((self.motionManager.gyroAvailable) || 
-        (self.motionManager.accelerometerAvailable), 
-             @"Device motion not available");*/
+    // Start updates from the motion manager.
+    self.motionManager = [[CMMotionManager alloc] init];
     [self.motionManager startDeviceMotionUpdates];
 }
 
@@ -514,17 +511,15 @@ static NSString *const MODEL_DOOR_NAME = @"door";
         double time = [self.time.text doubleValue] + 0.05;
         self.time.text = [NSString stringWithFormat:@"%.2f", time];
         
+        // Update movement using device.
+        [self updateSlopeUsingMotionController];
+        
         //  Update the boardgame movement.
         if ((self.previousXPosition != self.eyePosition.x) ||
             (self.previousZPosition != self.eyePosition.z)) {
             //  If the position of the matrix has not been altered, 
             //  the calulation of the new model view matrix wont be done,
             //  saving CPU cycles.
-            
-            //[self updateSlopeUsingMotionController];
-            
-            //  Update vectors and update the matrix.
-            //  ...
             
             //  Update de matrix
             self.baseEffect.transform.modelviewMatrix = 
@@ -596,24 +591,17 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 - (void)updateSlopeUsingMotionController
 {
-    self.xSlopeInGrades = GLKMathDegreesToRadians(self.motionManager.gyroData.rotationRate.x);
-    self.zSlopeInGrades = GLKMathDegreesToRadians(self.motionManager.gyroData.rotationRate.z);
-}
-
-/*
- *  Simuladores del sensor de movimiento.
- */
-- (IBAction)tiltXAxis:(UISlider *)sender {
-    self.xSlopeInGrades = sender.value;
-    float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades;
-    self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
-}
-
-- (IBAction)tiltZAxis:(UISlider *)sender {
-    self.zSlopeInGrades = sender.value;
-    float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades;
-    self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);
-
+    if (self.motionManager.isDeviceMotionActive)
+    {
+        self.xSlopeInGrades = self.motionManager.deviceMotion.attitude.roll;
+        self.zSlopeInGrades = self.motionManager.deviceMotion.attitude.pitch;
+        
+        float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades * 2;
+        self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
+        
+        float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades * 2;
+        self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);
+    }
 }
 
 @end

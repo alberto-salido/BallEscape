@@ -35,21 +35,11 @@
 //  Settings.
 @property (nonatomic) BOOL ghostThrowWall;
 
-
-
-/*
- *  Sliders para simular el nsor de movimento.
- */
-- (IBAction)tiltXAxis:(UISlider *)sender;
-- (IBAction)tiltZAxis:(UISlider *)sender;
-
 //  Pauses the current game.
 //  Pauses and play the game.
 - (IBAction)pauseGame:(UIButton *)sender;
 
 //  Pauses the game.
 - (void)pauseFrameRate;
-
-
 
 @end

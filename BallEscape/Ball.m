@@ -44,9 +44,9 @@
     
     //  Updates the velocity using the motion controller.
     self.velocity = GLKVector3Add(self.velocity, 
-                                  GLKVector3Make(-([controller getXSlope] / 4),
+                                  GLKVector3Make(-([controller getXSlope]),
                                                  0.0, 
-                                                 -([controller getZSlope] / 4)));
+                                                 -([controller getZSlope])));
     
     GLKVector3 traveledDistance = GLKVector3MultiplyScalar(self.velocity,
                                                            elapsedTimeSeconds);
