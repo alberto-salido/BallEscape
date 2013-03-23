@@ -9,7 +9,7 @@
 #import "Ghost.h"
 
 //  Far distance that the ghost can see.
-static float const SEE_DISTANCE = 2.0;
+static float const SEE_DISTANCE = 4.0;
 
 //  Constants with the information about the size of the boardgame.
 //  Size of the board game in the X-Axis.

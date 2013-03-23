@@ -22,7 +22,7 @@
 //  the other view controller. MainViewController is the first controller
 //  opened when the application starts.
 //
-@interface MainViewController : UIViewController <AVAudioPlayerDelegate>
+@interface MainViewController : UIViewController
 
 //  Dictionary with the scores obtained(Values) in each level(Key).
 //  Example:
@@ -31,9 +31,13 @@
 
 //  Properties about the game settings:
 //  Enables the option of ghost can pass throw the wall of the labyrinth, and
-//  the SFX sound for the game.
+//  the sound for the game.
 @property (nonatomic) BOOL ghostThrowWalls;
-@property (nonatomic) BOOL sfx;
+@property (nonatomic) BOOL shouldPlayMusic;
+
+//  Player for the game music.
+@property (nonatomic, strong, readonly) AVAudioPlayer *musicPlayer;
+
 
 //  Actions:
 //  Changes to the |GameViewController| for preparing the eviroment to play.

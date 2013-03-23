@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-
+	
 // Scores file name.
 static NSString *const FILE_NAME = @"ball_Escape_HScores.scoreplist";
 
@@ -17,6 +17,9 @@ static NSString *const HIGHSCORES_SEGUE_ID = @"showHighScores";
 static NSString *const SETTINGS_SEGUE_ID = @"settings";
 static NSString *const ABOUT_ME_SEGUE_ID = @"aboutMe";
 static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
+
+// Music
+static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium";
 
 // Private properties.
 @interface MainViewController ()
@@ -29,6 +32,8 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 //  Property with the path in which store the file with the scores.
 @property (nonatomic, strong) NSString *scoresPath;
 
+@property (nonatomic, strong) AVAudioPlayer *musicPlayer;
+
 @end
 
 @implementation MainViewController 
@@ -38,6 +43,8 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 @synthesize scoresPath = _scoresPath;
 @synthesize dictionaryCache = _dictionaryCache;
 @synthesize ghostThrowWalls = _ghostThrowWalls;
+@synthesize musicPlayer = _musicPlayer;
+@synthesize shouldPlayMusic = _shouldPlayMusic;
 
 
 #pragma mark - View lifecycle
@@ -45,7 +52,26 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    //  Open the music file.
+    NSURL* url = [[NSBundle mainBundle] URLForResource:MUSIC withExtension:@"mp3"];
+    NSAssert(url, @"URL is valid.");
+    NSError* error = nil;
+    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if(!self.musicPlayer)
+    {
+        NSLog(@"Error creating player: %@", error);
+    }
+    
+    // By default starts playing music.
+    self.shouldPlayMusic = YES;
+    
+    self.musicPlayer.numberOfLoops = 2;
+    
+    if (self.shouldPlayMusic) {
+         [self.musicPlayer play];
+    }
+   
     //  Sets the path in Documents/scores.plist.
     self.scoresPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                                 NSUserDomainMask,
@@ -58,13 +84,31 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
     self.dictionaryCache = self.scoresDictionary.copy;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // If the music is over, restart the song.
+    if(![self.musicPlayer isPlaying]) {
+        [self.musicPlayer play];
+    }
+    
+    // If the sound option is disabled, stop playing music.
+    if (!self.shouldPlayMusic) {
+        [self.musicPlayer stop];
+    }
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     self.scoresDictionary = nil;
     self.scoresPath = nil;
     self.dictionaryCache = nil;
-    self.ghostThrowWalls = FALSE;
+    self.ghostThrowWalls = NO;
+    self.musicPlayer = nil;
+    self.shouldPlayMusic = NO;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -73,6 +117,7 @@ static NSString *const TUTORIAL_SEGUE_ID = @"showTutorial";
             (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown));
 }
 
+//  Changes the view.
 - (IBAction)playButton:(id)sender {
     [self performSegueWithIdentifier:PLAY_SEGUE_ID sender:self];
 }

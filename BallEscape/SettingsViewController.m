@@ -58,7 +58,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     
     // Updates the status of the switches.
     self.ghostThrowSwitch.on = self.mvc.ghostThrowWalls;
-    self.SFXButton.on = self.mvc.sfx;
+    self.SFXButton.on = self.mvc.shouldPlayMusic;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -71,7 +71,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 }
 
 - (IBAction)SFXSwitcher:(UISwitch *)sender {
-    self.mvc.sfx = sender.on;
+    self.mvc.shouldPlayMusic = sender.on;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex

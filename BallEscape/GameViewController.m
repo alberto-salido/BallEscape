@@ -118,8 +118,6 @@ static int const OK = 1;
         }
         
         [dic setObject:array forKey:level];
-
-        NSLog(@"%d, %d", self.levelManager.currentLevel, self.levelManager.numberOfLevels);
         
         //  If there are more levels...
         if ([self.levelManager currentLevel] < [self.levelManager numberOfLevels]) {
