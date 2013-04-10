@@ -39,20 +39,16 @@ static int const OK = 1;
 @synthesize levelManager = _levelManager;
 @synthesize labelNewHighScore = _labelNewHighScore;
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];    
-}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+
     //  Initializes the LevelManages with the number of levels.
     self.levelManager = [[LevelManager alloc] 
                          initWithNumberOfLevels:NUMBER_OF_LEVELS];
-    [super viewDidLoad];   
 }
 
 - (void)viewDidAppear:(BOOL)animated

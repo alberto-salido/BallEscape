@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic, readwrite) GLKTextureInfo 
    *textureInfo;
-@property (strong, nonatomic, readwrite) UtilityMesh 
+@property (strong, nonatomic, readwrite) UtilityMesh
    *consolidatedMesh;
 @property (strong, nonatomic, readwrite) NSDictionary 
    *modelsDictionary;

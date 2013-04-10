@@ -30,11 +30,6 @@ static NSString *const CELL_NAME = @"scoreCell";
     self.scoresByLevel = nil;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 //  Configures each cell.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
@@ -47,10 +42,11 @@ static NSString *const CELL_NAME = @"scoreCell";
     //  Obtains the scores(NSArray) form the Dictionary with Key(level) equals to the section.
     NSMutableArray *scores = [self.scoresDictionary objectForKey:[NSString stringWithFormat:@"%d", 
                                                                  indexPath.section]];
-    
+    /*
     NSLog(@"%@", self.scoresDictionary);
     NSLog(@"index: %d", indexPath.section);
     NSLog(@"index.row: %d", indexPath.row);
+     */
     //  Gets a score from the array.
     Score *score = (Score *)[scores objectAtIndex:indexPath.row];
     

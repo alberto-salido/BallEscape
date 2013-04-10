@@ -25,7 +25,6 @@
 //  Property indicating if the user losses the last game.
 @property BOOL gameOver;
 
-
 //  Settings.
 @property BOOL ghostThrowWall;
 

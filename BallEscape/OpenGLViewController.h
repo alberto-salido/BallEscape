@@ -35,6 +35,15 @@
 //  Settings.
 @property (nonatomic) BOOL ghostThrowWall;
 
+// Image to display when pause game is paused.
+@property (weak, nonatomic) IBOutlet UIImageView *pauseView;
+
+// Back button.
+@property (weak, nonatomic) IBOutlet UIButton *goBackButton;
+
+// Being the game paused, go back to the menu.
+- (IBAction)goBackToMenu:(UIButton *)sender;
+
 //  Pauses the current game.
 //  Pauses and play the game.
 - (IBAction)pauseGame:(UIButton *)sender;

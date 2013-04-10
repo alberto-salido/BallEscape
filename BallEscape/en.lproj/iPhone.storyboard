@@ -389,8 +389,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ghost throw the Walls:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8hV-gC-1MK">
-                                <rect key="frame" x="94" y="157" width="172" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ghost through the Walls:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8hV-gC-1MK">
+                                <rect key="frame" x="78" y="157" width="188" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -473,20 +473,6 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="diq-nB-No9">
-                                <rect key="frame" x="250" y="263" width="202" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="tiltZAxis:" destination="2" eventType="valueChanged" id="BkR-ul-7Gd"/>
-                                </connections>
-                            </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="Unf-tq-d0O">
-                                <rect key="frame" x="27" y="263" width="217" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="tiltXAxis:" destination="2" eventType="valueChanged" id="irn-wa-1ZM"/>
-                                </connections>
-                            </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TIME:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="tk8-Xp-Fqg">
                                 <rect key="frame" x="20" y="13" width="46" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -584,8 +570,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OpenGLViewController.h"/>
             <relationships>
                 <relationship kind="action" name="pauseGame:" candidateClass="UIButton"/>
-                <relationship kind="action" name="tiltXAxis:" candidateClass="UISlider"/>
-                <relationship kind="action" name="tiltZAxis:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="time" candidateClass="UILabel"/>
             </relationships>
         </class>

@@ -72,7 +72,7 @@ static float const BOARD_GAME_HEIGHT = 13.68;
     //  Detects collisions with the four borders.
     //  Updates the velocity, as the ball was hitten, and sets up the nextPosition.
     //  The borders of the boardgame are defined by its height and width, starting in
-    //  the 0,0 point. 
+    //  the 0,0 point.
     
     float top = (borders.max.x - borders.min.x);
     float width = (borders.max.z - borders.min.z);

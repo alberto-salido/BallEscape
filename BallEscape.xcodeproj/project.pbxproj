@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5006C7431714C965004BDE73 /* BallEscape.GameMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 5006C7411714C965004BDE73 /* BallEscape.GameMenu.bmp */; };
+		5006C7441714C965004BDE73 /* BallEscape.PauseMenu.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5006C7421714C965004BDE73 /* BallEscape.PauseMenu.gif */; };
+		5008AA551700E16900572F21 /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 5008AA541700E16900572F21 /* ballEscape.modelplist */; };
 		5009CE30163EE7500082C5A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE2F163EE7500082C5A7 /* UIKit.framework */; };
 		5009CE32163EE7500082C5A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009CE31163EE7500082C5A7 /* Foundation.framework */; };
 		5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5009CE38163EE7500082C5A7 /* InfoPlist.strings */; };
@@ -28,13 +31,12 @@
 		5041472816FE1D7C008B4E36 /* BallEscape.MainMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */; };
 		5041472916FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 5041472716FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp */; };
 		5041472C16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5041472B16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 */; };
-		504CF57A167E287400F62C41 /* tutorialPage1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 504CF579167E287400F62C41 /* tutorialPage1.jpg */; };
-		504CF57D167E287F00F62C41 /* tutorialPage2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 504CF57C167E287F00F62C41 /* tutorialPage2.jpg */; };
 		506A33A2165535F600792B8A /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506A33A1165535F600792B8A /* GameViewController.m */; };
 		507D1CFA1651284F007FC594 /* BoardGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CF91651284F007FC594 /* BoardGame.m */; };
 		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
 		507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D0216512F25007FC594 /* Ball+viewAdditions.m */; };
 		507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D05165131B2007FC594 /* Wall+viewAdditions.m */; };
+		508EA3111712246100156B28 /* tutorialPage0.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 508EA3101712246100156B28 /* tutorialPage0.bmp */; };
 		509BF9C81675F03C00F87B50 /* level2.gameplist in Resources */ = {isa = PBXBuildFile; fileRef = 509BF9C71675F03C00F87B50 /* level2.gameplist */; };
 		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
 		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
@@ -49,10 +51,8 @@
 		50D848FA16652D82003DEEB5 /* GameCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848F916652D81003DEEB5 /* GameCharacter.m */; };
 		50D848FD1665FE7D003DEEB5 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D848FC1665FE7B003DEEB5 /* Ghost.m */; };
 		50D84904166611DC003DEEB5 /* Ghost+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D84903166611DC003DEEB5 /* Ghost+viewAdditions.m */; };
-		50D8490616661394003DEEB5 /* ballEscape.modelplist in Resources */ = {isa = PBXBuildFile; fileRef = 50D8490516661394003DEEB5 /* ballEscape.modelplist */; };
 		50F04890167DC412007CB339 /* TutorialPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F0488F167DC412007CB339 /* TutorialPageViewController.m */; };
 		50F04893167DC527007CB339 /* TutorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F04892167DC527007CB339 /* TutorialContentViewController.m */; };
-		50F04895167DCCAD007CB339 /* tutorialPage0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50F04894167DCCAD007CB339 /* tutorialPage0.jpg */; };
 		50F70DBE16822890000E80BC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F70DBD16822890000E80BC /* AVFoundation.framework */; };
 		50F70DC016822D13000E80BC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F70DBF16822D13000E80BC /* CoreFoundation.framework */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
@@ -60,6 +60,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5006C7411714C965004BDE73 /* BallEscape.GameMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.GameMenu.bmp; sourceTree = "<group>"; };
+		5006C7421714C965004BDE73 /* BallEscape.PauseMenu.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = BallEscape.PauseMenu.gif; sourceTree = "<group>"; };
+		5008AA541700E16900572F21 /* ballEscape.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ballEscape.modelplist; sourceTree = "<group>"; };
 		5009CE2B163EE7500082C5A7 /* BallEscape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BallEscape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5009CE2F163EE7500082C5A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5009CE31163EE7500082C5A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,8 +100,6 @@
 		5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.MainMenu.bmp; sourceTree = "<group>"; };
 		5041472716FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.SettingsMenu.bmp; sourceTree = "<group>"; };
 		5041472B16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3"; sourceTree = "<group>"; };
-		504CF579167E287400F62C41 /* tutorialPage1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage1.jpg; sourceTree = "<group>"; };
-		504CF57C167E287F00F62C41 /* tutorialPage2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage2.jpg; sourceTree = "<group>"; };
 		506A33A0165535F600792B8A /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		506A33A1165535F600792B8A /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		507D1CF81651284F007FC594 /* BoardGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGame.h; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		507D1D0216512F25007FC594 /* Ball+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ball+viewAdditions.m"; sourceTree = "<group>"; };
 		507D1D04165131B2007FC594 /* Wall+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Wall+viewAdditions.h"; sourceTree = "<group>"; };
 		507D1D05165131B2007FC594 /* Wall+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Wall+viewAdditions.m"; sourceTree = "<group>"; };
+		508EA3101712246100156B28 /* tutorialPage0.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tutorialPage0.bmp; sourceTree = "<group>"; };
 		509BF9C71675F03C00F87B50 /* level2.gameplist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.gameplist; sourceTree = "<group>"; };
 		509DC3781646CF1D00251009 /* 3DObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DObject.h; sourceTree = "<group>"; };
 		509DC3791646CF1D00251009 /* 3DObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DObject.m; sourceTree = "<group>"; };
@@ -136,12 +138,10 @@
 		50D848FC1665FE7B003DEEB5 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		50D84902166611DB003DEEB5 /* Ghost+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ghost+viewAdditions.h"; sourceTree = "<group>"; };
 		50D84903166611DC003DEEB5 /* Ghost+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ghost+viewAdditions.m"; sourceTree = "<group>"; };
-		50D8490516661394003DEEB5 /* ballEscape.modelplist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ballEscape.modelplist; sourceTree = "<group>"; };
 		50F0488E167DC412007CB339 /* TutorialPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageViewController.h; sourceTree = "<group>"; };
 		50F0488F167DC412007CB339 /* TutorialPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageViewController.m; sourceTree = "<group>"; };
 		50F04891167DC527007CB339 /* TutorialContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialContentViewController.h; sourceTree = "<group>"; };
 		50F04892167DC527007CB339 /* TutorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialContentViewController.m; sourceTree = "<group>"; };
-		50F04894167DCCAD007CB339 /* tutorialPage0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorialPage0.jpg; sourceTree = "<group>"; };
 		50F70DBD16822890000E80BC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		50F70DBF16822D13000E80BC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
@@ -206,27 +206,20 @@
 		5009CE35163EE7500082C5A7 /* BallEscape */ = {
 			isa = PBXGroup;
 			children = (
-				50D848EF16628A35003DEEB5 /* AboutMeViewController.h */,
-				50D848F016628A35003DEEB5 /* AboutMeViewController.m */,
+				50DBFA12170C443C00E3B00D /* AboutMeMVC */,
 				5009CE9E163F1FD80082C5A7 /* Game files */,
-				506A33A0165535F600792B8A /* GameViewController.h */,
-				506A33A1165535F600792B8A /* GameViewController.m */,
-				50D848931658F5DD003DEEB5 /* HighScoresViewController.h */,
-				50D848941658F5DD003DEEB5 /* HighScoresViewController.m */,
+				50DBFA11170C442800E3B00D /* GameMVC */,
+				50DBFA13170C444C00E3B00D /* HighScoresMVC */,
 				5009CE44163EE7500082C5A7 /* iPad.storyboard */,
 				5009CE41163EE7500082C5A7 /* iPhone.storyboard */,
+				50D848DB165D260C003DEEB5 /* Score.h */,
+				50D848DC165D260C003DEEB5 /* Score.m */,
 				50D848901658E23E003DEEB5 /* MainViewController.h */,
 				50D848911658E23F003DEEB5 /* MainViewController.m */,
 				506A33A316565D3A00792B8A /* OpenGLMVC */,
-				50D848DB165D260C003DEEB5 /* Score.h */,
-				50D848DC165D260C003DEEB5 /* Score.m */,
-				50D848EC16628705003DEEB5 /* SettingsViewController.h */,
-				50D848ED16628706003DEEB5 /* SettingsViewController.m */,
+				50DBFA14170C44AF00E3B00D /* SettingsMVC */,
 				5009CE36163EE7500082C5A7 /* Supporting Files */,
-				50F04891167DC527007CB339 /* TutorialContentViewController.h */,
-				50F04892167DC527007CB339 /* TutorialContentViewController.m */,
-				50F0488E167DC412007CB339 /* TutorialPageViewController.h */,
-				50F0488F167DC412007CB339 /* TutorialPageViewController.m */,
+				50DBFA15170C44BA00E3B00D /* TutorialMVC */,
 			);
 			path = BallEscape;
 			sourceTree = "<group>";
@@ -236,8 +229,6 @@
 			children = (
 				5009CE3E163EE7500082C5A7 /* AppDelegate.h */,
 				5009CE3F163EE7500082C5A7 /* AppDelegate.m */,
-				50D848E8165FC99F003DEEB5 /* NSDictionary+fileAdditions.h */,
-				50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */,
 				5009CE37163EE7500082C5A7 /* BallEscape-Info.plist */,
 				5009CE38163EE7500082C5A7 /* InfoPlist.strings */,
 				5009CE3B163EE7500082C5A7 /* main.m */,
@@ -261,6 +252,7 @@
 			children = (
 				5009CE47163EE7500082C5A7 /* OpenGLViewController.h */,
 				5009CE48163EE7500082C5A7 /* OpenGLViewController.m */,
+				50FCF5E2164BC83F008CD89E /* ObjectController.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -277,9 +269,6 @@
 				50D848F816652D81003DEEB5 /* GameCharacter.h */,
 				50D848F916652D81003DEEB5 /* GameCharacter.m */,
 				50D848F616652BDE003DEEB5 /* GameCharacterLogicController.h */,
-				50FCF55616492830008CD89E /* LevelManager.h */,
-				50FCF55716492830008CD89E /* LevelManager.m */,
-				50FCF5E2164BC83F008CD89E /* ObjectController.h */,
 				5009CE81163F18100082C5A7 /* UtilityMesh.h */,
 				5009CE82163F18100082C5A7 /* UtilityMesh.m */,
 				5009CE84163F18210082C5A7 /* UtilityModel.h */,
@@ -297,15 +286,15 @@
 		5009CE88163F1AA50082C5A7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				507D1D0116512F25007FC594 /* Ball+viewAdditions.h */,
+				507D1D0216512F25007FC594 /* Ball+viewAdditions.m */,
+				507D1CFE16512C14007FC594 /* BoardGame+viewAdditions.h */,
+				507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */,
+				50D84902166611DB003DEEB5 /* Ghost+viewAdditions.h */,
+				50D84903166611DC003DEEB5 /* Ghost+viewAdditions.m */,
 				5009CE8F163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.h */,
 				5009CE90163F1B7E0082C5A7 /* UtilityMesh+viewAdditions.m */,
 				5009CE8C163F1B580082C5A7 /* UtilityModel+viewAdditions.h */,
-				507D1D0116512F25007FC594 /* Ball+viewAdditions.h */,
-				507D1D0216512F25007FC594 /* Ball+viewAdditions.m */,
-				50D84902166611DB003DEEB5 /* Ghost+viewAdditions.h */,
-				50D84903166611DC003DEEB5 /* Ghost+viewAdditions.m */,
-				507D1CFE16512C14007FC594 /* BoardGame+viewAdditions.h */,
-				507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */,
 				5009CE8D163F1B580082C5A7 /* UtilityModel+viewAdditions.m */,
 				5009CE89163F1B210082C5A7 /* UtilityModelManager.h */,
 				5009CE8A163F1B210082C5A7 /* UtilityModelManager.m */,
@@ -322,12 +311,9 @@
 			children = (
 				5041472A16FE1E03008B4E36 /* Sounds */,
 				50743A9C16F6349D0061B607 /* Images */,
-				50D8490516661394003DEEB5 /* ballEscape.modelplist */,
 				50B45B9D166CBD1800CAF2D2 /* level1.gameplist */,
 				509BF9C71675F03C00F87B50 /* level2.gameplist */,
-				50F04894167DCCAD007CB339 /* tutorialPage0.jpg */,
-				504CF579167E287400F62C41 /* tutorialPage1.jpg */,
-				504CF57C167E287F00F62C41 /* tutorialPage2.jpg */,
+				5008AA541700E16900572F21 /* ballEscape.modelplist */,
 			);
 			name = "Game files";
 			sourceTree = "<group>";
@@ -354,10 +340,64 @@
 		50743A9C16F6349D0061B607 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				508EA3101712246100156B28 /* tutorialPage0.bmp */,
 				5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */,
+				5006C7411714C965004BDE73 /* BallEscape.GameMenu.bmp */,
+				5006C7421714C965004BDE73 /* BallEscape.PauseMenu.gif */,
 				5041472716FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		50DBFA11170C442800E3B00D /* GameMVC */ = {
+			isa = PBXGroup;
+			children = (
+				50D848E8165FC99F003DEEB5 /* NSDictionary+fileAdditions.h */,
+				50D848E9165FC9A0003DEEB5 /* NSDictionary+fileAdditions.m */,
+				506A33A0165535F600792B8A /* GameViewController.h */,
+				506A33A1165535F600792B8A /* GameViewController.m */,
+				50FCF55616492830008CD89E /* LevelManager.h */,
+				50FCF55716492830008CD89E /* LevelManager.m */,
+			);
+			name = GameMVC;
+			sourceTree = "<group>";
+		};
+		50DBFA12170C443C00E3B00D /* AboutMeMVC */ = {
+			isa = PBXGroup;
+			children = (
+				50D848EF16628A35003DEEB5 /* AboutMeViewController.h */,
+				50D848F016628A35003DEEB5 /* AboutMeViewController.m */,
+			);
+			name = AboutMeMVC;
+			sourceTree = "<group>";
+		};
+		50DBFA13170C444C00E3B00D /* HighScoresMVC */ = {
+			isa = PBXGroup;
+			children = (
+				50D848931658F5DD003DEEB5 /* HighScoresViewController.h */,
+				50D848941658F5DD003DEEB5 /* HighScoresViewController.m */,
+			);
+			name = HighScoresMVC;
+			sourceTree = "<group>";
+		};
+		50DBFA14170C44AF00E3B00D /* SettingsMVC */ = {
+			isa = PBXGroup;
+			children = (
+				50D848EC16628705003DEEB5 /* SettingsViewController.h */,
+				50D848ED16628706003DEEB5 /* SettingsViewController.m */,
+			);
+			name = SettingsMVC;
+			sourceTree = "<group>";
+		};
+		50DBFA15170C44BA00E3B00D /* TutorialMVC */ = {
+			isa = PBXGroup;
+			children = (
+				50F04891167DC527007CB339 /* TutorialContentViewController.h */,
+				50F04892167DC527007CB339 /* TutorialContentViewController.m */,
+				50F0488E167DC412007CB339 /* TutorialPageViewController.h */,
+				50F0488F167DC412007CB339 /* TutorialPageViewController.m */,
+			);
+			name = TutorialMVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,15 +453,15 @@
 				5009CE3A163EE7500082C5A7 /* InfoPlist.strings in Resources */,
 				5009CE43163EE7500082C5A7 /* iPhone.storyboard in Resources */,
 				5009CE46163EE7500082C5A7 /* iPad.storyboard in Resources */,
-				50D8490616661394003DEEB5 /* ballEscape.modelplist in Resources */,
 				50B45B9E166CBD1800CAF2D2 /* level1.gameplist in Resources */,
 				509BF9C81675F03C00F87B50 /* level2.gameplist in Resources */,
-				50F04895167DCCAD007CB339 /* tutorialPage0.jpg in Resources */,
-				504CF57A167E287400F62C41 /* tutorialPage1.jpg in Resources */,
-				504CF57D167E287F00F62C41 /* tutorialPage2.jpg in Resources */,
 				5041472816FE1D7C008B4E36 /* BallEscape.MainMenu.bmp in Resources */,
 				5041472916FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp in Resources */,
 				5041472C16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 in Resources */,
+				5008AA551700E16900572F21 /* ballEscape.modelplist in Resources */,
+				508EA3111712246100156B28 /* tutorialPage0.bmp in Resources */,
+				5006C7431714C965004BDE73 /* BallEscape.GameMenu.bmp in Resources */,
+				5006C7441714C965004BDE73 /* BallEscape.PauseMenu.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

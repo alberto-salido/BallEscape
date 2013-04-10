@@ -165,6 +165,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 @synthesize motionManager = _motionManager;
 
+@synthesize pauseView = _pauseView;
+
+@synthesize goBackButton = _goBackButton;
+
 //  Sent to the view controller when the app receives a memory warning.
 //  Release any cached data, images, etc that aren't in use.
 - (void)didReceiveMemoryWarning
@@ -203,6 +207,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 - (void)viewDidUnload
 {
     [self setTime:nil];
+    [self setPauseView:nil];
+    [self setGoBackButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -216,7 +222,6 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     [self.motionManager stopDeviceMotionUpdates];
     [self.motionManager stopAccelerometerUpdates];
     self.motionManager = nil;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -507,6 +512,15 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 - (void)update
 {
     if (!self.isPaused) {
+        
+        if (!self.pauseView.hidden) {
+            self.pauseView.hidden = YES;
+        }
+        
+        if (!self.goBackButton.hidden) {
+            self.goBackButton.hidden = YES;
+        }
+        
         //  Updates the time elapsed.
         double time = [self.time.text doubleValue] + 0.05;
         self.time.text = [NSString stringWithFormat:@"%.2f", time];
@@ -551,6 +565,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             //  Game Over!
             [self dismissViewControllerAnimated:YES completion:nil];
         }
+    } else {
+        // Game is paused:
+        self.pauseView.hidden = NO;
+        self.goBackButton.hidden = NO;
     }
 }
 
@@ -562,6 +580,12 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 - (void)pauseFrameRate
 {
     self.isPaused = YES;
+}
+
+- (IBAction)goBackToMenu:(UIButton *)sender
+{
+    self.gameOver = YES;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Protocol ObjectController
