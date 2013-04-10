@@ -22,6 +22,9 @@
 //  in complete the game.
 @property float timeUsedInCompleteLevel;
 
+// Current view, will change denpends on if the user wins the level or loses.
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 //  Property indicating if the user losses the last game.
 @property BOOL gameOver;
 

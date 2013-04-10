@@ -20,9 +20,9 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewWillAppear:animated];
         
     // Loads the main HTML file with the references to objects within, like css or js files.
     NSString *path = [[NSBundle mainBundle] bundlePath];

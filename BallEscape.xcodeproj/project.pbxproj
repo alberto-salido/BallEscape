@@ -39,12 +39,13 @@
 		5041472816FE1D7C008B4E36 /* BallEscape.MainMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */; };
 		5041472916FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 5041472716FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp */; };
 		5041472C16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5041472B16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 */; };
+		505C02001715E7E500DA6E6B /* BallEscape.GameMenu.Win.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 505C01FF1715E7E500DA6E6B /* BallEscape.GameMenu.Win.bmp */; };
+		505C0202171604B700DA6E6B /* BE_CREDITS.png in Resources */ = {isa = PBXBuildFile; fileRef = 505C0201171604B700DA6E6B /* BE_CREDITS.png */; };
 		506A33A2165535F600792B8A /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506A33A1165535F600792B8A /* GameViewController.m */; };
 		507D1CFA1651284F007FC594 /* BoardGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CF91651284F007FC594 /* BoardGame.m */; };
 		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
 		507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D0216512F25007FC594 /* Ball+viewAdditions.m */; };
 		507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D05165131B2007FC594 /* Wall+viewAdditions.m */; };
-		508EA3111712246100156B28 /* tutorialPage0.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 508EA3101712246100156B28 /* tutorialPage0.bmp */; };
 		509BF9C81675F03C00F87B50 /* level2.gameplist in Resources */ = {isa = PBXBuildFile; fileRef = 509BF9C71675F03C00F87B50 /* level2.gameplist */; };
 		509DC37A1646CF1D00251009 /* 3DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC3791646CF1D00251009 /* 3DObject.m */; };
 		509DC37E1646D19B00251009 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 509DC37D1646D19B00251009 /* Wall.m */; };
@@ -63,6 +64,7 @@
 		50F04893167DC527007CB339 /* TutorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F04892167DC527007CB339 /* TutorialContentViewController.m */; };
 		50F70DBE16822890000E80BC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F70DBD16822890000E80BC /* AVFoundation.framework */; };
 		50F70DC016822D13000E80BC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F70DBF16822D13000E80BC /* CoreFoundation.framework */; };
+		50FAB6631715E26000595FF7 /* tutorialPage0.png in Resources */ = {isa = PBXBuildFile; fileRef = 50FAB6621715E26000595FF7 /* tutorialPage0.png */; };
 		50FCF55816492830008CD89E /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF55716492830008CD89E /* LevelManager.m */; };
 		50FCF5DF164BA249008CD89E /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FCF5DE164BA249008CD89E /* Ball.m */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,8 @@
 		5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.MainMenu.bmp; sourceTree = "<group>"; };
 		5041472716FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.SettingsMenu.bmp; sourceTree = "<group>"; };
 		5041472B16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3"; sourceTree = "<group>"; };
+		505C01FF1715E7E500DA6E6B /* BallEscape.GameMenu.Win.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.GameMenu.Win.bmp; sourceTree = "<group>"; };
+		505C0201171604B700DA6E6B /* BE_CREDITS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BE_CREDITS.png; sourceTree = "<group>"; };
 		506A33A0165535F600792B8A /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		506A33A1165535F600792B8A /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		507D1CF81651284F007FC594 /* BoardGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardGame.h; sourceTree = "<group>"; };
@@ -126,7 +130,6 @@
 		507D1D0216512F25007FC594 /* Ball+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ball+viewAdditions.m"; sourceTree = "<group>"; };
 		507D1D04165131B2007FC594 /* Wall+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Wall+viewAdditions.h"; sourceTree = "<group>"; };
 		507D1D05165131B2007FC594 /* Wall+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Wall+viewAdditions.m"; sourceTree = "<group>"; };
-		508EA3101712246100156B28 /* tutorialPage0.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tutorialPage0.bmp; sourceTree = "<group>"; };
 		509BF9C71675F03C00F87B50 /* level2.gameplist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.gameplist; sourceTree = "<group>"; };
 		509DC3781646CF1D00251009 /* 3DObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DObject.h; sourceTree = "<group>"; };
 		509DC3791646CF1D00251009 /* 3DObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DObject.m; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		50F04892167DC527007CB339 /* TutorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialContentViewController.m; sourceTree = "<group>"; };
 		50F70DBD16822890000E80BC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		50F70DBF16822D13000E80BC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		50FAB6621715E26000595FF7 /* tutorialPage0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialPage0.png; sourceTree = "<group>"; };
 		50FCF55616492830008CD89E /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		50FCF55716492830008CD89E /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 		50FCF5DD164BA249008CD89E /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				5006C758171586C0004BDE73 /* XCODE.png */,
+				505C0201171604B700DA6E6B /* BE_CREDITS.png */,
 				5006C75C1715ABAA004BDE73 /* GIMP.png */,
 				5006C75417157F21004BDE73 /* LSI.gif */,
 				5006C75E1715AC07004BDE73 /* SKETCHBOOK.png */,
@@ -369,7 +374,8 @@
 		50743A9C16F6349D0061B607 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				508EA3101712246100156B28 /* tutorialPage0.bmp */,
+				50FAB6621715E26000595FF7 /* tutorialPage0.png */,
+				505C01FF1715E7E500DA6E6B /* BallEscape.GameMenu.Win.bmp */,
 				5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */,
 				5006C7411714C965004BDE73 /* BallEscape.GameMenu.bmp */,
 				5006C7421714C965004BDE73 /* BallEscape.PauseMenu.gif */,
@@ -491,7 +497,6 @@
 				5041472916FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp in Resources */,
 				5041472C16FE3F35008B4E36 /* DoKashiteru_-_The_Annual_New_England_Xylophone_Symposium.mp3 in Resources */,
 				5008AA551700E16900572F21 /* ballEscape.modelplist in Resources */,
-				508EA3111712246100156B28 /* tutorialPage0.bmp in Resources */,
 				5006C7431714C965004BDE73 /* BallEscape.GameMenu.bmp in Resources */,
 				5006C7441714C965004BDE73 /* BallEscape.PauseMenu.gif in Resources */,
 				5006C7491715618E004BDE73 /* aboutMeHTMLView.html in Resources */,
@@ -502,6 +507,9 @@
 				5006C759171586C0004BDE73 /* XCODE.png in Resources */,
 				5006C75D1715ABAA004BDE73 /* GIMP.png in Resources */,
 				5006C75F1715AC07004BDE73 /* SKETCHBOOK.png in Resources */,
+				50FAB6631715E26000595FF7 /* tutorialPage0.png in Resources */,
+				505C02001715E7E500DA6E6B /* BallEscape.GameMenu.Win.bmp in Resources */,
+				505C0202171604B700DA6E6B /* BE_CREDITS.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -73,7 +73,7 @@ static NSString *const IMAGE_NAME = @"tutorialPage";
     NSMutableArray *pageImages = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < NUM_OF_PAGES; i++) {
-        NSString *imageName = [NSString stringWithFormat:@"%@%d.bmp", IMAGE_NAME, i];
+        NSString *imageName = [NSString stringWithFormat:@"%@%d.png", IMAGE_NAME, i];
         UIImage *image = [UIImage imageNamed:imageName];
         if (image) {
             [pageImages addObject:image];

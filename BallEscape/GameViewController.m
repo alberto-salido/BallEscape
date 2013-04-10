@@ -15,6 +15,7 @@ static int const SCORES_PER_SECTION = 5;
 static NSString *const CONGRATS_MSG = @"Congratulations!\n You have escaped!!";
 static NSString *const FAIL_MSG = @"Ooooh!, You failed!!";
 static int const OK = 1;
+static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
 
 @interface GameViewController ()
 
@@ -38,6 +39,7 @@ static int const OK = 1;
 @synthesize restartLevelButton = _restartLevelButton;
 @synthesize levelManager = _levelManager;
 @synthesize labelNewHighScore = _labelNewHighScore;
+@synthesize imageView = _imageView;
 
 
 #pragma mark - View lifecycle
@@ -51,9 +53,9 @@ static int const OK = 1;
                          initWithNumberOfLevels:NUMBER_OF_LEVELS];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     
     self.labelNewHighScore.hidden = YES;
     self.continueButton.hidden = YES;
@@ -79,6 +81,9 @@ static int const OK = 1;
     
     //  If the user has complete a level...
     if (self.timeUsedInCompleteLevel) {
+        
+        // Changes the view.
+        self.imageView.image = [UIImage imageNamed:WIN_VIEW];
         
         //  Show messages and buttons.
         self.congratulationsMessage.text = CONGRATS_MSG;
@@ -128,6 +133,7 @@ static int const OK = 1;
 
 - (void)viewDidUnload
 {    
+    [self setImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.timeUsedInCompleteLevel = 0;
@@ -167,7 +173,7 @@ static int const OK = 1;
 
 - (IBAction)goBackToMenu:(id)sender {
     
-    if (self.levelManager.currentLevel == 0) {
+    if (self.levelManager.currentLevel < 1) {
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {
