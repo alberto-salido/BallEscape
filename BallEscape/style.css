@@ -1,0 +1,63 @@
+/**
+  *  Created by Alberto Salido López on 10/04/13.
+  *  Copyright (c) 2013 Alberto Salido López. All rights reserved.
+  *
+  */
+
+body {
+	background-color:#CEF6CE;
+	text-align: center;
+	font-family: fantasy;	
+}
+
+div {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.us_logo_image {
+	width: 160px; 
+	height: 160px;
+	margin: 10%;
+	margin-top: 0px;
+}
+
+.lsi_logo_image {
+	width: 120px;
+	height: 120px;
+	margin: 10%;
+	margin-top: 0px;
+}
+
+.blender_logo_image {
+	width: 220px;
+	height: 80px;
+	float: left;
+}
+
+.xcode_logo_image {
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+
+.gimp_logo_image {
+	width: 120px;
+	height: 120px;
+	float: left;
+}
+
+.sketchbook_logo_image {
+	width: 90px;
+	height: 90px;
+	float: left;
+}
+
+.header_letter {
+	font-size: xx-large;
+	margin-top: 50px;
+}
+
+.thanks4Playing {
+	margin-top: 150px;
+}

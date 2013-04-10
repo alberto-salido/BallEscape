@@ -62,7 +62,7 @@
         <position>
             7.5, 4.75, YES
         </position>
-                 <position>
+        <position>
             7.5, 5.75, YES
         </position>    
         <position>
@@ -80,7 +80,7 @@
         <position>
             5.5, 9.75, YES
         </position>
-                 <position>
+        <position>
             5.75, 10.5, NO
         </position>
         <position>
@@ -103,7 +103,7 @@
         </position>
         <position>
             2.75, 11.25, YES
-                    </position>
+        </position>
         <position>
             2.75, 12.25, YES
         </position>
@@ -127,5 +127,3 @@
         </position>
     </door>
 </xml>
-
- 

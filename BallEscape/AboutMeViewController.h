@@ -12,7 +12,10 @@
 //  Show information about the author of the app, and the description
 //  of the same.
 //
-@interface AboutMeViewController : UIViewController
+@interface AboutMeViewController : UIViewController <UIWebViewDelegate>
+
+// HTML View
+@property (nonatomic, weak, readonly) IBOutlet UIWebView *htmlView;
 
 //  Button to the main menu.
 - (IBAction)BackButtonAction:(id)sender;
