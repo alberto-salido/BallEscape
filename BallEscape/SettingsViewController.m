@@ -130,6 +130,15 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 
 }
 
+- (IBAction)calibrationInfo:(UIButton *)sender
+{
+    UIAlertView *calibrationInfo = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                               message:@"Place your iPad in a comfortable position and press CALIBRATE. From now you can play in that position. Press RESET VIEW to default settings."
+                                                              delegate:nil cancelButtonTitle:@"Okay"
+                                                     otherButtonTitles:nil];
+    [calibrationInfo show];
+}
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     //  Restart the scores.

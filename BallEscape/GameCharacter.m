@@ -160,7 +160,7 @@ static float const BOARD_GAME_HEIGHT = 13.68;
         //  It's sure that the ball is going to crash with the wall.
         //  Now have to check where are the ball and the wall
         //  for making the bound.
-        if ([self isInsideOfObjectWithPosition:currentWall.position 
+        if ([self isInsideOfObjectWithPosition:currentWall.position
                                    boundingBox:wallBBox]) {
             
             if ([currentWall isADoor]) {

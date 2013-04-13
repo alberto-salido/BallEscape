@@ -16,6 +16,8 @@ static NSString *const CONGRATS_MSG = @"Congratulations!\n You have escaped!!";
 static NSString *const FAIL_MSG = @"Ooooh!, You failed!!";
 static int const OK = 1;
 static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
+static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
+
 
 @interface GameViewController ()
 
@@ -73,6 +75,10 @@ static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
     
     //  If the user losses the previous game;
     if (self.gameOver) {
+        
+        // Changes the view.
+        self.imageView.image = [UIImage imageNamed:LOSE_VIEW];
+        
         self.congratulationsMessage.text = FAIL_MSG;
         self.congratulationsMessage.hidden = NO;
         self.showTime.hidden = YES;

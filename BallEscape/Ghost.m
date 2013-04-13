@@ -109,6 +109,7 @@ static float const BOARD_GAME_HEIGHT = 13.68;
 {
     float distance = GLKVector3Distance(self.position, position);
     
+    // Ball catched
     if (distance < (self.radius * 2)) {
         return YES;
     }

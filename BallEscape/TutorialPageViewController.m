@@ -11,7 +11,7 @@
 //  Constants with he number of pages of the tutorial, and the name of each one of
 //  these images. The image name format is 'tutorialPage' plus an integer with the
 //  page number.
-static int const NUM_OF_PAGES = 3;
+static int const NUM_OF_PAGES = 4;
 static NSString *const IMAGE_NAME = @"tutorialPage";
 
 @interface TutorialPageViewController ()

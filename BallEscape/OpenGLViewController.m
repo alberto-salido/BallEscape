@@ -640,11 +640,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             self.zSlopeInGrades = self.motionManager.deviceMotion.attitude.pitch - zCalibration;
         }
         
-        float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades * 2;
+        float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades;
         self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
         
         
-        float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades * 2;
+        float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades;
         self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);
     }
 }

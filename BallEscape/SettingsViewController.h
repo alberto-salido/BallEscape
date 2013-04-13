@@ -42,4 +42,7 @@
 
 // Reset the main calibration.
 - (IBAction)resetCalibrationButtonAction:(UIButton *)sender;
+
+// Show a message about the calibration.
+- (IBAction)calibrationInfo:(UIButton *)sender;
 @end
