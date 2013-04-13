@@ -59,6 +59,8 @@
 //  Restart the current level.
 @property (weak, nonatomic) IBOutlet UIButton *restartLevelButton;
 
+@property (strong, nonatomic) NSArray *calibrationCoordinates;
+
 //  Starts a new game.
 - (IBAction)playGame:(UIButton *)sender;
 

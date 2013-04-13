@@ -22,6 +22,12 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 // Reference to the Main View Controller.
 @property (nonatomic, strong) MainViewController *mvc;
 
+// Motion controller for the calibration.
+@property (nonatomic, strong) CMMotionManager *motionManager;
+
+// Array to store the current position of the tablet [x, z].
+@property (nonatomic, strong) NSMutableArray *calibrationCoordinates;
+
 @end
 
 @implementation SettingsViewController
@@ -31,8 +37,8 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 @synthesize SFXButton = _SFXButton;
 @synthesize ghostThrowSwitch = _ghostThrowSwitch;
 @synthesize clearButton = _clearButton;
-
 @synthesize mvc = _mvc;
+@synthesize calibrationCoordinates = _calibrationCoordinates;
 
 
 #pragma mark - View lifecycle
@@ -46,6 +52,10 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     [self setSFXButton:nil];
     [self setGhostThrowSwitch:nil];
     [self setClearButton:nil];
+    [self setCalibrationCoordinates:nil];
+    [self setMvc:nil];
+    [self.motionManager stopDeviceMotionUpdates];
+    [self setMotionManager:nil];
     [super viewDidUnload];
 }
 
@@ -59,6 +69,17 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     // Updates the status of the switches.
     self.ghostThrowSwitch.on = self.mvc.ghostThrowWalls;
     self.SFXButton.on = self.mvc.shouldPlayMusic;
+    
+    self.motionManager = [[CMMotionManager alloc] init];
+    [self.motionManager startDeviceMotionUpdates];
+    
+    // Initializes the array if needed.
+    if (self.calibrationCoordinates == nil) {
+        self.calibrationCoordinates = [NSMutableArray arrayWithCapacity:2];
+        [self.calibrationCoordinates insertObject:[NSNumber numberWithDouble:0.0] atIndex:0];
+        [self.calibrationCoordinates insertObject:[NSNumber numberWithDouble:0.0] atIndex:1];
+        self.mvc.calibrationCoordinates = self.calibrationCoordinates;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -72,6 +93,41 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 
 - (IBAction)SFXSwitcher:(UISwitch *)sender {
     self.mvc.shouldPlayMusic = sender.on;
+}
+
+- (IBAction)calibrateViewButtonAction:(UIButton *)sender {
+    
+    // Calibrates the current view of the array.
+    if (self.motionManager.isDeviceMotionActive)
+    {
+        [self.calibrationCoordinates insertObject:[NSNumber
+                                                   numberWithDouble:self.motionManager.deviceMotion.attitude.roll]
+                                          atIndex:0];
+        [self.calibrationCoordinates insertObject:[NSNumber
+                                                   numberWithDouble:self.motionManager.deviceMotion.attitude.pitch]
+                                          atIndex:1];
+        
+        self.mvc.calibrationCoordinates = self.calibrationCoordinates;
+    }
+    
+    UIAlertView *calibrationDone = [[UIAlertView alloc] initWithTitle:@"Message"
+                                                              message:@"Calibration completed."
+                                                             delegate:nil cancelButtonTitle:@"Okay"
+                                                    otherButtonTitles:nil];
+    [calibrationDone show];
+}
+
+- (IBAction)resetCalibrationButtonAction:(UIButton *)sender {
+    [self.calibrationCoordinates insertObject:[NSNumber numberWithDouble:0.0] atIndex:0];
+    [self.calibrationCoordinates insertObject:[NSNumber numberWithDouble:0.0] atIndex:1];
+    self.mvc.calibrationCoordinates = self.calibrationCoordinates;
+    
+    UIAlertView *calibrationReset = [[UIAlertView alloc] initWithTitle:@"Message"
+                                                              message:@"Calibration reseted."
+                                                             delegate:nil cancelButtonTitle:@"Okay"
+                                                    otherButtonTitles:nil];
+    [calibrationReset show];
+
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex

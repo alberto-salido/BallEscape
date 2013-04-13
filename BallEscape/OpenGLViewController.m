@@ -98,6 +98,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
 
+@property (nonatomic, strong) GameViewController *gvc;
+
 //  Configures the current GLKView.
 //  - Initializes a new one;
 //  - Checks the type of the view;
@@ -174,6 +176,14 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    [self pauseFrameRate];
+    
+    UIAlertView *memoryWarning = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                              message:@"You have too much applications running simultaneously, please, close any of them to ensure proper operation of BallEscape."
+                                                             delegate:nil cancelButtonTitle:@"Okay"
+                                                    otherButtonTitles:nil];
+    [memoryWarning show];
 }
 
 #pragma mark - View lifecycle
@@ -184,6 +194,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 {
     //  Loads any previous data from the father class.
     [super viewDidLoad];
+    
+    // Stores the reference to the previous view controller.
+    self.gvc = ((GameViewController *)self.presentingViewController);
     
     //  Sets up the GLKView context.
     [self configureGLView];
@@ -241,11 +254,10 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 	[super viewWillDisappear:animated];
     
     //  Sends to the GameViewController the time used for complete the level.
-    GameViewController *gvc = ((GameViewController *)self.presentingViewController);
-    gvc.timeUsedInCompleteLevel = [self.time.text floatValue];
+    self.gvc.timeUsedInCompleteLevel = [self.time.text floatValue];
     
     //  Sends if the game ends with game over.
-    gvc.gameOver = self.gameOver;
+    self.gvc.gameOver = self.gameOver;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -617,11 +629,20 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 {
     if (self.motionManager.isDeviceMotionActive)
     {
-        self.xSlopeInGrades = self.motionManager.deviceMotion.attitude.roll;
-        self.zSlopeInGrades = self.motionManager.deviceMotion.attitude.pitch;
+        double xCalibration = [[self.gvc.calibrationCoordinates objectAtIndex:0] doubleValue];
+        double zCalibration = [[self.gvc.calibrationCoordinates objectAtIndex:1] doubleValue];
+
+        self.xSlopeInGrades = self.motionManager.deviceMotion.attitude.roll - xCalibration;
+        
+        if (xCalibration > 1.5) {
+            self.zSlopeInGrades = -self.motionManager.deviceMotion.attitude.yaw;
+        } else {
+            self.zSlopeInGrades = self.motionManager.deviceMotion.attitude.pitch - zCalibration;
+        }
         
         float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades * 2;
         self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
+        
         
         float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades * 2;
         self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);

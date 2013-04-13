@@ -21,6 +21,8 @@ static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
 
 @property (nonatomic, strong) LevelManager *levelManager;
 
+@property MainViewController *mvc;
+
 - (void)performSegueToPlayGame;
 
 @end
@@ -40,6 +42,8 @@ static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
 @synthesize levelManager = _levelManager;
 @synthesize labelNewHighScore = _labelNewHighScore;
 @synthesize imageView = _imageView;
+@synthesize mvc = _mvc;
+@synthesize calibrationCoordinates = _calibrationCoordinates;
 
 
 #pragma mark - View lifecycle
@@ -47,7 +51,11 @@ static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    self.mvc = (MainViewController *)self.presentingViewController;
+    
+    self.calibrationCoordinates = self.mvc.calibrationCoordinates;
+    
     //  Initializes the LevelManages with the number of levels.
     self.levelManager = [[LevelManager alloc] 
                          initWithNumberOfLevels:NUMBER_OF_LEVELS];
@@ -148,6 +156,7 @@ static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
     self.restartLevelButton = nil;
     self.levelManager = nil;
     self.labelNewHighScore = nil;
+    self.mvc = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -45,6 +45,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
 @synthesize ghostThrowWalls = _ghostThrowWalls;
 @synthesize musicPlayer = _musicPlayer;
 @synthesize shouldPlayMusic = _shouldPlayMusic;
+@synthesize calibrationCoordinates = _calibrationView;
 
 
 #pragma mark - View lifecycle
@@ -82,6 +83,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
     self.scoresDictionary = [[NSMutableDictionary alloc] init];
     [self.scoresDictionary readScoresFromFile:self.scoresPath];
     self.dictionaryCache = self.scoresDictionary.copy;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated

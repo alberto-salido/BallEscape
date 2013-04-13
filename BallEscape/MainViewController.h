@@ -38,6 +38,9 @@
 //  Player for the game music.
 @property (nonatomic, strong, readonly) AVAudioPlayer *musicPlayer;
 
+// Calibration position. Array with x and z positions.
+@property (nonatomic) NSArray *calibrationCoordinates;
+
 
 //  Actions:
 //  Changes to the |GameViewController| for preparing the eviroment to play.

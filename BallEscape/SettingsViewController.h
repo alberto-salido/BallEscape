@@ -37,4 +37,9 @@
 //  Allow the ghost to pass throw the walls.
 - (IBAction)GhostCanPassThrowWall:(UISwitch *)sender;
 
+// Calibrates the game view using the position of the device.
+- (IBAction)calibrateViewButtonAction:(UIButton *)sender;
+
+// Reset the main calibration.
+- (IBAction)resetCalibrationButtonAction:(UIButton *)sender;
 @end
