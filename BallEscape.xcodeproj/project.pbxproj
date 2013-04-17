@@ -46,6 +46,7 @@
 		507D1D0016512C14007FC594 /* BoardGame+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1CFF16512C14007FC594 /* BoardGame+viewAdditions.m */; };
 		507D1D0316512F25007FC594 /* Ball+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D0216512F25007FC594 /* Ball+viewAdditions.m */; };
 		507D1D06165131B2007FC594 /* Wall+viewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507D1D05165131B2007FC594 /* Wall+viewAdditions.m */; };
+		508F59CB171D683900EB96BB /* tutorialPage1.png in Resources */ = {isa = PBXBuildFile; fileRef = 508F59CA171D683900EB96BB /* tutorialPage1.png */; };
 		50954881171A0FC800A97D9B /* BallEscape.GameMenu.Lose.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 50954880171A0FC800A97D9B /* BallEscape.GameMenu.Lose.bmp */; };
 		50954884171A0FD800A97D9B /* tutorialPage2.png in Resources */ = {isa = PBXBuildFile; fileRef = 50954882171A0FD800A97D9B /* tutorialPage2.png */; };
 		50954885171A0FD800A97D9B /* tutorialPage3.png in Resources */ = {isa = PBXBuildFile; fileRef = 50954883171A0FD800A97D9B /* tutorialPage3.png */; };
@@ -133,6 +134,7 @@
 		507D1D0216512F25007FC594 /* Ball+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ball+viewAdditions.m"; sourceTree = "<group>"; };
 		507D1D04165131B2007FC594 /* Wall+viewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Wall+viewAdditions.h"; sourceTree = "<group>"; };
 		507D1D05165131B2007FC594 /* Wall+viewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Wall+viewAdditions.m"; sourceTree = "<group>"; };
+		508F59CA171D683900EB96BB /* tutorialPage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialPage1.png; sourceTree = "<group>"; };
 		50954880171A0FC800A97D9B /* BallEscape.GameMenu.Lose.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = BallEscape.GameMenu.Lose.bmp; sourceTree = "<group>"; };
 		50954882171A0FD800A97D9B /* tutorialPage2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialPage2.png; sourceTree = "<group>"; };
 		50954883171A0FD800A97D9B /* tutorialPage3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialPage3.png; sourceTree = "<group>"; };
@@ -383,12 +385,20 @@
 				50954880171A0FC800A97D9B /* BallEscape.GameMenu.Lose.bmp */,
 				505C01FF1715E7E500DA6E6B /* BallEscape.GameMenu.Win.bmp */,
 				5041472616FE1D7C008B4E36 /* BallEscape.MainMenu.bmp */,
-				50954886171A11FD00A97D9B /* tutorialPage0.png */,
-				50954882171A0FD800A97D9B /* tutorialPage2.png */,
-				50954883171A0FD800A97D9B /* tutorialPage3.png */,
 				5006C7411714C965004BDE73 /* BallEscape.GameMenu.bmp */,
 				5006C7421714C965004BDE73 /* BallEscape.PauseMenu.gif */,
 				5041472716FE1D7C008B4E36 /* BallEscape.SettingsMenu.bmp */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		508F59CC171EC04300EB96BB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				50954886171A11FD00A97D9B /* tutorialPage0.png */,
+				50954882171A0FD800A97D9B /* tutorialPage2.png */,
+				508F59CA171D683900EB96BB /* tutorialPage1.png */,
+				50954883171A0FD800A97D9B /* tutorialPage3.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -439,6 +449,7 @@
 		50DBFA15170C44BA00E3B00D /* TutorialMVC */ = {
 			isa = PBXGroup;
 			children = (
+				508F59CC171EC04300EB96BB /* Images */,
 				50F04891167DC527007CB339 /* TutorialContentViewController.h */,
 				50F04892167DC527007CB339 /* TutorialContentViewController.m */,
 				50F0488E167DC412007CB339 /* TutorialPageViewController.h */,
@@ -522,6 +533,7 @@
 				50954884171A0FD800A97D9B /* tutorialPage2.png in Resources */,
 				50954885171A0FD800A97D9B /* tutorialPage3.png in Resources */,
 				50954887171A11FD00A97D9B /* tutorialPage0.png in Resources */,
+				508F59CB171D683900EB96BB /* tutorialPage1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
