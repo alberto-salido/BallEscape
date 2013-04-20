@@ -93,11 +93,13 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 //  if the game is paused, no updates are made.
 @property BOOL isPaused;
 
-//  Indicates if the game ends with gameover.
+//  Indicates if the game ends with gameover (user lost the game).
 @property BOOL gameOver;
 
+// Motion controller.
 @property (nonatomic, strong) CMMotionManager *motionManager;
 
+// Reference to the previous view controller.
 @property (nonatomic, strong) GameViewController *gvc;
 
 //  Configures the current GLKView.
@@ -155,6 +157,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize previousXPosition = _previousXPosition;
 @synthesize previousZPosition = _previousZPosition;
 
+@synthesize motionManager = _motionManager;
 @synthesize xSlopeInGrades = _xSlopeInGrades;
 @synthesize zSlopeInGrades = _zSlopeInGrades;
 
@@ -163,15 +166,13 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 @synthesize time = _time;
 @synthesize gameOver = _gameOver;
 
-@synthesize ghostThrowWall = _ghostThrowWall;
-
-@synthesize motionManager = _motionManager;
+@synthesize ghostThroughWall = _ghostThroughWall;
 
 @synthesize pauseView = _pauseView;
-
 @synthesize goBackButton = _goBackButton;
 
-//  Sent to the view controller when the app receives a memory warning.
+
+//  Send to the view controller when the app receives a memory warning.
 //  Release any cached data, images, etc that aren't in use.
 - (void)didReceiveMemoryWarning
 {
@@ -222,29 +223,19 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     [self setTime:nil];
     [self setPauseView:nil];
     [self setGoBackButton:nil];
+    [self setGlView:nil];
+    [self setBaseEffect:nil];
+    [self setModelManager:nil];
+    [self setBoardGame:nil];
+    [self setLabyrinth:nil];
+    [self setLabyrinthByQuadrants:nil];
+    [self setBall:nil];
+    [self setGhost:nil];
+    [self.motionManager stopDeviceMotionUpdates];
+    [self setMotionManager:nil];
+    [EAGLContext setCurrentContext:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    
-    self.glView = nil;
-    self.baseEffect = nil;
-    self.modelManager = nil;
-    self.boardGame = nil;
-    self.labyrinth = nil;
-    self.ball = nil;
-    [EAGLContext setCurrentContext:nil];
-    [self.motionManager stopDeviceMotionUpdates];
-    [self.motionManager stopAccelerometerUpdates];
-    self.motionManager = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 //  Notifies the view controller that its view is about to be removed
@@ -324,11 +315,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     //  the model that are shown. Not rendering the faces in depth.
     //  The GL_CULL_FACE constant render both face of each 
     //  triangle. It's an optimization when render. 
-    [((AGLKContext *)self.glView.context) enable:GL_DEPTH_TEST];
-    //[((AGLKContext *)self.glView.context) enable:GL_CULL_FACE];
-    
-    //  Sets the background color (RGBA).
-    ((AGLKContext *)self.glView.context).clearColor = GLKVector4Make(0.0, 0.0, 0.0, 1.0);
+    [((AGLKContext *)self.glView.context) enable:GL_DEPTH_TEST];    
 }
 
 - (void)configureDeviceMotion
@@ -341,6 +328,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 - (void)configureEnviroment
 {
     //  Creates a BaseEffect.
+    //  Manages the lights effects.
     self.baseEffect = [[GLKBaseEffect alloc] init];
     
     //  Enables the light.
@@ -410,6 +398,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     
     //  Makes a reference to the GameViewController's property LevelManager.
     LevelManager *levelManager = ((GameViewController *)self.presentingViewController).levelManager;
+    
+    // Prepares the level organization.
     [levelManager setUpLevel];
         
     //  Creates the walls and stores them into a set, making the entire labyrinth.
@@ -452,7 +442,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
                                                              0.0,
                                                              [[ghostCoordinates objectAtIndex:1] floatValue]) 
                                      velocity:GLKVector3Make(-0.5, 0.0, -0.5) 
-                                   throwWalls:self.ghostThrowWall];
+                                   throwWalls:self.ghostThroughWall];
     
     //  Load the Door.
     UtilityModel *gameModelDoor = [self.modelManager modelNamed:MODEL_DOOR_NAME];
@@ -510,7 +500,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             }
         }
     }
-    self.labyrinthByQuadrants = [[NSDictionary alloc] initWithObjectsAndKeys:firstQuadrant, @"1",
+    self.labyrinthByQuadrants = [[NSDictionary alloc]
+                                 initWithObjectsAndKeys:firstQuadrant, @"1",
                                  secondQuadrant, @"2",
                                  thirdQuadrant, @"3",
                                  forthQuadrant, @"4", nil];

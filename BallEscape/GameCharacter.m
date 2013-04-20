@@ -227,6 +227,7 @@ static float const BOARD_GAME_HEIGHT = 13.68;
     return NO;
 }
 
+// Checks if the position passed by parameter is inside of the bounding box.
 - (BOOL)isInsideOfObjectWithPosition:(GLKVector3)position 
                          boundingBox:(AGLKAxisAllignedBoundingBox)borders 
 {

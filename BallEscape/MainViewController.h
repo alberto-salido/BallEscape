@@ -30,9 +30,9 @@
 @property (nonatomic, strong, readonly) NSMutableDictionary *scoresDictionary;
 
 //  Properties about the game settings:
-//  Enables the option of ghost can pass throw the wall of the labyrinth, and
+//  Enables the option of ghost can pass through the wall of the labyrinth, and
 //  the sound for the game.
-@property (nonatomic) BOOL ghostThrowWalls;
+@property (nonatomic) BOOL ghostThroughWalls;
 @property (nonatomic) BOOL shouldPlayMusic;
 
 //  Player for the game music.

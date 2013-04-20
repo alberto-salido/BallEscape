@@ -33,7 +33,7 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
 
 @synthesize timeUsedInCompleteLevel = _timeUsedInCompleteLevel;
 @synthesize gameOver = _gameOver;
-@synthesize ghostThrowWall = _ghostThrowWall;
+@synthesize ghostThroughWall = _ghostThroughWall;
 @synthesize showTime = _showTime;
 @synthesize congratulationsMessage = _congratulationsMessage;
 @synthesize levelToPlayLabel = _levelToPlayLabel;
@@ -152,7 +152,7 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
     // Release any retained subviews of the main view.
     self.timeUsedInCompleteLevel = 0;
     self.gameOver = FALSE;
-    self.ghostThrowWall = FALSE;
+    self.ghostThroughWall = FALSE;
     self.showTime = nil;
     self.congratulationsMessage = nil;
     self.levelToPlayLabel = nil;
@@ -218,7 +218,7 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
 {
     if ([[segue identifier] isEqualToString:PLAY_GAME_SEGUE_ID]) {
         OpenGLViewController *ovc = [segue destinationViewController];
-        ovc.ghostThrowWall = self.ghostThrowWall;
+        ovc.ghostThroughWall = self.ghostThroughWall;
     }
 }
 

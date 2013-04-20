@@ -29,7 +29,7 @@
 @property BOOL gameOver;
 
 //  Settings.
-@property BOOL ghostThrowWall;
+@property BOOL ghostThroughWall;
 
 //  Manages the information about each level. Returns importat
 //  data about the levels; number of levels in the game, current level

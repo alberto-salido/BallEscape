@@ -67,7 +67,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     self.mvc = ((MainViewController *) self.presentingViewController);
     
     // Updates the status of the switches.
-    self.ghostThrowSwitch.on = self.mvc.ghostThrowWalls;
+    self.ghostThrowSwitch.on = self.mvc.ghostThroughWalls;
     self.SFXButton.on = self.mvc.shouldPlayMusic;
     
     self.motionManager = [[CMMotionManager alloc] init];
@@ -159,7 +159,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 }
 
 - (IBAction)GhostCanPassThrowWall:(UISwitch *)sender {
-    self.mvc.ghostThrowWalls = sender.on;
+    self.mvc.ghostThroughWalls = sender.on;
 }
 
 @end

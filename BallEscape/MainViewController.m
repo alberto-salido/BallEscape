@@ -42,7 +42,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
 @synthesize scoresDictionary = _scoresDictionary;
 @synthesize scoresPath = _scoresPath;
 @synthesize dictionaryCache = _dictionaryCache;
-@synthesize ghostThrowWalls = _ghostThrowWalls;
+@synthesize ghostThroughWalls = _ghostThroughWalls;
 @synthesize musicPlayer = _musicPlayer;
 @synthesize shouldPlayMusic = _shouldPlayMusic;
 @synthesize calibrationCoordinates = _calibrationView;
@@ -107,7 +107,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
     self.scoresDictionary = nil;
     self.scoresPath = nil;
     self.dictionaryCache = nil;
-    self.ghostThrowWalls = NO;
+    self.ghostThroughWalls = NO;
     self.musicPlayer = nil;
     self.shouldPlayMusic = NO;
     
@@ -153,13 +153,13 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
     //  Sends if the ghost will pass throw the walls or not, to the Game View Controller.
     if ([[segue identifier] isEqualToString:PLAY_SEGUE_ID]) {
         GameViewController *gvc = [segue destinationViewController];
-        gvc.ghostThrowWall = self.ghostThrowWalls;
+        gvc.ghostThroughWall = self.ghostThroughWalls;
     }
     
     //  Updates the attributes in the Settings View Controller according to the game. 
     if ([[segue identifier] isEqualToString:SETTINGS_SEGUE_ID]) {
         SettingsViewController *svc = [segue destinationViewController];
-        svc.ghostThrowSwitch.on = self.ghostThrowWalls;
+        svc.ghostThrowSwitch.on = self.ghostThroughWalls;
     }
 }
 

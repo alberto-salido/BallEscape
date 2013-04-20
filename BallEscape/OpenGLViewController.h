@@ -32,8 +32,8 @@
 //  player started to play.
 @property (weak, nonatomic) IBOutlet UILabel *time;
 
-//  Settings.
-@property (nonatomic) BOOL ghostThrowWall;
+//  Checks if the ghost can pass through the walls.
+@property (nonatomic) BOOL ghostThroughWall;
 
 // Image to display when pause game is paused.
 @property (weak, nonatomic) IBOutlet UIImageView *pauseView;
