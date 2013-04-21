@@ -9,11 +9,11 @@
             <objects>
                 <viewController id="SRd-tT-Kdq" customClass="AboutMeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dHE-Up-Tcl">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="vQY-L3-mze">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -50,11 +50,11 @@
             <objects>
                 <viewController storyboardIdentifier="Main View Controller" id="rmg-i1-1nc" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pnK-OI-UqM">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BallEscape.MainMenu.bmp" id="MlS-wO-KBH">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="t29-id-vV7">
@@ -136,6 +136,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="iIF-vM-G18" kind="modal" identifier="goToPlayMenu" modalTransitionStyle="flipHorizontal" id="25U-ze-2Ge"/>
@@ -156,15 +157,15 @@
             <objects>
                 <viewController id="iIF-vM-G18" customClass="GameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IFv-60-VGU">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BallEscape.GameMenu.bmp" id="Mom-6x-cfn">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="irk-a3-QgZ">
-                                <rect key="frame" x="300" y="305" width="399" height="139"/>
+                                <rect key="frame" x="300" y="315" width="399" height="139"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <state key="normal" title="PLAY">
@@ -179,21 +180,21 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Congratulations, you have escaped!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="Qd5-Kb-oZj">
-                                <rect key="frame" x="325" y="48" width="374" height="58"/>
+                                <rect key="frame" x="278" y="37" width="480" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="28"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your time:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="H51-ur-Fiu">
-                                <rect key="frame" x="438" y="117" width="160" height="30"/>
+                                <rect key="frame" x="438" y="134" width="160" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="23"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ua9-RL-27A">
-                                <rect key="frame" x="20" y="593" width="298" height="135"/>
+                                <rect key="frame" x="20" y="612" width="298" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <state key="normal" title="MENU">
@@ -208,7 +209,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V55-Fy-9tY">
-                                <rect key="frame" x="706" y="593" width="298" height="135"/>
+                                <rect key="frame" x="706" y="612" width="298" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <state key="normal" title="RESTART">
@@ -223,7 +224,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FTr-27-ztW">
-                                <rect key="frame" x="268" y="441" width="489" height="144"/>
+                                <rect key="frame" x="268" y="455" width="489" height="144"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Papyrus-Condensed" family="Papyrus" pointSize="81"/>
                                 <state key="normal" title="CONTINUE">
@@ -255,6 +256,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="congratulationsMessage" destination="Qd5-Kb-oZj" id="Lyg-CA-Dh6"/>
@@ -324,7 +326,7 @@
             <objects>
                 <viewController id="Umg-3s-omp" customClass="TutorialPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aKb-yA-295">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -380,11 +382,11 @@
             <objects>
                 <viewController id="ddN-h7-4B6" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tqf-Dw-iZK">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BallEscape.SettingsMenu.bmp" id="UQ9-UP-tS6">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VCL-Rh-DXO">
@@ -475,7 +477,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ATE-7H-x9x">
-                                <rect key="frame" x="291" y="281" width="18" height="19"/>
+                                <rect key="frame" x="595" y="281" width="18" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <state key="normal">
@@ -508,6 +510,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="SFXButton" destination="mE4-3H-YZL" id="1rF-aE-WRn"/>
@@ -605,6 +608,87 @@
         <image name="BallEscape.PauseMenu.gif" width="1600" height="1035"/>
         <image name="BallEscape.SettingsMenu.bmp" width="1600" height="1036"/>
     </resources>
+    <classes>
+        <class className="AboutMeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutMeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="BackButtonAction:"/>
+                <relationship kind="outlet" name="htmlView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="GameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="continueWithNextLevel:" candidateClass="UIButton"/>
+                <relationship kind="action" name="goBackToMenu:" candidateClass="UIButton"/>
+                <relationship kind="action" name="playGame:" candidateClass="UIButton"/>
+                <relationship kind="action" name="restartCurrentLevel:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="congratulationsMessage" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="continueButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="labelNewHighScore" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="levelToPlayLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="menuButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="restartLevelButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="showTime" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="HighScoresViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HighScoresViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backToMenuButton:" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="aboutMeButton:" candidateClass="UIButton"/>
+                <relationship kind="action" name="howToPlayButton:" candidateClass="UIButton"/>
+                <relationship kind="action" name="playButton:" candidateClass="UIButton"/>
+                <relationship kind="action" name="settingsButton:" candidateClass="UIButton"/>
+                <relationship kind="action" name="showHighScoresButton:" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="OpenGLViewController" superclassName="GLKViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OpenGLViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goBackToMenu:" candidateClass="UIButton"/>
+                <relationship kind="action" name="pauseGame:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="goBackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pauseView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="BackToMenuButtonAction:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ClearDataButtonAction:" candidateClass="UIButton"/>
+                <relationship kind="action" name="GhostCanPassThrowWall:" candidateClass="UISwitch"/>
+                <relationship kind="action" name="SFXSwitcher:" candidateClass="UISwitch"/>
+                <relationship kind="action" name="calibrateViewButtonAction:" candidateClass="UIButton"/>
+                <relationship kind="action" name="calibrationInfo:" candidateClass="UIButton"/>
+                <relationship kind="action" name="resetCalibrationButtonAction:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="SFXButton" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="SFXLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="clearButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="clearDataLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ghostThowWallsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ghostThrowSwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+        <class className="TutorialContentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TutorialContentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="skipTutorial:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="TutorialPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TutorialPageViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
