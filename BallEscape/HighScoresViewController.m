@@ -26,8 +26,8 @@ static NSString *const CELL_NAME = @"scoreCell";
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.scoresDictionary = nil;
-    self.scoresByLevel = nil;
+    [self setScoresByLevel:nil];
+    [self setScoresDictionary:nil];
 }
 
 //  Configures each cell.

@@ -31,11 +31,11 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 @end
 
 @implementation SettingsViewController
-@synthesize SFXLabel = _SFXLabel;
-@synthesize ghostThowWallsLabel = _ghostThowWallsLabel;
+@synthesize soundLabel = _soundLabel;
+@synthesize ghostThoughWallsLabel = _ghostThoughWallsLabel;
 @synthesize clearDataLabel = _clearDataLabel;
-@synthesize SFXButton = _SFXButton;
-@synthesize ghostThrowSwitch = _ghostThrowSwitch;
+@synthesize soundSwitcher = _soundSwitcher;
+@synthesize ghostThroughSwitcher = _ghostThroughSwitcher;
 @synthesize clearButton = _clearButton;
 @synthesize mvc = _mvc;
 @synthesize calibrationCoordinates = _calibrationCoordinates;
@@ -46,11 +46,11 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 - (void)viewDidUnload
 {
     // Release any retained subviews of the main view.
-    [self setSFXLabel:nil];
-    [self setGhostThowWallsLabel:nil];
+    [self setSoundLabel:nil];
+    [self setGhostThoughWallsLabel:nil];
     [self setClearDataLabel:nil];
-    [self setSFXButton:nil];
-    [self setGhostThrowSwitch:nil];
+    [self setSoundSwitcher:nil];
+    [self setGhostThroughSwitcher:nil];
     [self setClearButton:nil];
     [self setCalibrationCoordinates:nil];
     [self setMvc:nil];
@@ -67,8 +67,8 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     self.mvc = ((MainViewController *) self.presentingViewController);
     
     // Updates the status of the switches.
-    self.ghostThrowSwitch.on = self.mvc.ghostThroughWalls;
-    self.SFXButton.on = self.mvc.shouldPlayMusic;
+    self.ghostThroughSwitcher.on = self.mvc.ghostThroughWalls;
+    self.soundSwitcher.on = self.mvc.shouldPlayMusic;
     
     self.motionManager = [[CMMotionManager alloc] init];
     [self.motionManager startDeviceMotionUpdates];
@@ -87,19 +87,26 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     return ((interfaceOrientation != UIInterfaceOrientationPortrait) && (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown));
 }
 
-- (IBAction)BackToMenuButtonAction:(UIButton *)sender {
+- (IBAction)backToMenuButtonAction:(UIButton *)sender
+{
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)SFXSwitcher:(UISwitch *)sender {
-    self.mvc.shouldPlayMusic = sender.on;
+- (IBAction)soundSwitcher:(UISwitch *)sender
+{
+    if ((self.mvc.shouldPlayMusic = sender.on)) {
+        [self.mvc.musicPlayer play];
+    } else  {
+        [self.mvc.musicPlayer stop];
+
+    }
 }
 
-- (IBAction)calibrateViewButtonAction:(UIButton *)sender {
+- (IBAction)calibrateViewButtonAction:(UIButton *)sender
+{
     
     // Calibrates the current view of the array.
-    if (self.motionManager.isDeviceMotionActive)
-    {
+    if (self.motionManager.isDeviceMotionActive) {
         [self.calibrationCoordinates insertObject:[NSNumber
                                                    numberWithDouble:self.motionManager.deviceMotion.attitude.roll]
                                           atIndex:0];
@@ -110,6 +117,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
         self.mvc.calibrationCoordinates = self.calibrationCoordinates;
     }
     
+    // Message indicating that the calibration has been made.
     UIAlertView *calibrationDone = [[UIAlertView alloc] initWithTitle:@"Message"
                                                               message:@"Calibration completed."
                                                              delegate:nil cancelButtonTitle:@"Okay"
@@ -117,11 +125,13 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     [calibrationDone show];
 }
 
-- (IBAction)resetCalibrationButtonAction:(UIButton *)sender {
+- (IBAction)resetCalibrationButtonAction:(UIButton *)sender
+{    
     [self.calibrationCoordinates insertObject:[NSNumber numberWithDouble:0.0] atIndex:0];
     [self.calibrationCoordinates insertObject:[NSNumber numberWithDouble:0.0] atIndex:1];
     self.mvc.calibrationCoordinates = self.calibrationCoordinates;
     
+    // Message indicating that the calibration has been made.
     UIAlertView *calibrationReset = [[UIAlertView alloc] initWithTitle:@"Message"
                                                               message:@"Calibration reseted."
                                                              delegate:nil cancelButtonTitle:@"Okay"
@@ -147,7 +157,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     } 
 }
 
-- (IBAction)ClearDataButtonAction:(UIButton *)sender {
+- (IBAction)clearDataButtonAction:(UIButton *)sender {
     //  Shows a warning before deleting the scores.
     UIAlertView *warningAboutDeletingScores = [[UIAlertView alloc] 
                                                initWithTitle:@"Warning" 
@@ -158,7 +168,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
     [warningAboutDeletingScores show];
 }
 
-- (IBAction)GhostCanPassThrowWall:(UISwitch *)sender {
+- (IBAction)ghostCanPassThroughWall:(UISwitch *)sender {
     self.mvc.ghostThroughWalls = sender.on;
 }
 

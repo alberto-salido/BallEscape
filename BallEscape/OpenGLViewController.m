@@ -173,7 +173,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 
 //  Send to the view controller when the app receives a memory warning.
-//  Release any cached data, images, etc that aren't in use.
+//  Show a message to the user and pauses de game.
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -186,6 +186,7 @@ static NSString *const MODEL_DOOR_NAME = @"door";
                                                     otherButtonTitles:nil];
     [memoryWarning show];
 }
+
 
 #pragma mark - View lifecycle
 
@@ -235,7 +236,6 @@ static NSString *const MODEL_DOOR_NAME = @"door";
     [self setMotionManager:nil];
     [EAGLContext setCurrentContext:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 //  Notifies the view controller that its view is about to be removed
@@ -509,9 +509,8 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 
 #pragma mark - Animation
 
-//  The controller’s –update method is called automatically at configurable
-//  periodic rates (default 30 Hz). Immediately after –update,
-//  the controller’s view redraws. 
+//  The controller’s update method is called automatically at configurable
+//  periodic rates (default 30 Hz). Immediately after update, the controller’s view redraw. 
 - (void)update
 {
     if (!self.isPaused) {
@@ -620,9 +619,11 @@ static NSString *const MODEL_DOOR_NAME = @"door";
 {
     if (self.motionManager.isDeviceMotionActive)
     {
+        //  Gets the calibration offset.
         double xCalibration = [[self.gvc.calibrationCoordinates objectAtIndex:0] doubleValue];
         double zCalibration = [[self.gvc.calibrationCoordinates objectAtIndex:1] doubleValue];
 
+        //  Updates the slope.
         self.xSlopeInGrades = self.motionManager.deviceMotion.attitude.roll - xCalibration;
         
         if (xCalibration > 1.5) {
@@ -631,9 +632,9 @@ static NSString *const MODEL_DOOR_NAME = @"door";
             self.zSlopeInGrades = self.motionManager.deviceMotion.attitude.pitch - zCalibration;
         }
         
+        // Modifies the view.
         float xMovement = (BOARD_GAME_WIDTH / 2) + self.xSlopeInGrades;
         self.eyePosition = GLKVector3Make(xMovement, self.eyePosition.y, self.eyePosition.z);
-        
         
         float zMovement = (BOARD_GAME_HEIGHT / 2) + self.zSlopeInGrades;
         self.eyePosition = GLKVector3Make(self.eyePosition.x, self.eyePosition.y, zMovement);

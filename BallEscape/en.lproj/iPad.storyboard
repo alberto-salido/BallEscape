@@ -43,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wqB-Xo-N6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4275" y="-1751"/>
+            <point key="canvasLocation" x="-4395" y="-1751"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="9H7-ue-CIv">
@@ -401,7 +401,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BackToMenuButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="nBE-nk-5Hf"/>
+                                    <action selector="backToMenuButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="UqF-ey-HlN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Audio:" lineBreakMode="tailTruncation" minimumFontSize="10" id="0g2-di-G9u">
@@ -429,14 +429,14 @@
                                 <rect key="frame" x="672" y="197" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="SFXSwitcher:" destination="ddN-h7-4B6" eventType="valueChanged" id="7pO-vo-ZzV"/>
+                                    <action selector="soundSwitcher:" destination="ddN-h7-4B6" eventType="touchUpInside" id="jMp-Oe-JK9"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="oVB-aN-QWD">
                                 <rect key="frame" x="672" y="451" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="GhostCanPassThrowWall:" destination="ddN-h7-4B6" eventType="valueChanged" id="x96-wz-QLT"/>
+                                    <action selector="ghostCanPassThroughWall:" destination="ddN-h7-4B6" eventType="touchUpInside" id="y0m-2z-AaW"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uaj-DH-FlL">
@@ -451,7 +451,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="ClearDataButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="iIo-wc-5Rt"/>
+                                    <action selector="clearDataButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="33T-D6-RTw"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Calibrate View:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2RI-G1-s6e">
@@ -473,7 +473,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="calibrateViewButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="VyR-U5-53B"/>
+                                    <action selector="calibrateViewButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="gRZ-ye-TXm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ATE-7H-x9x">
@@ -488,7 +488,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="calibrationInfo:" destination="ddN-h7-4B6" eventType="touchUpInside" id="uuo-vC-GjD"/>
+                                    <action selector="calibrationInfo:" destination="ddN-h7-4B6" eventType="touchUpInside" id="4pP-ii-Fos"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ywK-t2-Jvh">
@@ -503,7 +503,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="resetCalibrationButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="aRZ-BH-OoR"/>
+                                    <action selector="resetCalibrationButtonAction:" destination="ddN-h7-4B6" eventType="touchUpInside" id="YZ5-NH-kGn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -513,12 +513,12 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="SFXButton" destination="mE4-3H-YZL" id="1rF-aE-WRn"/>
-                        <outlet property="SFXLabel" destination="0g2-di-G9u" id="hWn-9X-CYv"/>
-                        <outlet property="clearButton" destination="uaj-DH-FlL" id="kEW-Yg-ogP"/>
-                        <outlet property="clearDataLabel" destination="wsf-49-f7H" id="HCe-yr-sw0"/>
-                        <outlet property="ghostThowWallsLabel" destination="LN5-Ea-gNg" id="kaT-v5-bfd"/>
-                        <outlet property="ghostThrowSwitch" destination="oVB-aN-QWD" id="E0n-VP-nYu"/>
+                        <outlet property="clearButton" destination="uaj-DH-FlL" id="lis-kd-QdM"/>
+                        <outlet property="clearDataLabel" destination="wsf-49-f7H" id="mHP-9r-qFo"/>
+                        <outlet property="ghostThoughWallsLabel" destination="LN5-Ea-gNg" id="irO-Uq-87Z"/>
+                        <outlet property="ghostThroughSwitcher" destination="oVB-aN-QWD" id="lgC-0V-buT"/>
+                        <outlet property="soundLabel" destination="0g2-di-G9u" id="zJM-Lz-WIL"/>
+                        <outlet property="soundSwitcher" destination="mE4-3H-YZL" id="Rbl-zz-WAU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pD-02-HCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -663,19 +663,19 @@
         <class className="SettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="BackToMenuButtonAction:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ClearDataButtonAction:" candidateClass="UIButton"/>
-                <relationship kind="action" name="GhostCanPassThrowWall:" candidateClass="UISwitch"/>
-                <relationship kind="action" name="SFXSwitcher:" candidateClass="UISwitch"/>
+                <relationship kind="action" name="backToMenuButtonAction:" candidateClass="UIButton"/>
                 <relationship kind="action" name="calibrateViewButtonAction:" candidateClass="UIButton"/>
                 <relationship kind="action" name="calibrationInfo:" candidateClass="UIButton"/>
+                <relationship kind="action" name="clearDataButtonAction:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ghostCanPassThroughWall:" candidateClass="UISwitch"/>
                 <relationship kind="action" name="resetCalibrationButtonAction:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="SFXButton" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="SFXLabel" candidateClass="UILabel"/>
+                <relationship kind="action" name="soundSwitcher:" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="clearButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearDataLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ghostThowWallsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ghostThrowSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="ghostThoughWallsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ghostThroughSwitcher" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="soundLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="soundSwitcher" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="TutorialContentViewController" superclassName="UIViewController">

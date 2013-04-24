@@ -35,7 +35,7 @@
 //  Checks if the ghost can pass through the walls.
 @property (nonatomic) BOOL ghostThroughWall;
 
-// Image to display when pause game is paused.
+// Image to display when game is paused.
 @property (weak, nonatomic) IBOutlet UIImageView *pauseView;
 
 // Back button.
@@ -44,8 +44,7 @@
 // Being the game paused, go back to the menu.
 - (IBAction)goBackToMenu:(UIButton *)sender;
 
-//  Pauses the current game.
-//  Pauses and play the game.
+//  Pauses the current game and reanude again.
 - (IBAction)pauseGame:(UIButton *)sender;
 
 //  Pauses the game.

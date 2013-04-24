@@ -23,6 +23,8 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
 
 @property (nonatomic, strong) LevelManager *levelManager;
 
+//  Reference to the main view controller which has the
+//  inforation about the settings and the scores.
 @property MainViewController *mvc;
 
 - (void)performSegueToPlayGame;
@@ -56,6 +58,7 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
     
     self.mvc = (MainViewController *)self.presentingViewController;
     
+    //  Gets the calibration information from the previous view-controller.
     self.calibrationCoordinates = self.mvc.calibrationCoordinates;
     
     //  Initializes the LevelManages with the number of levels.
@@ -110,7 +113,7 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
         Score *s = [[Score alloc] initWithTime:self.timeUsedInCompleteLevel 
                                        atLevel:(self.levelManager.currentLevel - 1)];
         
-        //  Updates the dictionary.
+        //  Updates the dictionary with the socres.
         NSString *level = [NSString stringWithFormat:@"%d", s.level];
         NSMutableDictionary *dic = ((MainViewController *)self.presentingViewController).scoresDictionary;
         NSMutableArray *array;
@@ -146,23 +149,20 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
 }
 
 - (void)viewDidUnload
-{    
+{
     [self setImageView:nil];
+    [self setShowTime: nil];
+    [self setCongratulationsMessage: nil];
+    [self setLevelToPlayLabel:nil];
+    [self setPlayButton:nil];
+    [self setContinueButton:nil];
+    [self setMenuButton:nil];
+    [self setRestartLevelButton:nil];
+    [self setLevelManager:nil];
+    [self setLabelNewHighScore:nil];
+    [self setMvc:nil];
+    [self setCalibrationCoordinates:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    self.timeUsedInCompleteLevel = 0;
-    self.gameOver = FALSE;
-    self.ghostThroughWall = FALSE;
-    self.showTime = nil;
-    self.congratulationsMessage = nil;
-    self.levelToPlayLabel = nil;
-    self.playButton = nil;
-    self.continueButton = nil;
-    self.menuButton = nil;
-    self.restartLevelButton = nil;
-    self.levelManager = nil;
-    self.labelNewHighScore = nil;
-    self.mvc = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -188,7 +188,8 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
 
 - (IBAction)goBackToMenu:(id)sender {
     
-    if (self.levelManager.currentLevel < 1) {
+    if ((self.levelManager.currentLevel < 1) ||
+        (self.levelManager.currentLevel == NUMBER_OF_LEVELS)) {
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {

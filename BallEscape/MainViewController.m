@@ -159,7 +159,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
     //  Updates the attributes in the Settings View Controller according to the game. 
     if ([[segue identifier] isEqualToString:SETTINGS_SEGUE_ID]) {
         SettingsViewController *svc = [segue destinationViewController];
-        svc.ghostThrowSwitch.on = self.ghostThroughWalls;
+        svc.ghostThroughSwitcher.on = self.ghostThroughWalls;
     }
 }
 
