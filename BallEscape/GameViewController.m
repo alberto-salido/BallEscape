@@ -9,7 +9,7 @@
 #import "GameViewController.h"
 
 //  Constants.
-static int const NUMBER_OF_LEVELS = 2;
+static int const NUMBER_OF_LEVELS = 3;
 static NSString *const PLAY_GAME_SEGUE_ID = @"playGame";
 static int const SCORES_PER_SECTION = 5;
 static NSString *const CONGRATS_MSG = @"Congratulations!\n You have escaped!!";

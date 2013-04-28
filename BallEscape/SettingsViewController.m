@@ -95,7 +95,7 @@ static NSString *const SCORE_FILE_NAME = @"ball_Escape_HScores.scoreplist";
 - (IBAction)soundSwitcher:(UISwitch *)sender
 {
     if ((self.mvc.shouldPlayMusic = sender.on)) {
-        [self.mvc.musicPlayer play];
+      /*  [self.mvc.musicPlayer play];*/
     } else  {
         [self.mvc.musicPlayer stop];
 

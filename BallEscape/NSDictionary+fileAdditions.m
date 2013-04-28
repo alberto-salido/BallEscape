@@ -41,7 +41,7 @@
         body = [body stringByAppendingString:@"</array>\n</value>\n"];
     }
     
-    NSString *footer = @"</dict>\n</plist>\n</xml>\n";
+    NSString *footer = @"</dict>\n</xml>\n";
     
     header = [header stringByAppendingString:body];
     header = [header stringByAppendingString:footer];
