@@ -17,6 +17,8 @@ static NSString *const FAIL_MSG = @"Ooooh!, You failed!!";
 static int const OK = 1;
 static NSString *const WIN_VIEW = @"BallEscape.GameMenu.Win.bmp";
 static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
+static NSString *const WINNER_VIEW = @"BallEscape.GameMenu.Winner.bmp";
+
 
 
 @interface GameViewController ()
@@ -76,6 +78,8 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
     self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
                                   (self.levelManager.currentLevel + 1)];
     
+    self.levelToPlayLabel.hidden = NO;
+    
     //  If the user losses the previous game;
     if (self.gameOver) {
         
@@ -100,7 +104,11 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
     if (self.timeUsedInCompleteLevel) {
         
         // Changes the view.
-        self.imageView.image = [UIImage imageNamed:WIN_VIEW];
+        if ([self.levelManager hasNextLevel]) {
+            self.imageView.image = [UIImage imageNamed:WIN_VIEW];
+        } else {
+            self.imageView.image = [UIImage imageNamed:WINNER_VIEW];
+        }
         
         //  Show messages and buttons.
         self.congratulationsMessage.text = CONGRATS_MSG;
@@ -141,6 +149,7 @@ static NSString *const LOSE_VIEW = @"BallEscape.GameMenu.Lose.bmp";
         if ([self.levelManager currentLevel] < [self.levelManager numberOfLevels]) {
             //  Enables the "Continue" button.
             self.continueButton.hidden = NO;
+            self.levelToPlayLabel.hidden = YES;
         }
         
         //  Enables the "Restart" button.

@@ -10,10 +10,9 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>BallEscape.Logo_iPad.png</string>
-		<string>BallEscape.Logo_iPadHD.png</string>
-		<string>BallEscape.Logo_iPhone.png</string>
-		<string>BallEscape.Logo_iPhoneHD.png</string>
+		<string>BallEscape.Logo.png</string>
+		<string>BallEscape.Logo.iPhone.png</string>
+		<string>BallEscape.Logo.iPhone.Retina.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -21,10 +20,9 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>BallEscape.Logo_iPad.png</string>
-				<string>BallEscape.Logo_iPadHD.png</string>
-				<string>BallEscape.Logo_iPhone.png</string>
-				<string>BallEscape.Logo_iPhoneHD.png</string>
+				<string>BallEscape.Logo.png</string>
+				<string>BallEscape.Logo.iPhone.png</string>
+				<string>BallEscape.Logo.iPhone.Retina.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
