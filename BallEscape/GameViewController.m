@@ -78,10 +78,12 @@ static NSString *const WINNER_VIEW = @"BallEscape.GameMenu.Winner.bmp";
     self.levelToPlayLabel.text = [NSString stringWithFormat:@"Level - %d",
                                   (self.levelManager.currentLevel + 1)];
     
-    self.levelToPlayLabel.hidden = NO;
+    self.levelToPlayLabel.hidden = YES;
     
     //  If the user losses the previous game;
     if (self.gameOver) {
+        
+        self.levelToPlayLabel.hidden = NO;
         
         // Changes the view.
         self.imageView.image = [UIImage imageNamed:LOSE_VIEW];
@@ -149,7 +151,7 @@ static NSString *const WINNER_VIEW = @"BallEscape.GameMenu.Winner.bmp";
         if ([self.levelManager currentLevel] < [self.levelManager numberOfLevels]) {
             //  Enables the "Continue" button.
             self.continueButton.hidden = NO;
-            self.levelToPlayLabel.hidden = YES;
+            self.levelToPlayLabel.hidden = NO;
         }
         
         //  Enables the "Restart" button.
