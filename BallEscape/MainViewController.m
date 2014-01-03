@@ -71,7 +71,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
     self.musicPlayer.numberOfLoops = 2;
     
     if (self.shouldPlayMusic) {
-         [self.musicPlayer play];
+        // [self.musicPlayer play];
     }
    
     //  Sets the path in Documents/scores.plist.
@@ -93,7 +93,7 @@ static NSString *const MUSIC = @"DoKashiteru_-_The_Annual_New_England_Xylophone_
     
     // If the music is over, restart the song.
     if(![self.musicPlayer isPlaying]) {
-        [self.musicPlayer play];
+       // [self.musicPlayer play];
     }
     
     // If the sound option is disabled, stop playing music.
